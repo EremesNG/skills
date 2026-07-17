@@ -1,0 +1,40 @@
+{
+  "version": 1,
+  "cases": [
+    {
+      "id": "single-domain-example",
+      "task": "Fix an expired-session bug in the login flow.",
+      "expected_primary": "identity",
+      "expected_first_read": "docs/agent/modules/identity.md",
+      "expected_overlays": [],
+      "expected_code_roots": [
+        "src/auth/"
+      ],
+      "notes": "Replace with a realistic repository task and verified paths."
+    },
+    {
+      "id": "cross-cutting-example",
+      "task": "Add a field that changes both an API response and its database schema.",
+      "expected_primary": "api",
+      "expected_first_read": "docs/agent/modules/api.md",
+      "expected_overlays": [
+        "database",
+        "public-compatibility"
+      ],
+      "expected_code_roots": [
+        "src/api/",
+        "migrations/"
+      ],
+      "notes": "Choose the owner of public behavior as primary; keep only overlays that must change."
+    },
+    {
+      "id": "fallback-example",
+      "task": "Investigate an unfamiliar symbol named ExampleCoordinator.",
+      "expected_primary": "fallback",
+      "expected_first_read": "docs/agent/index.md",
+      "expected_overlays": [],
+      "expected_code_roots": [],
+      "notes": "Fallback should search the symbol and nearest tests before adding a route."
+    }
+  ]
+}

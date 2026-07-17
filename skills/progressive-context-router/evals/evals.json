@@ -1,0 +1,57 @@
+{
+  "skill_name": "progressive-context-router",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Set up this TypeScript monorepo so coding agents stop reading every package for each task. Create a small AGENTS.md, a context router, and only verified on-demand docs. Do not change application code.",
+      "expected_output": "A grounded bootstrap that inventories the repository, derives behavior-oriented routes, creates a compact canonical entrypoint and linked docs/agent router, adds realistic routing cases, validates the result, and reports uncertainty without claiming unmeasured savings.",
+      "files": [],
+      "assertions": [
+        "No product source file is modified.",
+        "The root entrypoint links to docs/agent/index.md and contains a progressive reading protocol.",
+        "Routes identify first-read documents, code roots, tests, overlays, and fallback behavior.",
+        "Commands and architecture claims are supported by repository evidence.",
+        "Validation and an estimated context budget are reported."
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Our AGENTS.md and CLAUDE.md are huge and contradict each other. Refactor them into one canonical guide plus task-specific context, but preserve every valid safety and release constraint.",
+      "expected_output": "A preservation-first refactor that classifies existing rules, resolves or reports conflicts, keeps one canonical source, creates only thin client-specific deltas, routes domain details out of always-loaded files, and documents all moved or uncertain constraints.",
+      "files": [],
+      "assertions": [
+        "Existing human constraints are not silently deleted.",
+        "One canonical source owns universal facts and duplicate prose is reduced.",
+        "Client-specific files contain only pointers and genuine client deltas.",
+        "Conflicts and their resolution are explicitly reported.",
+        "The result does not preload all routed documentation."
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Audit our current agent-context setup without editing anything. Find broken routes, stale paths, duplicated commands, unreachable docs, and places where every task is paying for domain-specific context.",
+      "expected_output": "A read-only audit with mechanical validation, context-budget estimates, evidence-backed findings ranked by severity, and a surgical remediation plan. It must not write repository files or present guesses as facts.",
+      "files": [],
+      "assertions": [
+        "The audit mode performs no repository writes.",
+        "Findings include evidence paths and distinguish errors from warnings.",
+        "Broken links, stale paths, duplication, reachability, and always-loaded size are examined.",
+        "Token counts are labeled as estimates.",
+        "The remediation plan is incremental rather than a blind regeneration."
+      ]
+    },
+    {
+      "id": 4,
+      "prompt": "We added a payments service and moved authorization into a shared package. Refresh the existing context router, keep our editorial notes, and update only what drifted.",
+      "expected_output": "A surgical refresh that inventories changed boundaries, updates route ownership and overlays, preserves valid human notes, revises routing cases, removes stale references, and validates the final graph without rewriting unrelated documents.",
+      "files": [],
+      "assertions": [
+        "Existing documentation is updated surgically rather than regenerated wholesale.",
+        "Responsibility drift is handled, not merely path replacement.",
+        "Valid human-authored notes are preserved.",
+        "Routing cases cover the new service and shared authorization overlay.",
+        "Validation reports no broken required links."
+      ]
+    }
+  ]
+}
