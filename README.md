@@ -47,6 +47,14 @@ package root is `skills/progressive-context-router/`, which contains `SKILL.md`
 and the supporting files needed by the skill. Client-specific installer options
 are intentionally not prescribed here.
 
+### Remote installation: `progressive-context-router`
+
+Install this skill from the repository with:
+
+```bash
+npx skills add https://github.com/EremesNG/skills --skill progressive-context-router
+```
+
 ## Read and use a skill
 
 Start with the skill's `SKILL.md`:
@@ -58,6 +66,25 @@ Start with the skill's `SKILL.md`:
 
 The [`progressive-context-router` documentation](skills/progressive-context-router/SKILL.md)
 is the authoritative guide for that skill's operation and bundled tools.
+
+### Usage example: `progressive-context-router`
+
+Use this copyable prompt when configuring this repository:
+
+```text
+Use progressive-context-router to configure this repository.
+
+I want a small, stable entry point for agents, a router at docs/agent/index.md, and task-specific documentation loaded on demand.
+
+Analyze the repository's actual structure and divide context by behavior, ownership, invariants, and verification method; do not create one document per directory.
+
+Preserve all existing human-authored constraints. Do not modify product code, invent commands or architecture, or load all documentation at the start of each task.
+
+Add routing cases, run validation, and report the approximate context budget for the always-loaded layer.
+```
+
+When more skills are added, keep this per-skill pattern: a labeled installation
+subsection in discovery/install and a concise usage subsection in read/use.
 
 ## Validation and CI
 
