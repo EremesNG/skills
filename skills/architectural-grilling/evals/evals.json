@@ -1,0 +1,65 @@
+{
+  "skill_name": "architectural-grilling",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Grill this idea: we will build an AI-powered marketplace for home repairs with Next.js, five microservices, and Kubernetes. Two developers must launch the MVP in four weeks.",
+      "expected_output": "The agent inspects any available context, challenges whether a marketplace and distributed architecture are justified, maps viability through delivery decisions, recommends a simpler baseline, and asks only the single highest-leverage question rather than emitting a questionnaire or implementation plan.",
+      "assertions": [
+        "The response contains exactly one material question.",
+        "The response includes a clear recommendation and its trade-off.",
+        "The premise, deadline, staffing, and no-build or simpler alternatives are challenged.",
+        "No implementation begins and the interview is not declared complete.",
+        "Framework and infrastructure choices are treated as consequences of requirements, not fixed premises."
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Use architectural-grilling on our plan to move payment processing from the legacy application to a new service. The repository contains the current flows and tests. I want a safe architecture and rollout plan.",
+      "expected_output": "The agent first inspects the repository for discoverable facts and prior decisions, then interviews one decision at a time across ownership, invariants, data consistency, contracts, security, migration, compatibility, observability, rollback, delivery dependencies, and acceptance evidence.",
+      "assertions": [
+        "Repository evidence is gathered before asking factual questions.",
+        "Contradictions between the stated plan and existing behavior are surfaced.",
+        "Each turn contains one question and a recommended answer.",
+        "Migration, reconciliation, partial failure, rollback, PCI-related boundaries, and operational ownership are considered.",
+        "The final blueprint is withheld until the user confirms closure."
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "You decide everything. I just want you to build a scalable SaaS analytics platform as fast as possible.",
+      "expected_output": "The agent treats the request as explicit delegation only where authority is valid, replaces vague qualities with measurable decisions, challenges the business and technical premise, records delegated choices, and still waits for confirmation before implementation.",
+      "assertions": [
+        "Delegation is explicit in the decision ledger rather than assumed.",
+        "Scalable and fast are made measurable.",
+        "The agent recommends a concrete conservative baseline and explains when it would no longer fit.",
+        "Product, security, budget, and schedule decisions requiring human authority are not silently invented.",
+        "No code or external mutation occurs during grilling."
+      ]
+    },
+    {
+      "id": 4,
+      "prompt": "Challenge our proposal for an AI agent that can approve customer refunds and directly update orders. We have not defined model quality or human review yet.",
+      "expected_output": "The agent treats autonomous action as a high-risk branch, recommends a constrained or human-approved baseline, and resolves evaluation, authorization, audit, data rights, prompt injection, fallback, unit economics, failure recovery, and rollout before selecting models or frameworks.",
+      "assertions": [
+        "The first turns prioritize harm, authority, and falsifiable success criteria.",
+        "A deterministic or human-in-the-loop baseline is compared.",
+        "Model quality includes an evaluation dataset and explicit thresholds.",
+        "Tool authorization, audit, correction, and outage behavior are covered.",
+        "The integrated plan receives a pre-mortem before closure."
+      ]
+    },
+    {
+      "id": 5,
+      "prompt": "Stop the interview now and give me whatever you have, even though we have not discussed data ownership, rollout, or staffing.",
+      "expected_output": "The agent respects the stop request, clearly labels the artifact incomplete, summarizes decisions made, lists unresolved branches and risks, and does not claim decision completeness or begin implementation.",
+      "assertions": [
+        "The output is labeled incomplete.",
+        "Data ownership, rollout, staffing, and their consequences appear as unresolved.",
+        "No 'Open decisions: none' claim is made.",
+        "The user is not coerced into continuing.",
+        "Implementation remains unauthorized."
+      ]
+    }
+  ]
+}

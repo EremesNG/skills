@@ -1,0 +1,4 @@
+interface:
+  display_name: "Architectural Grilling"
+  short_description: "Stress-test ideas into buildable plans"
+  default_prompt: "Use $architectural-grilling to challenge this idea and resolve every product, architecture, and delivery decision before implementation."
