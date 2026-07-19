@@ -6,12 +6,13 @@ context together.
 
 ## Available skills
 
-The catalog currently contains two skills:
+The catalog currently contains three skills:
 
 | Skill | Use it for | Documentation |
 | --- | --- | --- |
 | `architectural-grilling` | Relentlessly challenge an ambiguous product, architecture, or delivery idea until every material decision is explicit and the plan is safe to execute. | [`SKILL.md`](skills/architectural-grilling/SKILL.md) |
 | `progressive-context-router` | Configure, refactor, audit, or refresh repository instructions and progressive context for coding agents without changing product logic. | [`SKILL.md`](skills/progressive-context-router/SKILL.md) |
+| `simplify` | Refine the current diff for clarity and maintainability while preserving observable behavior and unrelated workspace changes. | [`SKILL.md`](skills/simplify/SKILL.md) |
 
 The core interview loop in `architectural-grilling` is inspired by the
 MIT-licensed [`grilling` skill from mattpocock/skills](https://github.com/mattpocock/skills/tree/main/skills/productivity/grilling). This version expands it with explicit decision states, architecture and project-management lenses, convergence criteria, red-team checks, and an implementation-ready blueprint.
@@ -45,7 +46,8 @@ discovery command:
 npx skills add . --list
 ```
 
-It currently discovers `architectural-grilling` and `progressive-context-router`.
+It currently discovers `architectural-grilling`, `progressive-context-router`,
+and `simplify`.
 For installation, point your Agent Skills-compatible installer at this repository
 and select the required skill. Each package root under `skills/` contains its
 `SKILL.md` and supporting files. Client-specific installer options are
@@ -65,6 +67,14 @@ Install this skill from the repository with:
 
 ```bash
 npx skills add https://github.com/EremesNG/skills --skill progressive-context-router
+```
+
+### Remote installation: `simplify`
+
+Install this skill from the repository with:
+
+```bash
+npx skills add https://github.com/EremesNG/skills --skill simplify
 ```
 
 ## Read and use a skill
@@ -107,6 +117,16 @@ Analyze the repository's actual structure and divide context by behavior, owners
 Preserve all existing human-authored constraints. Do not modify product code, invent commands or architecture, or load all documentation at the start of each task.
 
 Add routing cases, run validation, and report the approximate context budget for the always-loaded layer.
+```
+
+### Usage example: `simplify`
+
+Use this copyable prompt after an implementation is working:
+
+```text
+Use simplify for a final cleanup pass over the files changed by this task.
+
+Reduce accidental duplication, nesting, and indirection, but preserve public behavior, errors, ordering, performance constraints, and test meaning. Do not touch unrelated working-tree changes or redesign APIs. Run the nearest relevant checks and report any cleanup left out of scope.
 ```
 
 When more skills are added, keep this per-skill pattern: a labeled installation

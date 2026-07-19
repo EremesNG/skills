@@ -1,0 +1,39 @@
+{
+  "skill_name": "simplify",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "I just finished adding retry handling across src/client.ts and src/errors.ts. Clean up the implementation before I open a PR, but do not change retry timing, exported errors, or touch the unrelated edits already in src/config.ts.",
+      "expected_output": "A focused simplification of the two task-owned files that preserves retry and error contracts, avoids src/config.ts, verifies behavior, and reports deferred cleanup.",
+      "files": [],
+      "assertions": [
+        "Limits edits to the current task and explicitly preserves unrelated workspace changes",
+        "Preserves retry timing and exported error behavior",
+        "Runs or names focused verification and reports remaining uncertainty"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "This parser works and its tests pass, but the new code is deeply nested and repeats the same normalization in three branches. Make it easier to maintain without changing accepted inputs, outputs, or thrown errors.",
+      "expected_output": "A behavior-preserving cleanup that reduces nesting and duplication without weakening parser contracts or rewriting tests around implementation details.",
+      "files": [],
+      "assertions": [
+        "Treats accepted inputs, outputs, and thrown errors as invariants",
+        "Prioritizes clarity rather than minimizing line count",
+        "Keeps tests at behavioral seams and re-runs relevant checks"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "We completed a multi-file feature and I want a final refactor pass. Improve names and remove accidental abstractions, but stop if cleanup would require changing the public API or choosing a new architecture.",
+      "expected_output": "A bounded final cleanup that improves current-task code, preserves the public API, stops at architectural decisions, and reports those decisions as deferred work.",
+      "files": [],
+      "assertions": [
+        "Establishes the recent diff as the edit boundary",
+        "Does not redesign public APIs or architecture",
+        "Uses the documented return contract with simplifications, preservation evidence, verification, and deferred items"
+      ]
+    }
+  ]
+}
+
