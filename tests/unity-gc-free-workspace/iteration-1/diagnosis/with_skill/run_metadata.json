@@ -1,0 +1,21 @@
+{
+  "eval_id": 1,
+  "eval_name": "diagnosis",
+  "configuration": "with_skill",
+  "prompt_source": "../../../../skills/unity-gc-free/evals/evals.json#evals[id=1]",
+  "output": "outputs/recommendation.md",
+  "executor_received_expected_output": false,
+  "executor_received_assertions": false,
+  "assertions_frozen_before_grading": true,
+  "assertions": [
+    "The response distinguishes supplied observations from missing source, worker-thread, Release Player, retained-memory, and CPU evidence and does not claim any inspection or test was run.",
+    "The allocation contract names CombatHud.Refresh, 60 Hz representative inputs, completed warm-up/capacity, an explicit sample window, all relevant threads, and a managed-byte budget.",
+    "Managed allocation, collection behavior, managed heap size, native or retained memory, and CPU are treated as separate cost domains.",
+    "The response identifies LINQ terminal materialization/order, interpolated final strings, and logging/boxing or formatting as distinct candidate boundaries rather than blaming one keyword generically.",
+    "One smallest initial source is selected, with direct loops/reused storage compared against ZLinq and a reason to avoid a broad simultaneous rewrite.",
+    "Any ZLinq recommendation remains conditional on the installed version/compiler, closure/materialization semantics, exact provenance/license, and target-player measurement.",
+    "Functional tests preserve filtered values, ordering/ties, empty cases, label output, localization/formatting, and logging policy before allocation success is assessed.",
+    "Verification repeats the same warmed workload in a target player, checks GC.Alloc on all relevant threads, and separately records CPU and retained/native trade-offs.",
+    "The result is labeled provisional until the proposed source inspection and target-player after-capture exist; zero-allocation success is not asserted from the prompt alone."
+  ]
+}

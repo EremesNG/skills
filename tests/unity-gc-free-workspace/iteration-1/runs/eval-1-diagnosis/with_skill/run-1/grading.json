@@ -1,0 +1,91 @@
+{
+  "expectations": [
+    {
+      "text": "The response distinguishes supplied observations from missing source, worker-thread, Release Player, retained-memory, and CPU evidence and does not claim any inspection or test was run.",
+      "passed": true,
+      "evidence": "Under 'Observed as reported' the response labels the facts as user-stated and not independently reproduced. 'Still unknown' explicitly lists source/package evidence, worker-thread allocation, Release behavior, CPU baseline, and retained-memory effects; the Conclusion says no source change, test, player build, Profiler capture, or memory comparison is claimed."
+    },
+    {
+      "text": "The allocation contract names CombatHud.Refresh, 60 Hz representative inputs, completed warm-up/capacity, an explicit sample window, all relevant threads, and a managed-byte budget.",
+      "passed": true,
+      "evidence": "The Allocation contract defines one CombatHud.Refresh at 60 Hz with 80 representative effects, a five-second warm-up plus branch exercise and scratch preparation, a 600-refresh/10-second window repeated three times, inspection across all relevant threads, and both whole-refresh and first-slice budgets of 0 B / 0 managed allocation events."
+    },
+    {
+      "text": "Managed allocation, collection behavior, managed heap size, native or retained memory, and CPU are treated as separate cost domains.",
+      "passed": true,
+      "evidence": "Evidence states that allocation traffic is not heap growth, retained memory, GC pause duration, or native memory. The contract and verification separately require managed bytes/count, CPU distributions, GC/transition reporting, scratch high-water/retained-reference checks, and native/retained-memory comparison."
+    },
+    {
+      "text": "The response identifies LINQ terminal materialization/order, interpolated final strings, and logging/boxing or formatting as distinct candidate boundaries rather than blaming one keyword generically.",
+      "passed": true,
+      "evidence": "The Conclusion says the 1.6 KB cannot yet be divided among the LINQ query, sorting/materialization, three labels, and logging. The text section notes that final string production can still allocate, while the logging section separately names formatting, params arrays, boxing, and stack handling."
+    },
+    {
+      "text": "One smallest initial source is selected, with direct loops/reused storage compared against ZLinq and a reason to avoid a broad simultaneous rewrite.",
+      "passed": true,
+      "evidence": "The selected slice replaces only Where/OrderBy/ToList with a direct filter, component-owned pre-sized scratch storage, and stable measured sort. ZLinq is rejected for one small local pipeline, and labels/logging are deliberately unchanged so the allocation delta remains attributable."
+    },
+    {
+      "text": "Any ZLinq recommendation remains conditional on the installed version/compiler, closure/materialization semantics, exact provenance/license, and target-player measurement.",
+      "passed": true,
+      "evidence": "ZLinq is not recommended initially. Its conditional revisit requires an exact pinned package coordinate/tag, compiler minimum, license, Unity 6/IL2CPP/AOT validation, and pooled-result lifecycle; the same paragraph calls out captured state, ordering storage, and terminal materialization, while the acceptance contract requires target-like Development and production-equivalent Release Player measurement."
+    },
+    {
+      "text": "Functional tests preserve filtered values, ordering/ties, empty cases, label output, localization/formatting, and logging policy before allocation success is assessed.",
+      "passed": true,
+      "evidence": "Functional verification covers empty/all-filtered/mixed cases, identities and counts, duplicate-key stable ties, exact comparer behavior, exact three-label strings including localization/culture/rounding/rich text, and unchanged log content/frequency. The implementation slice explicitly says to run functional evidence before allocation comparison."
+    },
+    {
+      "text": "Verification repeats the same warmed workload in a target player, checks GC.Alloc on all relevant threads, and separately records CPU and retained/native trade-offs.",
+      "passed": true,
+      "evidence": "Verification repeats the warmed 80-effect, 60 Hz workload for 600 refreshes across three identical runs in Windows IL2CPP Development and production-equivalent Release players, inspects all relevant threads, and separately compares CPU distributions, scratch retention/high-water, retained references, and native/retained memory."
+    },
+    {
+      "text": "The result is labeled provisional until the proposed source inspection and target-player after-capture exist; zero-allocation success is not asserted from the prompt alone.",
+      "passed": true,
+      "evidence": "The Conclusion limits the result to a diagnosis/recommendation and says it is not yet source-level attribution or project-wide GC-free evidence. The response requires exact predicate/comparer/consumer inspection plus matching target-player after-captures and states that no PASS or 'GC-free' label is warranted until those checks produce evidence."
+    }
+  ],
+  "summary": {
+    "passed": 9,
+    "failed": 0,
+    "total": 9,
+    "pass_rate": 1.0
+  },
+  "reconciled": {
+    "summary": "PASS: 9 of 9 assertions are fully and explicitly supported by the recommendation. The response keeps observation, attribution, implementation choice, and acceptance evidence distinct while making no execution claim."
+  },
+  "execution_metrics": {
+    "output_chars": 23009,
+    "transcript_chars": 0
+  },
+  "claims": [
+    {
+      "claim": "The recommendation defines a measurable steady-state allocation contract rather than treating the reported 1.6 KB as a complete baseline.",
+      "evidence": "It specifies the workload, warm-up, prepared capacity, 600-refresh window, repeat count, thread scope, and explicit byte/event budgets."
+    },
+    {
+      "claim": "The first implementation slice is deliberately narrow and preserves attribution.",
+      "evidence": "Only LINQ filter/order/materialization is replaced with a direct loop and owned scratch storage; labels and logging stay unchanged in that slice."
+    },
+    {
+      "claim": "The recommendation treats functional equivalence as a prerequisite to allocation acceptance.",
+      "evidence": "It requires identity/count/order/tie, empty-case, label/localization, logging, lifecycle, and overflow checks before the allocation comparison."
+    },
+    {
+      "claim": "The response does not overstate zero-allocation or performance success.",
+      "evidence": "It explicitly withholds PASS/GC-free status pending source inspection and matching Development/Release target-player evidence, and separately requires CPU and retained/native-memory comparison."
+    }
+  ],
+  "user_notes_summary": {
+    "uncertainties": [
+      "No execution transcript was provided; transcript_chars is 0."
+    ],
+    "needs_review": [],
+    "workarounds": []
+  },
+  "eval_feedback": {
+    "suggestions": [],
+    "overall": "All assertions pass. Strong points are cost-domain separation, stable-order safety, a narrow query-only slice, conditional dependency criteria, and the target-player verification contract."
+  }
+}

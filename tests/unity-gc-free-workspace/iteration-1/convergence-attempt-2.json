@@ -1,0 +1,32 @@
+{
+  "status": "superseded_after_abbreviated_rerun",
+  "grading_policy": "strict full-assertion artifact-only grading",
+  "observation": "The concise rerun reduced coverage despite the refined skill, so the next unbiased rerun removes the concision constraint and again requires faithful use of every applicable routed checkpoint without exposing assertions.",
+  "results": [
+    {
+      "eval_name": "diagnosis",
+      "score": "5/9",
+      "recommendation_sha256": "b87a972e9862a22ea516e283bafb98858255ccbdb0038a19da5a832fc78fc6d7",
+      "grading_sha256": "d6238a30565a29359feb63d7f44210a1d1d8e8bd02c0873a10afe441937cf87b",
+      "failed_assertion_count": 4
+    },
+    {
+      "eval_name": "dependency-selection",
+      "score": "5/9",
+      "recommendation_sha256": "9bb7d4ed8e280f157532e76907f2c2da42940d65717fc79e578d2a9d39b78cea",
+      "grading_sha256": "edb6d33da2ad33265b4c10576f2b9d0d53ba502655fd025ef6ceb2d49e62ee3b",
+      "failed_assertion_count": 4
+    },
+    {
+      "eval_name": "pool-lifecycle",
+      "score": "8/9",
+      "recommendation_sha256": "fe7ed6aae9ef403829adc9e2aa82e7bd7ca09592e61d5ae7752a651d0ebcab4d",
+      "grading_sha256": "588865c34e41c646f49772e20c380dcfb125a8a1618a88d19414be3e1c8d28bf",
+      "failed_assertion_count": 1
+    }
+  ],
+  "telemetry": {
+    "duration_ms": "unavailable",
+    "total_tokens": "unavailable"
+  }
+}

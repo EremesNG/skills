@@ -6,7 +6,7 @@ context together.
 
 ## Available skills
 
-The catalog currently contains four skills:
+The catalog currently contains five skills:
 
 | Skill | Use it for | Documentation |
 | --- | --- | --- |
@@ -14,6 +14,7 @@ The catalog currently contains four skills:
 | `progressive-context-router` | Configure, refactor, audit, or refresh repository instructions and progressive context for coding agents without changing product logic. | [`SKILL.md`](skills/progressive-context-router/SKILL.md) |
 | `simplify` | Refine the current diff for clarity and maintainability while preserving observable behavior and unrelated workspace changes. | [`SKILL.md`](skills/simplify/SKILL.md) |
 | `unity-developer` | Select and implement proportional Unity + C# design patterns, architecture, lifecycle safeguards, and game AI systems from project evidence. | [`SKILL.md`](skills/unity-developer/SKILL.md) |
+| `unity-gc-free` | Diagnose and migrate measured Unity managed-allocation hot paths with behavior-safe reuse, pooling, libraries, and target-player evidence. | [`SKILL.md`](skills/unity-gc-free/SKILL.md) |
 
 The core interview loop in `architectural-grilling` is inspired by the
 MIT-licensed [`grilling` skill from mattpocock/skills](https://github.com/mattpocock/skills/tree/main/skills/productivity/grilling). This version expands it with explicit decision states, architecture and project-management lenses, convergence criteria, red-team checks, and an implementation-ready blueprint.
@@ -48,7 +49,7 @@ npx skills add . --list
 ```
 
 It currently discovers `architectural-grilling`, `progressive-context-router`,
-`simplify`, and `unity-developer`.
+`simplify`, `unity-developer`, and `unity-gc-free`.
 For installation, point your Agent Skills-compatible installer at this repository
 and select the required skill. Each package root under `skills/` contains its
 `SKILL.md` and supporting files. Client-specific installer options are
@@ -84,6 +85,14 @@ Install this skill from the repository with:
 
 ```bash
 npx skills add https://github.com/EremesNG/skills --skill unity-developer
+```
+
+### Remote installation: `unity-gc-free`
+
+Install this skill from the repository with:
+
+```bash
+npx skills add https://github.com/EremesNG/skills --skill unity-gc-free
 ```
 
 ## Read and use a skill
@@ -150,6 +159,18 @@ Inspect the available project version, packages, source layout, ownership, lifec
 For behavior changes, establish a failing test at the narrowest useful seam, preserve Unity initialization and teardown, and verify honestly. Treat performance as unverified until it is measured in a representative build on target hardware.
 ```
 
+### Usage example: `unity-gc-free`
+
+Use this copyable prompt for a measured Unity allocation hot path:
+
+```text
+Use unity-gc-free to diagnose and reduce managed allocations in this Unity hot path.
+
+Inspect the Unity and package versions, profiler evidence, target platform, scripting backend, workload, warm-up, capacities, and all relevant threads. Define the managed-allocation budget before recommending a direct loop, caller-owned buffer, pool, native container, or library such as ZLinq, UniTask, or PrimeTween.
+
+Preserve results, ordering, timing, cancellation, thread affinity, overflow, and owner teardown. Implement one measured source at a time with functional tests first, then verify the same representative workload in a target player. Report native memory, retained memory, and CPU separately; do not call the result GC-free without scoped evidence.
+```
+
 When more skills are added, keep this per-skill pattern: a labeled installation
 subsection in discovery/install and a concise usage subsection in read/use.
 
@@ -162,7 +183,8 @@ python3 -m py_compile \
   skills/progressive-context-router/scripts/context_budget.py \
   skills/progressive-context-router/scripts/repo_inventory.py \
   skills/progressive-context-router/scripts/validate_context_setup.py \
-  skills/unity-developer/scripts/inspect_unity_project.py
+  skills/unity-developer/scripts/inspect_unity_project.py \
+  skills/unity-gc-free/scripts/inspect_unity_gc.py
 python3 -m unittest discover -s tests -v
 npx skills add . --list
 ```

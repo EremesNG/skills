@@ -1,0 +1,114 @@
+{
+  "expectations": [
+    {
+      "text": "The response defines one owner for the pool, Addressables load handle, active/inactive projectiles, damage buffer, and teardown, with acquisition and release paired exactly once.",
+      "passed": true,
+      "evidence": "The scene-owned pool is the sole owner of the prefab handle, active/free collections, reusable physics buffers, and lifetime CTS; its idempotent shutdown owns teardown, while atomic lease release and the reference-count tests require exactly-once release behavior."
+    },
+    {
+      "text": "Capacity distinguishes observed 64, believed peak 128, warm-up, max size, retained-memory cap, empty-pool exhaustion, overflow behavior, growth telemetry, and remeasurement rather than treating 128 as proven.",
+      "passed": false,
+      "evidence": "It discusses observed 64, warm-up, a hard cap of 128, configurable warm count, 129th-acquisition/exhaustion policies, metrics, and memory measurement, but the conclusion explicitly calls 128 the proven peak even though the prompt only says it is believed."
+    },
+    {
+      "text": "Get/release/reset/destroy behavior covers transforms, physics, visual/material state, subscriptions, PrimeTween cancellation/reset, UniTask cancellation, retained references, and a fresh lease generation or equivalent late-callback safeguard.",
+      "passed": false,
+      "evidence": "It covers generation checks, velocity and gameplay fields, trail alpha/tween cancellation, homing CTS cancellation, subscriptions, retained references, deactivation, and destruction. It does not explicitly reset transform state, broader physics state such as collision configuration, or material state, so the complete dirty-reset contract is missing."
+    },
+    {
+      "text": "Addressables instance/load APIs and reference counts are paired according to the installed package, and pooled instances cannot outlive the asset or bundle handle they depend on.",
+      "passed": true,
+      "evidence": "It requires one counted prefab or instance handle model around the project's exact Addressables API, exactly-once releases across completion/cancellation paths, immediate release of late operations/instances, and release of prefab handles only after dependent instances and pending operations are gone."
+    },
+    {
+      "text": "Additive scene unload stops new leases, handles in-flight completion/cancellation races, settles active/inactive objects, rejects late returns deterministically, and releases handles in a safe order.",
+      "passed": true,
+      "evidence": "The unload sequence stops acquisitions, cancels the pool token, releases active leases, settles pending Addressables work, destroys free pooled instances, then releases prefab handles; pool tokens and generations reject late activation or stale re-entry."
+    },
+    {
+      "text": "A full buffer is detected and receives an explicit tested truncation, ordering, telemetry, and fallback policy; the response does not assume the 32 results are nearest or complete.",
+      "passed": true,
+      "evidence": "It detects count == buffer.Length, records DamageBufferOverflow, defines a larger reusable or bounded allocating fallback, specifies deterministic sorting/filtering and a final first-32 truncation policy, and explicitly says a full result must never be treated as complete."
+    },
+    {
+      "text": "Tests begin with meaningful functional red cases and cover dirty reuse, exhaustion, overflow, double return, use after return, scene unload, Domain Reload configuration, cancellation, and Addressables late completion.",
+      "passed": false,
+      "evidence": "The failing tests cover dirty reuse, exhaustion, overflow, duplicate return, stale callbacks/use after return, cancellation, scene unload races, and late Addressables completion. Domain Reload disabled is addressed with a reset hook, but no explicit failing test of that configuration or play-session transition is specified."
+    },
+    {
+      "text": "Allocation red and green use the same representative burst workload after warm-up in a target player across all relevant threads, without placing test assertion overhead inside the measured window.",
+      "passed": false,
+      "evidence": "It calls for post-warm target-player captures and pooled/legacy comparisons, but it does not explicitly require the exact same representative workload for red and green, observation across all relevant threads, or keeping assertion/recorder overhead outside the measured window."
+    },
+    {
+      "text": "Managed allocation, pool-retained memory, Addressables residency, native physics memory, and CPU are measured separately, with rollback triggers if correctness, saturation, memory, or frame-time budgets fail.",
+      "passed": false,
+      "evidence": "It measures managed/native memory, active/overflow counts, refcounts, and correctness and provides correctness or memory rollback. It does not explicitly separate pool-retained memory, Addressables residency, native physics memory, and CPU, nor does it define a frame-time rollback trigger."
+    }
+  ],
+  "summary": {
+    "passed": 4,
+    "failed": 5,
+    "total": 9,
+    "pass_rate": 0.4444
+  },
+  "execution_metrics": {
+    "output_chars": 9799,
+    "transcript_chars": 0
+  },
+  "claims": [
+    {
+      "claim": "The artifact characterizes 128 concurrent projectiles as a proven peak.",
+      "supported": true,
+      "evidence": "Its conclusion says to size for the proven peak, 128, despite separately noting that only 64 was observed."
+    },
+    {
+      "claim": "A full 32-entry damage query is treated as incomplete and observable.",
+      "supported": true,
+      "evidence": "It requires DamageBufferOverflow telemetry and a configured fallback or explicit truncation policy."
+    },
+    {
+      "claim": "Late Addressables completion after unload may activate a projectile normally.",
+      "supported": false,
+      "evidence": "The completion must validate pool and scene lifetime; otherwise the operation/instance is immediately released or discarded."
+    },
+    {
+      "claim": "The recommendation reports completed profiling or target-player verification.",
+      "supported": false,
+      "evidence": "Its Verification section explicitly states that no repository commands, profiling sessions, or target-player runs were performed."
+    },
+    {
+      "claim": "CPU and frame time receive an explicit separate measurement and rollback budget.",
+      "supported": false,
+      "evidence": "The verification and rollback sections do not name CPU or a frame-time threshold."
+    }
+  ],
+  "user_notes_summary": {
+    "uncertainties": [
+      "The desired empty-pool policy is not chosen among rejection, queuing, or bounded expansion.",
+      "The accepted greater-than-32 damage policy and larger-buffer memory budget are unresolved.",
+      "PrimeTween/UniTask kill and await semantics depend on unconfirmed project versions.",
+      "Target devices and release thresholds are unspecified."
+    ],
+    "needs_review": [
+      "Correct the unsupported description of 128 as proven and remeasure capacity.",
+      "Expand the dirty-reset contract to transforms, collision/physics configuration, and material state.",
+      "Add an explicit disabled-Domain-Reload test and a controlled red/green profiler protocol.",
+      "Define separate residency/native-physics/CPU measurements and frame-time rollback gates."
+    ],
+    "workarounds": [
+      "Retain the legacy path behind a feature flag while the pool is validated.",
+      "Prefer a second preallocated damage buffer over the allocating fallback.",
+      "Use a configurable warm count while preserving a tested hard cap pending memory evidence."
+    ]
+  },
+  "eval_feedback": {
+    "suggestions": [
+      "Treat 128 as a hypothesis and connect warm size, hard cap, retained-memory ceiling, growth telemetry, and remeasurement explicitly.",
+      "List every dirty transform, physics, visual/material, subscription, tween, async, and retained-reference reset obligation.",
+      "Add a functional red test for disabled Domain Reload and define identical target-player allocation windows across all relevant threads with test overhead excluded.",
+      "Separate managed allocation, pool retention, Addressables residency, native physics memory, and CPU/frame-time evidence and rollback thresholds."
+    ],
+    "overall": "Four assertions are fully supported. Ownership, Addressables teardown, additive-scene shutdown, and full-buffer policy are strong; capacity truthfulness, complete reset coverage, Domain Reload testing, profiler comparability, and separate memory/CPU gates remain incomplete."
+  }
+}

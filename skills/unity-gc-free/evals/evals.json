@@ -1,0 +1,53 @@
+{
+  "skill_name": "unity-gc-free",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Diagnose a recurring allocation in a Unity 6.0.15f1 Windows game using IL2CPP. A Development Player capture on target-like hardware shows 1.6 KB GC.Alloc on the main thread during every combat HUD refresh at 60 Hz; the call stack reaches CombatHud.Refresh. That method filters 80 status effects with System.Linq Where/OrderBy/ToList, builds three interpolated labels, and writes one Debug.LogFormat message. No worker-thread capture, Release Player run, retained-memory comparison, or CPU baseline exists. The first five seconds also populate caches, but the reported sample begins after that warm-up. Recommend a bounded diagnosis and first implementation slice. Explain what is observed versus still unknown, define the allocation contract, decide whether a direct loop, reused storage, ZLinq, text-specific tooling, or logging change is justified, and give functional plus allocation verification without claiming work was executed.",
+      "expected_output": "A scoped, evidence-labeled diagnosis that treats the supplied Development Player call stack as a strong lead but not complete proof, separates recurring managed allocation from first-use/native/retained/CPU costs, chooses one smallest behavior-preserving vertical slice, compares direct reuse and ZLinq conditionally, locks ordering/text/logging semantics, and defines identical target-player before/after evidence across relevant threads.",
+      "assertions": [
+        "The response distinguishes supplied observations from missing source, worker-thread, Release Player, retained-memory, and CPU evidence and does not claim any inspection or test was run.",
+        "The allocation contract names CombatHud.Refresh, 60 Hz representative inputs, completed warm-up/capacity, an explicit sample window, all relevant threads, and a managed-byte budget.",
+        "Managed allocation, collection behavior, managed heap size, native or retained memory, and CPU are treated as separate cost domains.",
+        "The response identifies LINQ terminal materialization/order, interpolated final strings, and logging/boxing or formatting as distinct candidate boundaries rather than blaming one keyword generically.",
+        "One smallest initial source is selected, with direct loops/reused storage compared against ZLinq and a reason to avoid a broad simultaneous rewrite.",
+        "Any ZLinq recommendation remains conditional on the installed version/compiler, closure/materialization semantics, exact provenance/license, and target-player measurement.",
+        "Functional tests preserve filtered values, ordering/ties, empty cases, label output, localization/formatting, and logging policy before allocation success is assessed.",
+        "Verification repeats the same warmed workload in a target player, checks GC.Alloc on all relevant threads, and separately records CPU and retained/native trade-offs.",
+        "The result is labeled provisional until the proposed source inspection and target-player after-capture exist; zero-allocation success is not asserted from the prompt alone."
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Select a low-allocation dependency strategy for a Unity 2022.3.12f1 game shipping IL2CPP on Android and WebGL. Profiling found three independent warmed hot paths: a per-frame inventory query built from LINQ and ToArray; 200 NPC cooldown coroutines that allocate during repeated restarts; and combat UI tweens currently created through DOTween with captured completion lambdas. The team proposes replacing all LINQ with ZLinq, all coroutines with UniTask, and all DOTween calls with PrimeTween. They also ask whether Unity Awaitable, direct state machines, or keeping the existing code could be better. Produce a decision matrix and staged recommendation. Preserve query ordering, coroutine first-step and cancellation timing, tween sequence/overwrite/completion behavior, WebGL constraints, IL2CPP/AOT compatibility, package provenance and license acceptance. Define capacity warm-up, rollback, and target-player evidence; do not assume the newest package works or that any headline benchmark proves this workload.",
+      "expected_output": "A conditional per-source decision rather than a replacement dictionary: direct loop or ZLinq for the measured query, explicit state/Awaitable/UniTask compared against required PlayerLoop and WebGL semantics, and existing tweening versus PrimeTween compared on captures, capacity, overwrite, lifecycle, and license. It should pin artifacts, preserve behavior with tests, stage one source at a time, and require target-player allocation evidence.",
+      "assertions": [
+        "The response rejects a blanket three-library migration and evaluates each measured source independently, including the option to keep or directly rewrite existing code.",
+        "The LINQ decision addresses deferred/materialized output, query ordering, captures, reusable or pooled result ownership, direct-loop clarity, and ZLinq compatibility/provenance.",
+        "Unity Awaitable's supported-version fit, pooled single-await rule, synchronous continuation, and thread behavior are compared with UniTask rather than treated as interchangeable.",
+        "The UniTask option covers PlayerLoop timing/injection, first-step and cancellation semantics, promise/cancellation allocation boundaries, ECS-loop reset when relevant, and WebGL thread limits.",
+        "The PrimeTween option covers captured closures, configured capacity and warm-up, non-reusable tween handles, sequence timing, overwrite/concurrent-target behavior, cancellation/completion, and pool/scene teardown.",
+        "PrimeTween's non-MIT redistribution/repackaging constraints and exact package provenance require explicit project acceptance; no universal latest version is asserted.",
+        "IL2CPP/AOT, stripping, compiler/editor minimums, Android and WebGL builds, and exact locked artifacts are part of compatibility verification.",
+        "The migration is staged as one reversible measured source with functional red-green evidence, allocation before/after evidence, explicit rollback triggers, and no simultaneous semantic changes.",
+        "The response requires an identical warmed representative target-player workload across relevant threads and reports managed allocation separately from CPU, native, and retained memory."
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Design a lifecycle-safe migration for a Unity 6 co-op game that creates Addressables-backed projectile prefabs with InstantiateAsync and destroys them after impact. A Development Player capture shows recurring managed allocation during bursts. The proposed solution is an ObjectPool of projectile components plus a reused Physics.OverlapSphereNonAlloc array for damage. Peak concurrent projectiles are believed to be 128 but only 64 were observed; the damage buffer holds 32 colliders and sometimes returns a full buffer. Each projectile owns event subscriptions, a PrimeTween trail fade, and a UniTask homing loop bound to scene lifetime. Additive combat scenes unload while Addressables operations may still be completing, and Domain Reload is disabled in the Editor. Provide a test-first migration and ownership protocol covering pool warm-up/capacity/exhaustion, dirty reset, cancellation and late callbacks, Addressables reference counts, full buffer truncation/order/fallback, scene/domain teardown, retained/native memory, rollback, and representative target-player verification.",
+      "expected_output": "A single-owner, bounded pool and caller-buffer design that does not equate pooling with zero cost: explicit acquisition/release pairing, prepared capacity plus measured exhaustion, generation-safe reset/cancellation, Addressables handle lifetime, deterministic scene teardown, saturation telemetry and an accepted damage-query fallback. It should begin with failing behavior and allocation evidence and end only after lifecycle tests and target-player remeasurement pass.",
+      "assertions": [
+        "The response defines one owner for the pool, Addressables load handle, active/inactive projectiles, damage buffer, and teardown, with acquisition and release paired exactly once.",
+        "Capacity distinguishes observed 64, believed peak 128, warm-up, max size, retained-memory cap, empty-pool exhaustion, overflow behavior, growth telemetry, and remeasurement rather than treating 128 as proven.",
+        "Get/release/reset/destroy behavior covers transforms, physics, visual/material state, subscriptions, PrimeTween cancellation/reset, UniTask cancellation, retained references, and a fresh lease generation or equivalent late-callback safeguard.",
+        "Addressables instance/load APIs and reference counts are paired according to the installed package, and pooled instances cannot outlive the asset or bundle handle they depend on.",
+        "Additive scene unload stops new leases, handles in-flight completion/cancellation races, settles active/inactive objects, rejects late returns deterministically, and releases handles in a safe order.",
+        "A full buffer is detected and receives an explicit tested truncation, ordering, telemetry, and fallback policy; the response does not assume the 32 results are nearest or complete.",
+        "Tests begin with meaningful functional red cases and cover dirty reuse, exhaustion, overflow, double return, use after return, scene unload, Domain Reload configuration, cancellation, and Addressables late completion.",
+        "Allocation red and green use the same representative burst workload after warm-up in a target player across all relevant threads, without placing test assertion overhead inside the measured window.",
+        "Managed allocation, pool-retained memory, Addressables residency, native physics memory, and CPU are measured separately, with rollback triggers if correctness, saturation, memory, or frame-time budgets fail."
+      ]
+    }
+  ]
+}

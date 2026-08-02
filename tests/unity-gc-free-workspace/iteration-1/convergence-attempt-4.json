@@ -1,0 +1,24 @@
+{
+  "status": "selection_superseded_after_final_entry-guard refinement",
+  "grading_policy": "strict full-assertion artifact-only grading",
+  "results": [
+    {
+      "eval_name": "dependency-selection",
+      "score": "7/9",
+      "recommendation_sha256": "af5d0a933724ab6e8550913a8dc7f4e9d84f84908212f5f8814eb8feaa667934",
+      "grading_sha256": "7f3553a55779a2272e347fb984c581664969e8fa4ad68c6f9ebe16eac6ce0eff",
+      "disposition": "rerun after making Awaitable continuation-thread and full vertical red-green evidence explicit"
+    },
+    {
+      "eval_name": "pool-lifecycle",
+      "score": "9/9",
+      "recommendation_sha256": "878efc4538217190027a33ad0960f8447e1bd4bb8c8135b028a3fc6d337e3b56",
+      "grading_sha256": "8d76b5ce83fa64e496447be451b5e4688901ccace29979cd151d08a4ec9655fa",
+      "disposition": "retained as final"
+    }
+  ],
+  "telemetry": {
+    "duration_ms": "unavailable",
+    "total_tokens": "unavailable"
+  }
+}

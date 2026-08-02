@@ -1,0 +1,110 @@
+{
+  "expectations": [
+    {
+      "text": "The response rejects a blanket three-library migration and evaluates each measured source independently, including the option to keep or directly rewrite existing code.",
+      "passed": true,
+      "evidence": "The conclusion says, \"Do not perform the proposed three-way substitution as a blanket rule,\" then separately recommends a direct inventory loop, an explicit cooldown state machine, and DOTween callback/capacity cleanup. The matrix also includes cleaned existing coroutines, retained DOTween, direct/manual alternatives, and conditional library use."
+    },
+    {
+      "text": "The LINQ decision addresses deferred/materialized output, query ordering, captures, reusable or pooled result ownership, direct-loop clarity, and ZLinq compatibility/provenance.",
+      "passed": true,
+      "evidence": "The inventory contract and matrix explicitly preserve deferred-versus-eager behavior, stable ordering, captures, repeated enumeration, and terminal-result ownership; require exactly-once return for pooled terminals; define owner-held reusable storage and overflow; prefer the direct loop when it is clear; and require the exact ZLinq manifest/tag/commit, Unity/compiler fit, IL2CPP stripping/AOT, targets, transitive dependencies, and license approval."
+    },
+    {
+      "text": "Unity Awaitable's supported-version fit, pooled single-await rule, synchronous continuation, and thread behavior are compared with UniTask rather than treated as interchangeable.",
+      "passed": true,
+      "evidence": "The conclusion and decision matrix place Awaitable and UniTask in distinct alternatives: Awaitable is gated to Unity 2023.1+ and therefore rejected for 2022.3, is pooled and single-await, has synchronous continuations and a thread-affinity gate; UniTask instead requires pinned PlayerLoop timing/injection, cancellation tests, and guarded thread-pool/thread switches on WebGL."
+    },
+    {
+      "text": "The UniTask option covers PlayerLoop timing/injection, first-step and cancellation semantics, promise/cancellation allocation boundaries, ECS-loop reset when relevant, and WebGL thread limits.",
+      "passed": true,
+      "evidence": "The UniTask matrix row explicitly requires pinned PlayerLoopTiming, injection/reinjection if ECS or another system replaces the loop, first-step parity for adapters, immediate and in-flight cancellation/race testing, pooled-promise versus capture/registration/combinator cost boundaries, and guards against RunOnThreadPool or thread switches because WebGL lacks general worker-thread support."
+    },
+    {
+      "text": "The PrimeTween option covers captured closures, configured capacity and warm-up, non-reusable tween handles, sequence timing, overwrite/concurrent-target behavior, cancellation/completion, and pool/scene teardown.",
+      "passed": true,
+      "evidence": "The tween stages first eliminate captured completion lambdas through a cached static delegate/context seam, then put PrimeTween behind that same adapter if necessary. The matrix and Stage 3 cover capacity growth and warmed sampling, non-reusable handles, sequence order/timing/loops, overwrite versus concurrent targets, cancellation/completion parity, UI pool reset, and scene-unload teardown."
+    },
+    {
+      "text": "PrimeTween's non-MIT redistribution/repackaging constraints and exact package provenance require explicit project acceptance; no universal latest version is asserted.",
+      "passed": true,
+      "evidence": "The PrimeTween row states it is not MIT and that redistribution/repackaging restrictions require explicit legal/project acceptance. Stage 0 and Stage 3 require the exact manifest/version/source/tag/commit to be pinned and approved, and explicitly say a newest release or README benchmark is only a hypothesis."
+    },
+    {
+      "text": "IL2CPP/AOT, stripping, compiler/editor minimums, Android and WebGL builds, and exact locked artifacts are part of compatibility verification.",
+      "passed": true,
+      "evidence": "The matrix and Stage 0 require exact package-lock coordinates and source/tag/commit, Unity/editor minimums, compiler API surface, IL2CPP/AOT and stripping checks, and transitive dependencies. Stage 4 requires Android IL2CPP Development and Release runs plus WebGL runs in the actual browser/runtime."
+    },
+    {
+      "text": "The migration is staged as one reversible measured source with functional red-green evidence, allocation before/after evidence, explicit rollback triggers, and no simultaneous semantic changes.",
+      "passed": true,
+      "evidence": "Stages 0-4 keep each old path behind a narrow adapter or feature flag, migrate inventory, cooldowns, and tweens as separate slices, require the functional red contract to turn green before allocation comparison, and keep baseline/changed measurements identical. The recommendation freezes ordering/timing/cancellation/completion semantics and enumerates explicit immediate rollback triggers."
+    },
+    {
+      "text": "The response requires an identical warmed representative target-player workload across relevant threads and reports managed allocation separately from CPU, native, and retained memory.",
+      "passed": true,
+      "evidence": "The allocation contract requires identical baseline and changed input, settings, backend, package versions, capacities, warm-up, markers, repetitions, and device, with all relevant threads and representative Android/WebGL players. Managed bytes/count are a distinct budget, while CPU/frame time, retained memory, native memory, collection pauses, saturation, and leases are reported separately."
+    }
+  ],
+  "summary": {
+    "passed": 9,
+    "failed": 0,
+    "total": 9,
+    "pass_rate": 1.0
+  },
+  "execution_metrics": {
+    "output_chars": 19394,
+    "transcript_chars": 0
+  },
+  "claims": [
+    {
+      "text": "A blanket ZLinq, UniTask, and PrimeTween migration is not justified by the three independent profiler findings.",
+      "status": "supported",
+      "evidence": "The conclusion rejects the three-way substitution and gives a different preferred intervention for each path."
+    },
+    {
+      "text": "Unity Awaitable is outside the stated Unity 2022.3.12f1 version gate.",
+      "status": "supported",
+      "evidence": "The recommendation identifies the applicable Awaitable documentation gate as Unity 2023.1+ and rejects it for the current target."
+    },
+    {
+      "text": "The preferred cooldown solution is an explicit pre-sized per-NPC state machine rather than UniTask.",
+      "status": "supported",
+      "evidence": "The conclusion, matrix, and Stage 2 consistently select the state machine while reserving UniTask for genuinely asynchronous composition."
+    },
+    {
+      "text": "PrimeTween adoption is conditional on semantic parity, target-player evidence, exact provenance, and license acceptance.",
+      "status": "supported",
+      "evidence": "The PrimeTween row and Stage 3 make all four conditions explicit and keep DOTween when callback/capacity cleanup meets budget."
+    },
+    {
+      "text": "Acceptance evidence must separate warmed managed allocation from CPU, native memory, and retained-memory effects.",
+      "status": "supported",
+      "evidence": "The context contract and target-player rollout specify separate budgets and measurements for those cost classes."
+    }
+  ],
+  "user_notes_summary": {
+    "uncertainties": [
+      "Exact proposed and installed package coordinates, tags or commits, transitive dependencies, and accepted licenses remain unknown.",
+      "Inventory result-size/ownership limits, cooldown time and PlayerLoop semantics, and current tween sequence/overwrite settings need project evidence.",
+      "Shipping Android devices, WebGL browsers, and numerical managed-byte, CPU, retained-memory, and saturation budgets are not yet defined."
+    ],
+    "needs_review": [
+      "Review and approve exact package locks, compiler/editor compatibility, IL2CPP/AOT stripping behavior, and PrimeTween's non-MIT terms.",
+      "Validate functional parity and warmed allocation evidence independently on representative Android and WebGL players.",
+      "Confirm result ownership, first-step/cancellation timing, tween overwrite/completion order, and teardown behavior before rollout."
+    ],
+    "workarounds": [
+      "Use a direct owner-controlled inventory loop with prepared storage before considering ZLinq.",
+      "Use an explicit pre-sized cooldown state machine instead of wrapping deterministic timers in UniTask.",
+      "Keep DOTween, remove captured callbacks, and warm configured capacity before considering PrimeTween; retain adapters or feature flags for rollback."
+    ]
+  },
+  "eval_feedback": {
+    "suggestions": [
+      "Once project data exists, add the exact package coordinates, accepted license records, device/browser matrix, and numeric rollback thresholds.",
+      "Keep each migration slice and its target-player evidence independently reviewable so semantic and allocation regressions remain attributable."
+    ],
+    "overall": "PASS. The recommendation fully and explicitly covers all nine assertions with a selective, compatibility-aware, reversible, target-player-measured strategy."
+  }
+}

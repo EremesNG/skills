@@ -1,0 +1,109 @@
+{
+  "expectations": [
+    {
+      "text": "The response rejects a blanket three-library migration and evaluates each measured source independently, including the option to keep or directly rewrite existing code.",
+      "passed": true,
+      "evidence": "The Conclusion rejects replacing every LINQ, coroutine, and DOTween call at once. It separately recommends an imperative inventory loop, a direct cooldown scheduler/state machine, retained DOTween with capture removal, and optional one-path package pilots; the matrix also retains existing code as rollback baseline."
+    },
+    {
+      "text": "The LINQ decision addresses deferred/materialized output, query ordering, captures, reusable or pooled result ownership, direct-loop clarity, and ZLinq compatibility/provenance.",
+      "passed": false,
+      "evidence": "The inventory material covers ToArray/fresh-copy ownership, deferred execution, ordering, reusable-buffer aliasing, direct-loop preference, and ZLinq version/compiler/AOT/provenance gates. It never explicitly addresses captured delegates or captures in the LINQ/ZLinq query path, so the full assertion is not satisfied."
+    },
+    {
+      "text": "Unity Awaitable's supported-version fit, pooled single-await rule, synchronous continuation, and thread behavior are compared with UniTask rather than treated as interchangeable.",
+      "passed": false,
+      "evidence": "The Awaitable row only says Unity 2022.3 availability must be confirmed and mentions changed continuation semantics. It does not state the pooled single-await rule, synchronous continuation behavior, or Awaitable thread-affinity/background-thread behavior."
+    },
+    {
+      "text": "The UniTask option covers PlayerLoop timing/injection, first-step and cancellation semantics, promise/cancellation allocation boundaries, ECS-loop reset when relevant, and WebGL thread limits.",
+      "passed": false,
+      "evidence": "The artifact mentions scheduler/cancellation timing, async-state and cancellation-registration allocations, avoiding per-restart CancellationTokenSource creation, and WebGL verification. It does not explicitly cover PlayerLoop injection, promise-pool allocation boundaries, UniTask first-step execution, or WebGL's thread limitations; no ECS relevance determination is made."
+    },
+    {
+      "text": "The PrimeTween option covers captured closures, configured capacity and warm-up, non-reusable tween handles, sequence timing, overwrite/concurrent-target behavior, cancellation/completion, and pool/scene teardown.",
+      "passed": false,
+      "evidence": "The PrimeTween pilot maps overwrite, sequence nesting, delay/update mode, cancellation/kill, and completion, while the general evidence plan warms large tween sequences. It does not explicitly cover PrimeTween capture-free callback forms, non-reusable handles, configured PrimeTween capacity, or PrimeTween pool and scene-teardown lifecycle."
+    },
+    {
+      "text": "PrimeTween's non-MIT redistribution/repackaging constraints and exact package provenance require explicit project acceptance; no universal latest version is asserted.",
+      "passed": false,
+      "evidence": "The response requires an exact pinned version, provenance, and license/security acceptance and says not to float to latest. It never identifies PrimeTween's license as non-MIT or explains its redistribution/repackaging restrictions, so acceptance is not informed by the required constraints."
+    },
+    {
+      "text": "IL2CPP/AOT, stripping, compiler/editor minimums, Android and WebGL builds, and exact locked artifacts are part of compatibility verification.",
+      "passed": true,
+      "evidence": "The matrix and stages require Unity 2022.3 compiler/profile and package-support checks, exact versions/commits/hashes and package locks, generic AOT/linker and stripping verification, and Android IL2CPP plus WebGL release-player builds."
+    },
+    {
+      "text": "The migration is staged as one reversible measured source with functional red-green evidence, allocation before/after evidence, explicit rollback triggers, and no simultaneous semantic changes.",
+      "passed": true,
+      "evidence": "Stage 0 captures current behavior before editing and isolates paths behind flags, Stage 1 changes one source at a time while preserving its semantics, Stage 2 pilots one representative path, and Stage 3 promotes only after old/new correctness and target-player measurement. Behavior differences block migration, performance or memory regressions block promotion, and rollback is a one-change strategy/package-lock switch."
+    },
+    {
+      "text": "The response requires an identical warmed representative target-player workload across relevant threads and reports managed allocation separately from CPU, native, and retained memory.",
+      "passed": false,
+      "evidence": "The evidence plan warms a representative scene and separately collects GC.Alloc, memory snapshots, frame-time, and build metrics on target players. It does not explicitly require the identical workload/trace for every comparison, allocation capture across all relevant threads, or retained memory as a distinct reported dimension."
+    }
+  ],
+  "summary": {
+    "passed": 3,
+    "failed": 6,
+    "total": 9,
+    "pass_rate": 0.3333
+  },
+  "execution_metrics": {
+    "output_chars": 11853,
+    "transcript_chars": 0
+  },
+  "claims": [
+    {
+      "claim": "The recommendation rejects a blanket dependency migration.",
+      "passed": true,
+      "evidence": "The Conclusion says not to replace every LINQ, coroutine, and DOTween call in one migration and instead adopts a minimal-dependency hybrid strategy."
+    },
+    {
+      "claim": "The baseline NPC implementation is a capacity-warmed scheduler or direct state machine.",
+      "passed": true,
+      "evidence": "Conclusion item 2 and the decision matrix make a fixed-capacity scheduler/state machine the preferred NPC implementation."
+    },
+    {
+      "claim": "The baseline tween implementation retains DOTween and removes captured completion lambdas.",
+      "passed": true,
+      "evidence": "Conclusion item 3 and Stage 1 prescribe keeping DOTween while replacing captures with static callbacks, IDs, or a receiver lookup."
+    },
+    {
+      "claim": "The recommendation claims that package or profiler verification has already been run.",
+      "passed": false,
+      "evidence": "The Verification section explicitly says no command, profiler session, or package compatibility result is assumed to have been run."
+    },
+    {
+      "claim": "The artifact explains PrimeTween's non-MIT redistribution and repackaging limits.",
+      "passed": false,
+      "evidence": "It names generic package provenance and license acceptance as gates but gives no PrimeTween-specific license classification or redistribution/repackaging terms."
+    }
+  ],
+  "user_notes_summary": {
+    "uncertainties": [
+      "Inventory result lifetime, cooldown clock and timing contracts, DOTween behavior/configuration, exact package candidates, and the target Android/WebGL acceptance matrix remain open questions.",
+      "Unity Awaitable availability and behavior on Unity 2022.3 are left to future confirmation."
+    ],
+    "needs_review": [
+      "Awaitable pooling, continuation, and thread rules need explicit versioned review.",
+      "UniTask PlayerLoop/injection and WebGL thread constraints, plus PrimeTween handle/capacity/teardown and exact license restrictions, need explicit review."
+    ],
+    "workarounds": [
+      "Use an imperative reusable-buffer inventory path and a fixed-capacity cooldown scheduler without adding packages.",
+      "Keep DOTween, remove captures, and place each candidate behind a reversible feature flag for one-path target-player pilots."
+    ]
+  },
+  "eval_feedback": {
+    "suggestions": [
+      "Add query-capture analysis to the LINQ/ZLinq decision.",
+      "Document Unity Awaitable's single-await pooling, synchronous continuation, and thread behavior, and UniTask's PlayerLoop injection/pool/thread boundaries.",
+      "Add PrimeTween-specific stateful callback, capacity, handle lifecycle, teardown, and non-MIT redistribution/repackaging gates.",
+      "Require one identical warmed target-player trace across all relevant threads and report retained memory explicitly."
+    ],
+    "overall": "The artifact makes a sound independent and reversible strategy choice and covers broad build compatibility, but six assertions lack explicit technical details required by the rubric."
+  }
+}

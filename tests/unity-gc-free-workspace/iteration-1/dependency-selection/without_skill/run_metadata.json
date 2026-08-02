@@ -1,0 +1,21 @@
+{
+  "eval_id": 2,
+  "eval_name": "dependency-selection",
+  "configuration": "without_skill",
+  "prompt_source": "../../../../skills/unity-gc-free/evals/evals.json#evals[id=2]",
+  "output": "outputs/recommendation.md",
+  "executor_received_expected_output": false,
+  "executor_received_assertions": false,
+  "assertions_frozen_before_grading": true,
+  "assertions": [
+    "The response rejects a blanket three-library migration and evaluates each measured source independently, including the option to keep or directly rewrite existing code.",
+    "The LINQ decision addresses deferred/materialized output, query ordering, captures, reusable or pooled result ownership, direct-loop clarity, and ZLinq compatibility/provenance.",
+    "Unity Awaitable's supported-version fit, pooled single-await rule, synchronous continuation, and thread behavior are compared with UniTask rather than treated as interchangeable.",
+    "The UniTask option covers PlayerLoop timing/injection, first-step and cancellation semantics, promise/cancellation allocation boundaries, ECS-loop reset when relevant, and WebGL thread limits.",
+    "The PrimeTween option covers captured closures, configured capacity and warm-up, non-reusable tween handles, sequence timing, overwrite/concurrent-target behavior, cancellation/completion, and pool/scene teardown.",
+    "PrimeTween's non-MIT redistribution/repackaging constraints and exact package provenance require explicit project acceptance; no universal latest version is asserted.",
+    "IL2CPP/AOT, stripping, compiler/editor minimums, Android and WebGL builds, and exact locked artifacts are part of compatibility verification.",
+    "The migration is staged as one reversible measured source with functional red-green evidence, allocation before/after evidence, explicit rollback triggers, and no simultaneous semantic changes.",
+    "The response requires an identical warmed representative target-player workload across relevant threads and reports managed allocation separately from CPU, native, and retained memory."
+  ]
+}

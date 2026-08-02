@@ -1,6 +1,110 @@
 # Validation report
 
-Generated on 2026-08-01 for the in-progress `unity-developer` change.
+## Unity GC-Free checkpoint — 2026-08-02
+
+This checkpoint covers the final pre-checksum `unity-gc-free` package, its public
+reference contracts, the read-only inspector, repository integration,
+behavior-preserving simplification, local structural checks, and one comparative
+prose-evaluation iteration with preserved convergence evidence. Checksum
+regeneration and final Oracle verification have not run yet and are not claimed.
+No Unity Editor, representative game project, target-player profiler capture, or
+target hardware was available; the package defines those runtime protocols but
+has not executed them here.
+
+### Package and inspector facts
+
+- `skills/unity-gc-free/SKILL.md` contains **200 lines**, routes exactly **7**
+  existing reference files, and keeps frontmatter to `name` and `description`.
+- `references/sources.md` contains **48 unique direct primary-source URLs** and
+  records the 2026-08-02 access date, authority order, version/license conflicts,
+  benchmark qualification, and refresh triggers.
+- `evals/evals.json` parses as JSON and contains **3 unique scenarios**, each
+  with **9 predeclared objective assertions**. The same assertion lists were
+  frozen into both run metadata files before artifact grading.
+- The inspector uses the Python standard library, emits a versioned deterministic
+  schema, reads only eligible C# under `Assets/` and embedded `Packages/`, and
+  returns counts plus capped relative paths. It reports raw backend values only
+  as hints, filters unrelated packages, redacts URI userinfo and credential-like
+  assignments, excludes generated and secret-like paths, and never emits source
+  lines or matched values.
+- **11/11 inspector cases pass**, covering invalid roots, valid and malformed
+  metadata, relevant packages and redaction, all eleven signal families,
+  exclusions/privacy, deterministic bounds, argument validation, human lead
+  labeling, and before/after filesystem identity.
+
+### Automated checks observed
+
+- Focused `unity-gc-free` suite after simplification: **24/24 passed**.
+- Whole repository suite after simplification: **58/58 passed**.
+- Explicit compilation of all **5** bundled Python scripts: **PASS**.
+- Installed `skill-creator` structural validation: **PASS** (`Skill is valid!`).
+- Cached local read-only discovery found exactly **5** skills:
+  `architectural-grilling`, `progressive-context-router`, `simplify`,
+  `unity-developer`, and `unity-gc-free`.
+- Final static package audit: **200** entry lines, **7/7** routed links present,
+  **48** unique source URLs, **3** evaluation prompts, and **9/9/9** assertions.
+- The artifact reconciliation audit parsed **32** package/evaluation JSON files,
+  reconciled all six grade summaries, matched all six frozen assertion sets and
+  output byte counts to the run manifest, and found **0** baseline references to
+  `unity-gc-free`.
+
+### Behavioral evaluation observed
+
+Three prompts were executed as isolated with-skill/no-skill pairs. Executors
+received only the prompt and, for enabled runs, the skill path; expected outputs
+and assertions were withheld. Separate artifact-only graders received the frozen
+assertions plus one output and did not receive the skill or expected output.
+
+| Scenario | With skill | Without skill | Observed difference |
+| --- | ---: | ---: | ---: |
+| Allocation diagnosis | 9/9 | 2/9 | +7 |
+| Dependency selection | 9/9 | 3/9 | +6 |
+| Pool lifecycle | 9/9 | 4/9 | +5 |
+| **Total** | **27/27** | **9/27** | **+18** |
+
+- Nine assertions passed in both configurations and are non-discriminating in
+  this sample; eighteen passed only with the skill; none passed only without it.
+- The final with-skill mean pass rate is **100.0%** versus **33.3%** for the
+  baseline, an observed difference of **66.7 percentage points**. This is an
+  artifact result, not proof that the skill caused the difference.
+- With-skill output averaged **26,860 characters**; baseline output averaged
+  **9,207 characters**. Character count is descriptive and does not establish
+  token efficiency, usability, or quality.
+- Strict grading initially exposed three omissions at 8/9 per enabled artifact.
+  A deliberately concise rerun degraded coverage, and later test-first entry
+  refinements converged to 27/27. Four `convergence-attempt-*.json` records retain
+  the scores, failure dispositions, and SHA-256 hashes of superseded artifacts.
+- The final result was refined against these same prompts, so it is not a held-out
+  generalization estimate and may include evaluation-suite-specific adaptation.
+- Six direct grading files, `benchmark.json`, a corrected `benchmark.md`, ten
+  evidence-grounded analyst notes, and a **250,013-byte** static `review.html`
+  exist. A generated `runs/` projection supplies the installed aggregator's
+  expected layout without changing the primary artifacts.
+
+The collaboration host exposed neither execution duration nor total tokens and
+did not expose exact executor/analyzer model identity. Zero time values in the
+aggregator are placeholders; its field named `tokens` contains output character
+counts. There is one artifact per prompt/configuration, so no run-to-run variance
+or flakiness estimate exists. No human preference comparison was performed;
+SC-007 remains an unobserved outcome risk.
+
+### Commands executed for this checkpoint
+
+```powershell
+python -m unittest tests.test_unity_gc_free -v
+python -m unittest discover -s tests -v
+python -m py_compile skills/progressive-context-router/scripts/context_budget.py skills/progressive-context-router/scripts/repo_inventory.py skills/progressive-context-router/scripts/validate_context_setup.py skills/unity-developer/scripts/inspect_unity_project.py skills/unity-gc-free/scripts/inspect_unity_gc.py
+$env:PYTHONUTF8='1'; python 'C:\Users\EremesNG\.codex\skills\.system\skill-creator\scripts\quick_validate.py' skills\unity-gc-free
+& 'C:\Users\EremesNG\.cache\codex-runtimes\codex-primary-runtime\dependencies\node\bin\node.exe' 'C:\Users\EremesNG\AppData\Local\npm-cache\_npx\ac0ed6aa23b37c1e\node_modules\skills\bin\cli.mjs' add . --list
+```
+
+Each command above completed with exit code 0. The final static audit used
+read-only PowerShell parsing for line, link, URL, and assertion counts.
+
+## Unity Developer retained report — 2026-08-01
+
+The following earlier section records the completed `unity-developer` change and
+is retained as historical repository validation evidence.
 
 ## Current scope
 

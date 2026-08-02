@@ -1,0 +1,16 @@
+{
+  "eval_id": 2,
+  "eval_name": "dependency-selection",
+  "prompt": "Select a low-allocation dependency strategy for a Unity 2022.3.12f1 game shipping IL2CPP on Android and WebGL. Profiling found three independent warmed hot paths: a per-frame inventory query built from LINQ and ToArray; 200 NPC cooldown coroutines that allocate during repeated restarts; and combat UI tweens currently created through DOTween with captured completion lambdas. The team proposes replacing all LINQ with ZLinq, all coroutines with UniTask, and all DOTween calls with PrimeTween. They also ask whether Unity Awaitable, direct state machines, or keeping the existing code could be better. Produce a decision matrix and staged recommendation. Preserve query ordering, coroutine first-step and cancellation timing, tween sequence/overwrite/completion behavior, WebGL constraints, IL2CPP/AOT compatibility, package provenance and license acceptance. Define capacity warm-up, rollback, and target-player evidence; do not assume the newest package works or that any headline benchmark proves this workload.",
+  "assertions": [
+    "The response rejects a blanket three-library migration and evaluates each measured source independently, including the option to keep or directly rewrite existing code.",
+    "The LINQ decision addresses deferred/materialized output, query ordering, captures, reusable or pooled result ownership, direct-loop clarity, and ZLinq compatibility/provenance.",
+    "Unity Awaitable's supported-version fit, pooled single-await rule, synchronous continuation, and thread behavior are compared with UniTask rather than treated as interchangeable.",
+    "The UniTask option covers PlayerLoop timing/injection, first-step and cancellation semantics, promise/cancellation allocation boundaries, ECS-loop reset when relevant, and WebGL thread limits.",
+    "The PrimeTween option covers captured closures, configured capacity and warm-up, non-reusable tween handles, sequence timing, overwrite/concurrent-target behavior, cancellation/completion, and pool/scene teardown.",
+    "PrimeTween's non-MIT redistribution/repackaging constraints and exact package provenance require explicit project acceptance; no universal latest version is asserted.",
+    "IL2CPP/AOT, stripping, compiler/editor minimums, Android and WebGL builds, and exact locked artifacts are part of compatibility verification.",
+    "The migration is staged as one reversible measured source with functional red-green evidence, allocation before/after evidence, explicit rollback triggers, and no simultaneous semantic changes.",
+    "The response requires an identical warmed representative target-player workload across relevant threads and reports managed allocation separately from CPU, native, and retained memory."
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "eval_id": 1,
+  "eval_name": "diagnosis",
+  "prompt": "Diagnose a recurring allocation in a Unity 6.0.15f1 Windows game using IL2CPP. A Development Player capture on target-like hardware shows 1.6 KB GC.Alloc on the main thread during every combat HUD refresh at 60 Hz; the call stack reaches CombatHud.Refresh. That method filters 80 status effects with System.Linq Where/OrderBy/ToList, builds three interpolated labels, and writes one Debug.LogFormat message. No worker-thread capture, Release Player run, retained-memory comparison, or CPU baseline exists. The first five seconds also populate caches, but the reported sample begins after that warm-up. Recommend a bounded diagnosis and first implementation slice. Explain what is observed versus still unknown, define the allocation contract, decide whether a direct loop, reused storage, ZLinq, text-specific tooling, or logging change is justified, and give functional plus allocation verification without claiming work was executed.",
+  "assertions": [
+    "The response distinguishes supplied observations from missing source, worker-thread, Release Player, retained-memory, and CPU evidence and does not claim any inspection or test was run.",
+    "The allocation contract names CombatHud.Refresh, 60 Hz representative inputs, completed warm-up/capacity, an explicit sample window, all relevant threads, and a managed-byte budget.",
+    "Managed allocation, collection behavior, managed heap size, native or retained memory, and CPU are treated as separate cost domains.",
+    "The response identifies LINQ terminal materialization/order, interpolated final strings, and logging/boxing or formatting as distinct candidate boundaries rather than blaming one keyword generically.",
+    "One smallest initial source is selected, with direct loops/reused storage compared against ZLinq and a reason to avoid a broad simultaneous rewrite.",
+    "Any ZLinq recommendation remains conditional on the installed version/compiler, closure/materialization semantics, exact provenance/license, and target-player measurement.",
+    "Functional tests preserve filtered values, ordering/ties, empty cases, label output, localization/formatting, and logging policy before allocation success is assessed.",
+    "Verification repeats the same warmed workload in a target player, checks GC.Alloc on all relevant threads, and separately records CPU and retained/native trade-offs.",
+    "The result is labeled provisional until the proposed source inspection and target-player after-capture exist; zero-allocation success is not asserted from the prompt alone."
+  ]
+}

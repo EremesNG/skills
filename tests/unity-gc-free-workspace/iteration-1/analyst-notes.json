@@ -1,0 +1,66 @@
+{
+  "skill_name": "unity-gc-free",
+  "iteration": 1,
+  "notes": [
+    {
+      "id": 1,
+      "type": "observed",
+      "evidence": "Final with-skill grades are 9/9, 9/9, and 9/9; baseline grades are 2/9, 3/9, and 4/9.",
+      "interpretation": "The final artifacts differ by 18 of 27 objective assertion outcomes."
+    },
+    {
+      "id": 2,
+      "type": "observed",
+      "evidence": "Nine assertions passed in both configurations: 2 diagnosis, 3 selection, and 4 pooling assertions.",
+      "interpretation": "These checks are non-discriminating in this sample and should not be credited as skill-specific separation."
+    },
+    {
+      "id": 3,
+      "type": "observed",
+      "evidence": "Eighteen assertions passed only with the skill, and none passed only in the baseline.",
+      "interpretation": "The observed separation concerns scoped measurement, compatibility/semantics, lifecycle edge cases, and verification honesty."
+    },
+    {
+      "id": 4,
+      "type": "limitation",
+      "evidence": "Each prompt/configuration has one final artifact.",
+      "interpretation": "No run-to-run variance, reliability, or flakiness estimate is available."
+    },
+    {
+      "id": 5,
+      "type": "limitation",
+      "evidence": "The collaboration host exposed neither duration_ms nor total_tokens.",
+      "interpretation": "Zero duration is a placeholder; aggregator token values are output character counts and cannot support speed or token-efficiency claims."
+    },
+    {
+      "id": 6,
+      "type": "observed",
+      "evidence": "Mean output length is 26,860 characters with the skill and 9,207 characters without it.",
+      "interpretation": "The skill-enabled artifacts are about 2.9 times as long; length alone is neither a benefit nor a defect."
+    },
+    {
+      "id": 7,
+      "type": "limitation",
+      "evidence": "Convergence records preserve initial 8/9 scores, a degraded concise rerun, and later refinements against the same assertion suite.",
+      "interpretation": "The final 27/27 result is not held-out evidence and may include suite-specific adaptation."
+    },
+    {
+      "id": 8,
+      "type": "process",
+      "evidence": "Executors received prompts and, for enabled runs, the skill path; expected outputs and assertions were withheld. Artifact-only graders received assertions and outputs but no skill or expected output.",
+      "interpretation": "Answer generation and grading were separated, while the later refinement loop remained visible."
+    },
+    {
+      "id": 9,
+      "type": "limitation",
+      "evidence": "No Unity project, target-player capture, package installation, build, profiler session, or runtime test was part of these prose evaluations.",
+      "interpretation": "Grades assess recommendation quality, not actual allocation removal or runtime correctness."
+    },
+    {
+      "id": 10,
+      "type": "outcome-risk",
+      "evidence": "No reviewer preference or usability comparison was collected.",
+      "interpretation": "Human preference remains unobserved; automated assertions cannot substitute for it."
+    }
+  ]
+}

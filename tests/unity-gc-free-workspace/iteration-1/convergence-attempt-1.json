@@ -1,0 +1,36 @@
+{
+  "status": "superseded_after_skill_refinement",
+  "grading_policy": "strict full-assertion artifact-only grading",
+  "results": [
+    {
+      "eval_name": "diagnosis",
+      "score": "8/9",
+      "failed_assertion": "Any ZLinq recommendation remains conditional on the installed version/compiler, closure/materialization semantics, exact provenance/license, and target-player measurement.",
+      "recommendation_sha256": "84525adda99f20a90f3ca70ca58444ad9ac4f35dce64682fe902bc946480d337",
+      "grading_sha256": "097f895d5c3bd9801c812d48ba078d778cfc99794d3d26ae87528122551f5c42"
+    },
+    {
+      "eval_name": "dependency-selection",
+      "score": "8/9",
+      "failed_assertion": "The UniTask option covers PlayerLoop timing/injection, first-step and cancellation semantics, promise/cancellation allocation boundaries, ECS-loop reset when relevant, and WebGL thread limits.",
+      "recommendation_sha256": "cea558a7bb4266d3082b97d3c560c7cbc4eed846f6f36d018670338baee259db",
+      "grading_sha256": "f48aabd2f9ffba0533e3b125a4d7d76c6026edab046f4ec7709157bb2b223cc2"
+    },
+    {
+      "eval_name": "pool-lifecycle",
+      "score": "8/9",
+      "failed_assertion": "Managed allocation, pool-retained memory, Addressables residency, native physics memory, and CPU are measured separately, with rollback triggers if correctness, saturation, memory, or frame-time budgets fail.",
+      "recommendation_sha256": "1f49c9ef366c3b77e88d067e3f37920c0996e60524ed971f4ae0e8689126e404",
+      "grading_sha256": "a2fdb1017562f7db4bd45687e6a74e2013eb7b40757cfaaeb6f8e9f6a350b06d"
+    }
+  ],
+  "refinement": [
+    "The entry workflow now requires installed manifest/lock version and exact dependency provenance/license evidence.",
+    "The entry workflow now calls out UniTask PlayerLoop injection/reinjection, ECS loop replacement when present, and WebGL threading limits.",
+    "The verification ladder now reports native physics memory separately for physics-query and projectile-pool changes."
+  ],
+  "telemetry": {
+    "duration_ms": "unavailable",
+    "total_tokens": "unavailable"
+  }
+}

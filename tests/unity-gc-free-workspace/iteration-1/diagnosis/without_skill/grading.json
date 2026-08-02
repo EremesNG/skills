@@ -1,0 +1,113 @@
+{
+  "expectations": [
+    {
+      "text": "The response distinguishes supplied observations from missing source, worker-thread, Release Player, retained-memory, and CPU evidence and does not claim any inspection or test was run.",
+      "passed": true,
+      "evidence": "The evidence section separately labels the supplied capture/code shape as observed, identifies unresolved source-level contributors and Release behavior, and explicitly says worker-thread capture, retained-memory comparison, and CPU baseline are absent. All implementation and verification actions are prospective rather than reported as executed."
+    },
+    {
+      "text": "The allocation contract names CombatHud.Refresh, 60 Hz representative inputs, completed warm-up/capacity, an explicit sample window, all relevant threads, and a managed-byte budget.",
+      "passed": false,
+      "evidence": "The artifact names CombatHud.Refresh, a 0-byte budget, explicit warm-up, capacity 80, and a later 300+ refresh window, but its contract is expressly main-thread-only and never requires allocation checks on all relevant threads. It also assumes an 80-effect maximum without establishing it."
+    },
+    {
+      "text": "Managed allocation, collection behavior, managed heap size, native or retained memory, and CPU are treated as separate cost domains.",
+      "passed": false,
+      "evidence": "Managed allocation and CPU are discussed and retained memory is noted as missing, but collection behavior, managed heap size, native memory, and retained/native trade-offs are not defined as separate measurement domains."
+    },
+    {
+      "text": "The response identifies LINQ terminal materialization/order, interpolated final strings, and logging/boxing or formatting as distinct candidate boundaries rather than blaming one keyword generically.",
+      "passed": true,
+      "evidence": "The conclusion separates the LINQ iterator/sort/list path, three interpolated strings or their UI setter, and Debug.LogFormat's formatted/params path; the allocation contract also separately names sort helpers, boxing, strings, and log formatting."
+    },
+    {
+      "text": "One smallest initial source is selected, with direct loops/reused storage compared against ZLinq and a reason to avoid a broad simultaneous rewrite.",
+      "passed": false,
+      "evidence": "Although direct/reused storage is compared with deferred ZLinq and broader refactoring is deferred, the stated first slice changes two distinct candidate boundaries at once: the LINQ path and the per-refresh logging policy. This is not one smallest initial source."
+    },
+    {
+      "text": "Any ZLinq recommendation remains conditional on the installed version/compiler, closure/materialization semantics, exact provenance/license, and target-player measurement.",
+      "passed": false,
+      "evidence": "ZLinq is deferred pending IL2CPP proof, but the artifact does not require an installed-version/compiler check, closure and terminal-materialization analysis, exact provenance, license review, or an explicit target-player ZLinq measurement."
+    },
+    {
+      "text": "Functional tests preserve filtered values, ordering/ties, empty cases, label output, localization/formatting, and logging policy before allocation success is assessed.",
+      "passed": false,
+      "evidence": "The functional section covers filter results, zero/all matches, duplicate sort keys, labels, and enabled/disabled diagnostics, but it does not explicitly test localization, culture, or formatting semantics. The full required functional contract is therefore incomplete."
+    },
+    {
+      "text": "Verification repeats the same warmed workload in a target player, checks GC.Alloc on all relevant threads, and separately records CPU and retained/native trade-offs.",
+      "passed": false,
+      "evidence": "The artifact proposes warmed Development and Release captures and a CPU secondary check, but only directs inspection of the CombatHud.Refresh subtree/main-thread symptom. It neither checks all relevant threads nor records retained and native memory trade-offs."
+    },
+    {
+      "text": "The result is labeled provisional until the proposed source inspection and target-player after-capture exist; zero-allocation success is not asserted from the prompt alone.",
+      "passed": false,
+      "evidence": "The response avoids claiming zero-allocation success and asks for future captures, but it never explicitly labels the result provisional pending source inspection and a target-player after-capture, nor does it propose the necessary source inspection as a gate."
+    }
+  ],
+  "summary": {
+    "passed": 2,
+    "failed": 7,
+    "total": 9,
+    "pass_rate": 0.2222
+  },
+  "execution_metrics": {
+    "output_chars": 5970,
+    "transcript_chars": 0
+  },
+  "claims": [
+    {
+      "claim": "The supplied capture establishes recurring main-thread allocation after the stated cache warm-up.",
+      "passed": true,
+      "evidence": "The artifact consistently limits the observation to the supplied Development capture, 1.6 KB per refresh, main thread, and a sample beginning after five seconds."
+    },
+    {
+      "claim": "Eighty effects is an established hard maximum suitable for fixed capacity planning.",
+      "passed": false,
+      "evidence": "The artifact first says the observed code shape processes 80 effects, then calls this the \"80-effect maximum\" without presenting evidence that 80 is a hard maximum or specifying overflow behavior."
+    },
+    {
+      "claim": "The proposed ordering replacement accounts for OrderBy tie stability.",
+      "passed": true,
+      "evidence": "It explicitly requires stable tie behavior and suggests stable insertion sort or an original-index tie break."
+    },
+    {
+      "claim": "The proposed allocation acceptance covers all relevant threads and memory domains.",
+      "passed": false,
+      "evidence": "The contract and verification focus on the main thread/CombatHud.Refresh subtree; no all-thread, native-memory, or retained-memory acceptance checks are included."
+    },
+    {
+      "claim": "The author reports that implementation, tests, or captures were executed.",
+      "passed": false,
+      "evidence": "Implementation and verification are written as recommendations and next actions, with no execution claim or result."
+    }
+  ],
+  "user_notes_summary": {
+    "uncertainties": [
+      "Per-leaf allocation attribution, text-setter behavior, production log configuration, and Release allocation remain unknown.",
+      "No worker-thread capture, retained-memory comparison, or CPU baseline exists.",
+      "The exact filter/sort contract and text implementation are unresolved."
+    ],
+    "needs_review": [
+      "Establish whether 80 is a true capacity maximum and define overflow behavior.",
+      "Add all-relevant-thread, managed-heap/collection, retained-memory, and native-memory acceptance checks.",
+      "Specify localized/culture-sensitive formatting cases and an exact logging policy before evaluating allocation success.",
+      "Inspect source and obtain a target-player after-capture before labeling the result successful."
+    ],
+    "workarounds": [
+      "Use a HUD-owned reusable list with stable tie handling as the direct-query candidate.",
+      "Keep text tooling deferred until label/UI-setter allocation is isolated.",
+      "Use a disabled-by-default diagnostic log gate, subject to an explicitly approved behavior contract."
+    ]
+  },
+  "eval_feedback": {
+    "suggestions": [
+      "Limit the first slice to one allocation boundary so its before/after delta is attributable.",
+      "Expand the contract to representative 60 Hz inputs, verified capacity and overflow, an explicit warmed window, all relevant threads, and separate managed-allocation, GC/heap, CPU, retained-memory, and native-memory evidence.",
+      "Make any future ZLinq evaluation conditional on exact installed version, compiler/AOT behavior, closure and terminal semantics, provenance/license, and target-player measurement.",
+      "Add localization/formatting cases and explicitly label the diagnosis provisional until source inspection and target-player after-capture are complete."
+    ],
+    "overall": "The artifact identifies the principal allocation boundaries and offers useful stable-order functional checks, but its first slice combines query and logging changes and its acceptance contract omits several required evidence domains and dependency gates."
+  }
+}

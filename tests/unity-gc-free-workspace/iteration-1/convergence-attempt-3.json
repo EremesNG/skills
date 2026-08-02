@@ -1,0 +1,31 @@
+{
+  "status": "partially_superseded_after_additional_entry-guard refinement",
+  "grading_policy": "strict full-assertion artifact-only grading",
+  "results": [
+    {
+      "eval_name": "diagnosis",
+      "score": "9/9",
+      "recommendation_sha256": "6312ef4b76af831228e0f4a5ff2b4a0aa2f88553de5b34488ee307d4041f6e64",
+      "grading_sha256": "f91de45a193e0b405f90de04cd24ed180919e353bdfd54a84a60aec61f29864d",
+      "disposition": "retained as final"
+    },
+    {
+      "eval_name": "dependency-selection",
+      "score": "7/9",
+      "recommendation_sha256": "0f3fb336d50a05586022a00ad8707260365b69f566afd14b53f7c316ce3cfc0e",
+      "grading_sha256": "22009a7841b58734d7e0d68e93c27af90988bcfbbf5694003e40a98d693b9509",
+      "disposition": "rerun after making deferred/eager and UniTask first-step checks prominent"
+    },
+    {
+      "eval_name": "pool-lifecycle",
+      "score": "8/9",
+      "recommendation_sha256": "138913328a634734f0460ec883a3c228d2093962f448ce2cec334438631a10a2",
+      "grading_sha256": "acb22fbf4d9381b57e92a90348d4e2b4c0ba80b72d8e85ec938d7a022bb58fcb",
+      "disposition": "rerun after making a use-after-return red test prominent"
+    }
+  ],
+  "telemetry": {
+    "duration_ms": "unavailable",
+    "total_tokens": "unavailable"
+  }
+}

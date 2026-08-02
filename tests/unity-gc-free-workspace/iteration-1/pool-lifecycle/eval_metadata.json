@@ -1,0 +1,16 @@
+{
+  "eval_id": 3,
+  "eval_name": "pool-lifecycle",
+  "prompt": "Design a lifecycle-safe migration for a Unity 6 co-op game that creates Addressables-backed projectile prefabs with InstantiateAsync and destroys them after impact. A Development Player capture shows recurring managed allocation during bursts. The proposed solution is an ObjectPool of projectile components plus a reused Physics.OverlapSphereNonAlloc array for damage. Peak concurrent projectiles are believed to be 128 but only 64 were observed; the damage buffer holds 32 colliders and sometimes returns a full buffer. Each projectile owns event subscriptions, a PrimeTween trail fade, and a UniTask homing loop bound to scene lifetime. Additive combat scenes unload while Addressables operations may still be completing, and Domain Reload is disabled in the Editor. Provide a test-first migration and ownership protocol covering pool warm-up/capacity/exhaustion, dirty reset, cancellation and late callbacks, Addressables reference counts, full buffer truncation/order/fallback, scene/domain teardown, retained/native memory, rollback, and representative target-player verification.",
+  "assertions": [
+    "The response defines one owner for the pool, Addressables load handle, active/inactive projectiles, damage buffer, and teardown, with acquisition and release paired exactly once.",
+    "Capacity distinguishes observed 64, believed peak 128, warm-up, max size, retained-memory cap, empty-pool exhaustion, overflow behavior, growth telemetry, and remeasurement rather than treating 128 as proven.",
+    "Get/release/reset/destroy behavior covers transforms, physics, visual/material state, subscriptions, PrimeTween cancellation/reset, UniTask cancellation, retained references, and a fresh lease generation or equivalent late-callback safeguard.",
+    "Addressables instance/load APIs and reference counts are paired according to the installed package, and pooled instances cannot outlive the asset or bundle handle they depend on.",
+    "Additive scene unload stops new leases, handles in-flight completion/cancellation races, settles active/inactive objects, rejects late returns deterministically, and releases handles in a safe order.",
+    "A full buffer is detected and receives an explicit tested truncation, ordering, telemetry, and fallback policy; the response does not assume the 32 results are nearest or complete.",
+    "Tests begin with meaningful functional red cases and cover dirty reuse, exhaustion, overflow, double return, use after return, scene unload, Domain Reload configuration, cancellation, and Addressables late completion.",
+    "Allocation red and green use the same representative burst workload after warm-up in a target player across all relevant threads, without placing test assertion overhead inside the measured window.",
+    "Managed allocation, pool-retained memory, Addressables residency, native physics memory, and CPU are measured separately, with rollback triggers if correctness, saturation, memory, or frame-time budgets fail."
+  ]
+}

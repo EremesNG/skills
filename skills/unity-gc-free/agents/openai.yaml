@@ -1,0 +1,4 @@
+interface:
+  display_name: "Unity GC-Free"
+  short_description: "Measure and eliminate Unity GC allocations"
+  default_prompt: "Use $unity-gc-free to diagnose and reduce managed allocations in this Unity hot path, preserve behavior, and verify the scoped budget in a target player."

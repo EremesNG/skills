@@ -1,0 +1,106 @@
+{
+  "expectations": [
+    {
+      "text": "The response defines one owner for the pool, Addressables load handle, active/inactive projectiles, damage buffer, and teardown, with acquisition and release paired exactly once.",
+      "passed": true,
+      "evidence": "The Two-level ownership section assigns in-flight Addressables operations to the application-lifetime AddressableProjectileFactory and assigns the fixed pool, transferred active/inactive records, damage workspace, and drain state to the combat-scene ProjectilePoolOwner. The reference-count protocol adds guarded exactly-once release routes, per-origin ownership records, balance equations, and idempotent drain behavior."
+    },
+    {
+      "text": "Capacity distinguishes observed 64, believed peak 128, warm-up, max size, retained-memory cap, empty-pool exhaustion, overflow behavior, growth telemetry, and remeasurement rather than treating 128 as proven.",
+      "passed": true,
+      "evidence": "The conclusion and capacity sections explicitly call 64 observed and 128 believed/provisional, prewarm exactly 128, set ObjectPool defaultCapacity and maxSize to 128, prevent Get on an empty pool, route lease 129 through a legacy transient overflow lane, track high-water/misses/created-active-inactive counts, constrain increases by an approved retained-memory budget, and require representative high-water remeasurement."
+    },
+    {
+      "text": "Get/release/reset/destroy behavior covers transforms, physics, visual/material state, subscriptions, PrimeTween cancellation/reset, UniTask cancellation, retained references, and a fresh lease generation or equivalent late-callback safeguard.",
+      "passed": true,
+      "evidence": "Warming an asynchronous source into ObjectPool defines Get/create/release behavior and Addressables-backed destruction. Dirty reset and lease ordering explicitly resets transform, Rigidbody and collider state, trails, particles/audio/animator, renderer/material state, callbacks, collections, and retained graphs. Events, UniTask, and PrimeTween sections define subscription cleanup, tween cancellation and visual reset, homing cancellation, and ownerEpoch plus leaseGeneration guards against stale callbacks."
+    },
+    {
+      "text": "Addressables instance/load APIs and reference counts are paired according to the installed package, and pooled instances cannot outlive the asset or bundle handle they depend on.",
+      "passed": true,
+      "evidence": "Addressables reference-count protocol requires a version-specific adapter matching the installed InstantiateAsync form, handle-tracking option, and ReleaseInstance/handle API; forbids Destroy and double-release mismatches; retains instance references while pooled; provides balance equations; and releases any separate long-lived asset/load handle only after every dependent active, inactive, overflow, and late-completion instance."
+    },
+    {
+      "text": "Additive scene unload stops new leases, handles in-flight completion/cancellation races, settles active/inactive objects, rejects late returns deterministically, and releases handles in a safe order.",
+      "passed": true,
+      "evidence": "The idempotent DrainAsync protocol first enters Draining, invalidates the epoch, rejects rents, and removes routing; it then cancels scene work, marks pending factory requests non-transferable, releases late successes, quiesces active and overflow leases, clears inactive objects, verifies ownership counts reach zero, releases a separate asset handle last, and makes repeated drains or stale returns deterministic no-ops with telemetry."
+    },
+    {
+      "text": "A full buffer is detected and receives an explicit tested truncation, ordering, telemetry, and fallback policy; the response does not assume the 32 results are nearest or complete.",
+      "passed": true,
+      "evidence": "The response treats the observed Collider[32] full return as saturation rather than completeness, retries exact-capacity results through prepared 64/128/256 tiers, records saturation telemetry, invokes a complete allocating overlap fallback if 256 is full, sorts by an explicit stable gameplay key rather than physics order, and specifies exact/full/over-capacity plus permuted-order tests."
+    },
+    {
+      "text": "Tests begin with meaningful functional red cases and cover dirty reuse, exhaustion, overflow, double return, use after return, scene unload, Domain Reload configuration, cancellation, and Addressables late completion.",
+      "passed": true,
+      "evidence": "The Test-first migration sequence begins with behavior characterization and missing-protocol red tests. Its pool/reset, Addressables race, async/tween, and scene/domain sections explicitly cover dirty reuse, 128-plus-1 exhaustion and overflow, double/foreign/stale returns, generation-N use after return, unload, two no-Domain-Reload play sessions, cancellation races, and late Addressables successes after unload."
+    },
+    {
+      "text": "Allocation red and green use the same representative burst workload after warm-up in a target player across all relevant threads, without placing test assertion overhead inside the measured window.",
+      "passed": true,
+      "evidence": "The Allocation contract defines one deterministic ProjectileBurstSteadyState workload and full premeasurement warm-up, requires 0 B and 0 events across all relevant threads, and places recorder creation, assertions, formatting, and setup outside the marker. Allocation red/green and the verification ladder require identical warmed samples in representative Development and Release target players."
+    },
+    {
+      "text": "Managed allocation, pool-retained memory, Addressables residency, native physics memory, and CPU are measured separately, with rollback triggers if correctness, saturation, memory, or frame-time budgets fail.",
+      "passed": true,
+      "evidence": "The allocation contract and verification ladder separately require managed allocation events/bytes, retained pool and managed graph memory, Addressables asset/bundle residency, native physics and GameObject/component memory, and CPU/frame time. Rollout and rollback explicitly trigger on behavior mismatches, pool or damage-tier saturation, managed-budget failure, retained/native cap breach, and CPU/frame-time regression."
+    }
+  ],
+  "summary": {
+    "passed": 9,
+    "failed": 0,
+    "total": 9,
+    "pass_rate": 1.0
+  },
+  "execution_metrics": {
+    "output_chars": 38177,
+    "transcript_chars": 0
+  },
+  "claims": [
+    {
+      "text": "The recommendation establishes explicit lifetime ownership and exactly-once release invariants for pooled and overflow Addressables instances.",
+      "supported": true,
+      "evidence": "Two-level ownership, record state machines, origin-specific release paths, ownership equations, and idempotent drain are all stated."
+    },
+    {
+      "text": "The proposed capacity is intentionally provisional and has a correct, observable exhaustion path.",
+      "supported": true,
+      "evidence": "Observed 64 and believed 128 are distinguished; 128 is prewarmed and capped; lease 129 uses the legacy transient lane; misses and high-water are measured."
+    },
+    {
+      "text": "The damage-query design preserves completeness and deterministic ordering when nonallocating buffers saturate.",
+      "supported": true,
+      "evidence": "Exact-capacity results retry through larger prepared tiers, top-tier saturation uses a complete fallback, and candidates are canonically sorted with permutation tests."
+    },
+    {
+      "text": "The acceptance plan separates allocation success from retained/native memory, Addressables residency, CPU, and correctness.",
+      "supported": true,
+      "evidence": "The allocation contract, verification ladder, memory snapshots, and rollback criteria measure and gate these concerns independently."
+    }
+  ],
+  "user_notes_summary": {
+    "uncertainties": [
+      "Exact Unity 6 patch, Addressables, UniTask, and PrimeTween versions and version-specific APIs remain to be recorded.",
+      "The true projectile high-water mark, collider density, target-player allocation stacks, and numeric CPU/retained/native budgets remain unmeasured.",
+      "Existing activation timing, network authority/order, and once-per-entity versus once-per-collider damage semantics require characterization."
+    ],
+    "needs_review": [
+      "Confirm the installed Addressables acquisition, handle-tracking, and release pairing before implementation.",
+      "Approve retained/native memory and frame-time caps before changing the provisional pool and damage-tier capacities.",
+      "Verify no-domain-reload and additive-scene race behavior on the actual supported target configurations."
+    ],
+    "workarounds": [
+      "Keep the legacy InstantiateAsync path as an origin-tagged overflow and rollback lane.",
+      "Use an allocating complete overlap query only after the prepared 256-collider tier also saturates.",
+      "Let the application-lifetime factory retain pending-operation ownership so a scene cancellation cannot orphan a late completion."
+    ]
+  },
+  "eval_feedback": {
+    "suggestions": [
+      "Populate the explicitly marked unknown version, profiler, and budget fields with project evidence before coding.",
+      "Convert provisional 128 and 64/128/256 capacities into measured limits after representative target-player soak data.",
+      "Preserve the recommendation's exact ownership equations and generation-stamped race tests as implementation acceptance gates."
+    ],
+    "overall": "PASS: all nine exact assertions receive explicit, actionable coverage. The recommendation is unusually complete about ownership, races, reference counting, saturation, test-first migration, representative profiling, retained/native memory, and rollback while clearly labeling unresolved project-specific evidence."
+  }
+}

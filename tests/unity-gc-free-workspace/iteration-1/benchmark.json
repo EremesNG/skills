@@ -1,0 +1,500 @@
+{
+  "metadata": {
+    "skill_name": "unity-gc-free",
+    "skill_path": "skills\\unity-gc-free",
+    "executor_model": "unavailable from collaboration host",
+    "analyzer_model": "unavailable from collaboration host",
+    "timestamp": "2026-08-02T20:16:40Z",
+    "evals_run": [
+      1,
+      2,
+      3
+    ],
+    "runs_per_configuration": 3,
+    "metric_limitations": {
+      "duration": "Unavailable; zero values are aggregator placeholders and are not measured durations.",
+      "tokens": "Unavailable; the aggregator populated its tokens field from output_chars. Values are character counts, not token counts.",
+      "variance": "One artifact exists per prompt and configuration. Standard deviation across three different prompts is not run-to-run variance."
+    }
+  },
+  "runs": [
+    {
+      "eval_id": 1,
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 9,
+        "failed": 0,
+        "total": 9,
+        "time_seconds": 0.0,
+        "tokens": 23009,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "The response distinguishes supplied observations from missing source, worker-thread, Release Player, retained-memory, and CPU evidence and does not claim any inspection or test was run.",
+          "passed": true,
+          "evidence": "Under 'Observed as reported' the response labels the facts as user-stated and not independently reproduced. 'Still unknown' explicitly lists source/package evidence, worker-thread allocation, Release behavior, CPU baseline, and retained-memory effects; the Conclusion says no source change, test, player build, Profiler capture, or memory comparison is claimed."
+        },
+        {
+          "text": "The allocation contract names CombatHud.Refresh, 60 Hz representative inputs, completed warm-up/capacity, an explicit sample window, all relevant threads, and a managed-byte budget.",
+          "passed": true,
+          "evidence": "The Allocation contract defines one CombatHud.Refresh at 60 Hz with 80 representative effects, a five-second warm-up plus branch exercise and scratch preparation, a 600-refresh/10-second window repeated three times, inspection across all relevant threads, and both whole-refresh and first-slice budgets of 0 B / 0 managed allocation events."
+        },
+        {
+          "text": "Managed allocation, collection behavior, managed heap size, native or retained memory, and CPU are treated as separate cost domains.",
+          "passed": true,
+          "evidence": "Evidence states that allocation traffic is not heap growth, retained memory, GC pause duration, or native memory. The contract and verification separately require managed bytes/count, CPU distributions, GC/transition reporting, scratch high-water/retained-reference checks, and native/retained-memory comparison."
+        },
+        {
+          "text": "The response identifies LINQ terminal materialization/order, interpolated final strings, and logging/boxing or formatting as distinct candidate boundaries rather than blaming one keyword generically.",
+          "passed": true,
+          "evidence": "The Conclusion says the 1.6 KB cannot yet be divided among the LINQ query, sorting/materialization, three labels, and logging. The text section notes that final string production can still allocate, while the logging section separately names formatting, params arrays, boxing, and stack handling."
+        },
+        {
+          "text": "One smallest initial source is selected, with direct loops/reused storage compared against ZLinq and a reason to avoid a broad simultaneous rewrite.",
+          "passed": true,
+          "evidence": "The selected slice replaces only Where/OrderBy/ToList with a direct filter, component-owned pre-sized scratch storage, and stable measured sort. ZLinq is rejected for one small local pipeline, and labels/logging are deliberately unchanged so the allocation delta remains attributable."
+        },
+        {
+          "text": "Any ZLinq recommendation remains conditional on the installed version/compiler, closure/materialization semantics, exact provenance/license, and target-player measurement.",
+          "passed": true,
+          "evidence": "ZLinq is not recommended initially. Its conditional revisit requires an exact pinned package coordinate/tag, compiler minimum, license, Unity 6/IL2CPP/AOT validation, and pooled-result lifecycle; the same paragraph calls out captured state, ordering storage, and terminal materialization, while the acceptance contract requires target-like Development and production-equivalent Release Player measurement."
+        },
+        {
+          "text": "Functional tests preserve filtered values, ordering/ties, empty cases, label output, localization/formatting, and logging policy before allocation success is assessed.",
+          "passed": true,
+          "evidence": "Functional verification covers empty/all-filtered/mixed cases, identities and counts, duplicate-key stable ties, exact comparer behavior, exact three-label strings including localization/culture/rounding/rich text, and unchanged log content/frequency. The implementation slice explicitly says to run functional evidence before allocation comparison."
+        },
+        {
+          "text": "Verification repeats the same warmed workload in a target player, checks GC.Alloc on all relevant threads, and separately records CPU and retained/native trade-offs.",
+          "passed": true,
+          "evidence": "Verification repeats the warmed 80-effect, 60 Hz workload for 600 refreshes across three identical runs in Windows IL2CPP Development and production-equivalent Release players, inspects all relevant threads, and separately compares CPU distributions, scratch retention/high-water, retained references, and native/retained memory."
+        },
+        {
+          "text": "The result is labeled provisional until the proposed source inspection and target-player after-capture exist; zero-allocation success is not asserted from the prompt alone.",
+          "passed": true,
+          "evidence": "The Conclusion limits the result to a diagnosis/recommendation and says it is not yet source-level attribution or project-wide GC-free evidence. The response requires exact predicate/comparer/consumer inspection plus matching target-player after-captures and states that no PASS or 'GC-free' label is warranted until those checks produce evidence."
+        }
+      ],
+      "notes": [
+        "No execution transcript was provided; transcript_chars is 0."
+      ]
+    },
+    {
+      "eval_id": 2,
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 9,
+        "failed": 0,
+        "total": 9,
+        "time_seconds": 0.0,
+        "tokens": 19394,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "The response rejects a blanket three-library migration and evaluates each measured source independently, including the option to keep or directly rewrite existing code.",
+          "passed": true,
+          "evidence": "The conclusion says, \"Do not perform the proposed three-way substitution as a blanket rule,\" then separately recommends a direct inventory loop, an explicit cooldown state machine, and DOTween callback/capacity cleanup. The matrix also includes cleaned existing coroutines, retained DOTween, direct/manual alternatives, and conditional library use."
+        },
+        {
+          "text": "The LINQ decision addresses deferred/materialized output, query ordering, captures, reusable or pooled result ownership, direct-loop clarity, and ZLinq compatibility/provenance.",
+          "passed": true,
+          "evidence": "The inventory contract and matrix explicitly preserve deferred-versus-eager behavior, stable ordering, captures, repeated enumeration, and terminal-result ownership; require exactly-once return for pooled terminals; define owner-held reusable storage and overflow; prefer the direct loop when it is clear; and require the exact ZLinq manifest/tag/commit, Unity/compiler fit, IL2CPP stripping/AOT, targets, transitive dependencies, and license approval."
+        },
+        {
+          "text": "Unity Awaitable's supported-version fit, pooled single-await rule, synchronous continuation, and thread behavior are compared with UniTask rather than treated as interchangeable.",
+          "passed": true,
+          "evidence": "The conclusion and decision matrix place Awaitable and UniTask in distinct alternatives: Awaitable is gated to Unity 2023.1+ and therefore rejected for 2022.3, is pooled and single-await, has synchronous continuations and a thread-affinity gate; UniTask instead requires pinned PlayerLoop timing/injection, cancellation tests, and guarded thread-pool/thread switches on WebGL."
+        },
+        {
+          "text": "The UniTask option covers PlayerLoop timing/injection, first-step and cancellation semantics, promise/cancellation allocation boundaries, ECS-loop reset when relevant, and WebGL thread limits.",
+          "passed": true,
+          "evidence": "The UniTask matrix row explicitly requires pinned PlayerLoopTiming, injection/reinjection if ECS or another system replaces the loop, first-step parity for adapters, immediate and in-flight cancellation/race testing, pooled-promise versus capture/registration/combinator cost boundaries, and guards against RunOnThreadPool or thread switches because WebGL lacks general worker-thread support."
+        },
+        {
+          "text": "The PrimeTween option covers captured closures, configured capacity and warm-up, non-reusable tween handles, sequence timing, overwrite/concurrent-target behavior, cancellation/completion, and pool/scene teardown.",
+          "passed": true,
+          "evidence": "The tween stages first eliminate captured completion lambdas through a cached static delegate/context seam, then put PrimeTween behind that same adapter if necessary. The matrix and Stage 3 cover capacity growth and warmed sampling, non-reusable handles, sequence order/timing/loops, overwrite versus concurrent targets, cancellation/completion parity, UI pool reset, and scene-unload teardown."
+        },
+        {
+          "text": "PrimeTween's non-MIT redistribution/repackaging constraints and exact package provenance require explicit project acceptance; no universal latest version is asserted.",
+          "passed": true,
+          "evidence": "The PrimeTween row states it is not MIT and that redistribution/repackaging restrictions require explicit legal/project acceptance. Stage 0 and Stage 3 require the exact manifest/version/source/tag/commit to be pinned and approved, and explicitly say a newest release or README benchmark is only a hypothesis."
+        },
+        {
+          "text": "IL2CPP/AOT, stripping, compiler/editor minimums, Android and WebGL builds, and exact locked artifacts are part of compatibility verification.",
+          "passed": true,
+          "evidence": "The matrix and Stage 0 require exact package-lock coordinates and source/tag/commit, Unity/editor minimums, compiler API surface, IL2CPP/AOT and stripping checks, and transitive dependencies. Stage 4 requires Android IL2CPP Development and Release runs plus WebGL runs in the actual browser/runtime."
+        },
+        {
+          "text": "The migration is staged as one reversible measured source with functional red-green evidence, allocation before/after evidence, explicit rollback triggers, and no simultaneous semantic changes.",
+          "passed": true,
+          "evidence": "Stages 0-4 keep each old path behind a narrow adapter or feature flag, migrate inventory, cooldowns, and tweens as separate slices, require the functional red contract to turn green before allocation comparison, and keep baseline/changed measurements identical. The recommendation freezes ordering/timing/cancellation/completion semantics and enumerates explicit immediate rollback triggers."
+        },
+        {
+          "text": "The response requires an identical warmed representative target-player workload across relevant threads and reports managed allocation separately from CPU, native, and retained memory.",
+          "passed": true,
+          "evidence": "The allocation contract requires identical baseline and changed input, settings, backend, package versions, capacities, warm-up, markers, repetitions, and device, with all relevant threads and representative Android/WebGL players. Managed bytes/count are a distinct budget, while CPU/frame time, retained memory, native memory, collection pauses, saturation, and leases are reported separately."
+        }
+      ],
+      "notes": [
+        "Exact proposed and installed package coordinates, tags or commits, transitive dependencies, and accepted licenses remain unknown.",
+        "Inventory result-size/ownership limits, cooldown time and PlayerLoop semantics, and current tween sequence/overwrite settings need project evidence.",
+        "Shipping Android devices, WebGL browsers, and numerical managed-byte, CPU, retained-memory, and saturation budgets are not yet defined.",
+        "Review and approve exact package locks, compiler/editor compatibility, IL2CPP/AOT stripping behavior, and PrimeTween's non-MIT terms.",
+        "Validate functional parity and warmed allocation evidence independently on representative Android and WebGL players.",
+        "Confirm result ownership, first-step/cancellation timing, tween overwrite/completion order, and teardown behavior before rollout.",
+        "Use a direct owner-controlled inventory loop with prepared storage before considering ZLinq.",
+        "Use an explicit pre-sized cooldown state machine instead of wrapping deterministic timers in UniTask.",
+        "Keep DOTween, remove captured callbacks, and warm configured capacity before considering PrimeTween; retain adapters or feature flags for rollback."
+      ]
+    },
+    {
+      "eval_id": 3,
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 9,
+        "failed": 0,
+        "total": 9,
+        "time_seconds": 0.0,
+        "tokens": 38177,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "The response defines one owner for the pool, Addressables load handle, active/inactive projectiles, damage buffer, and teardown, with acquisition and release paired exactly once.",
+          "passed": true,
+          "evidence": "The Two-level ownership section assigns in-flight Addressables operations to the application-lifetime AddressableProjectileFactory and assigns the fixed pool, transferred active/inactive records, damage workspace, and drain state to the combat-scene ProjectilePoolOwner. The reference-count protocol adds guarded exactly-once release routes, per-origin ownership records, balance equations, and idempotent drain behavior."
+        },
+        {
+          "text": "Capacity distinguishes observed 64, believed peak 128, warm-up, max size, retained-memory cap, empty-pool exhaustion, overflow behavior, growth telemetry, and remeasurement rather than treating 128 as proven.",
+          "passed": true,
+          "evidence": "The conclusion and capacity sections explicitly call 64 observed and 128 believed/provisional, prewarm exactly 128, set ObjectPool defaultCapacity and maxSize to 128, prevent Get on an empty pool, route lease 129 through a legacy transient overflow lane, track high-water/misses/created-active-inactive counts, constrain increases by an approved retained-memory budget, and require representative high-water remeasurement."
+        },
+        {
+          "text": "Get/release/reset/destroy behavior covers transforms, physics, visual/material state, subscriptions, PrimeTween cancellation/reset, UniTask cancellation, retained references, and a fresh lease generation or equivalent late-callback safeguard.",
+          "passed": true,
+          "evidence": "Warming an asynchronous source into ObjectPool defines Get/create/release behavior and Addressables-backed destruction. Dirty reset and lease ordering explicitly resets transform, Rigidbody and collider state, trails, particles/audio/animator, renderer/material state, callbacks, collections, and retained graphs. Events, UniTask, and PrimeTween sections define subscription cleanup, tween cancellation and visual reset, homing cancellation, and ownerEpoch plus leaseGeneration guards against stale callbacks."
+        },
+        {
+          "text": "Addressables instance/load APIs and reference counts are paired according to the installed package, and pooled instances cannot outlive the asset or bundle handle they depend on.",
+          "passed": true,
+          "evidence": "Addressables reference-count protocol requires a version-specific adapter matching the installed InstantiateAsync form, handle-tracking option, and ReleaseInstance/handle API; forbids Destroy and double-release mismatches; retains instance references while pooled; provides balance equations; and releases any separate long-lived asset/load handle only after every dependent active, inactive, overflow, and late-completion instance."
+        },
+        {
+          "text": "Additive scene unload stops new leases, handles in-flight completion/cancellation races, settles active/inactive objects, rejects late returns deterministically, and releases handles in a safe order.",
+          "passed": true,
+          "evidence": "The idempotent DrainAsync protocol first enters Draining, invalidates the epoch, rejects rents, and removes routing; it then cancels scene work, marks pending factory requests non-transferable, releases late successes, quiesces active and overflow leases, clears inactive objects, verifies ownership counts reach zero, releases a separate asset handle last, and makes repeated drains or stale returns deterministic no-ops with telemetry."
+        },
+        {
+          "text": "A full buffer is detected and receives an explicit tested truncation, ordering, telemetry, and fallback policy; the response does not assume the 32 results are nearest or complete.",
+          "passed": true,
+          "evidence": "The response treats the observed Collider[32] full return as saturation rather than completeness, retries exact-capacity results through prepared 64/128/256 tiers, records saturation telemetry, invokes a complete allocating overlap fallback if 256 is full, sorts by an explicit stable gameplay key rather than physics order, and specifies exact/full/over-capacity plus permuted-order tests."
+        },
+        {
+          "text": "Tests begin with meaningful functional red cases and cover dirty reuse, exhaustion, overflow, double return, use after return, scene unload, Domain Reload configuration, cancellation, and Addressables late completion.",
+          "passed": true,
+          "evidence": "The Test-first migration sequence begins with behavior characterization and missing-protocol red tests. Its pool/reset, Addressables race, async/tween, and scene/domain sections explicitly cover dirty reuse, 128-plus-1 exhaustion and overflow, double/foreign/stale returns, generation-N use after return, unload, two no-Domain-Reload play sessions, cancellation races, and late Addressables successes after unload."
+        },
+        {
+          "text": "Allocation red and green use the same representative burst workload after warm-up in a target player across all relevant threads, without placing test assertion overhead inside the measured window.",
+          "passed": true,
+          "evidence": "The Allocation contract defines one deterministic ProjectileBurstSteadyState workload and full premeasurement warm-up, requires 0 B and 0 events across all relevant threads, and places recorder creation, assertions, formatting, and setup outside the marker. Allocation red/green and the verification ladder require identical warmed samples in representative Development and Release target players."
+        },
+        {
+          "text": "Managed allocation, pool-retained memory, Addressables residency, native physics memory, and CPU are measured separately, with rollback triggers if correctness, saturation, memory, or frame-time budgets fail.",
+          "passed": true,
+          "evidence": "The allocation contract and verification ladder separately require managed allocation events/bytes, retained pool and managed graph memory, Addressables asset/bundle residency, native physics and GameObject/component memory, and CPU/frame time. Rollout and rollback explicitly trigger on behavior mismatches, pool or damage-tier saturation, managed-budget failure, retained/native cap breach, and CPU/frame-time regression."
+        }
+      ],
+      "notes": [
+        "Exact Unity 6 patch, Addressables, UniTask, and PrimeTween versions and version-specific APIs remain to be recorded.",
+        "The true projectile high-water mark, collider density, target-player allocation stacks, and numeric CPU/retained/native budgets remain unmeasured.",
+        "Existing activation timing, network authority/order, and once-per-entity versus once-per-collider damage semantics require characterization.",
+        "Confirm the installed Addressables acquisition, handle-tracking, and release pairing before implementation.",
+        "Approve retained/native memory and frame-time caps before changing the provisional pool and damage-tier capacities.",
+        "Verify no-domain-reload and additive-scene race behavior on the actual supported target configurations.",
+        "Keep the legacy InstantiateAsync path as an origin-tagged overflow and rollback lane.",
+        "Use an allocating complete overlap query only after the prepared 256-collider tier also saturates.",
+        "Let the application-lifetime factory retain pending-operation ownership so a scene cancellation cannot orphan a late completion."
+      ]
+    },
+    {
+      "eval_id": 1,
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.2222,
+        "passed": 2,
+        "failed": 7,
+        "total": 9,
+        "time_seconds": 0.0,
+        "tokens": 5970,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "The response distinguishes supplied observations from missing source, worker-thread, Release Player, retained-memory, and CPU evidence and does not claim any inspection or test was run.",
+          "passed": true,
+          "evidence": "The evidence section separately labels the supplied capture/code shape as observed, identifies unresolved source-level contributors and Release behavior, and explicitly says worker-thread capture, retained-memory comparison, and CPU baseline are absent. All implementation and verification actions are prospective rather than reported as executed."
+        },
+        {
+          "text": "The allocation contract names CombatHud.Refresh, 60 Hz representative inputs, completed warm-up/capacity, an explicit sample window, all relevant threads, and a managed-byte budget.",
+          "passed": false,
+          "evidence": "The artifact names CombatHud.Refresh, a 0-byte budget, explicit warm-up, capacity 80, and a later 300+ refresh window, but its contract is expressly main-thread-only and never requires allocation checks on all relevant threads. It also assumes an 80-effect maximum without establishing it."
+        },
+        {
+          "text": "Managed allocation, collection behavior, managed heap size, native or retained memory, and CPU are treated as separate cost domains.",
+          "passed": false,
+          "evidence": "Managed allocation and CPU are discussed and retained memory is noted as missing, but collection behavior, managed heap size, native memory, and retained/native trade-offs are not defined as separate measurement domains."
+        },
+        {
+          "text": "The response identifies LINQ terminal materialization/order, interpolated final strings, and logging/boxing or formatting as distinct candidate boundaries rather than blaming one keyword generically.",
+          "passed": true,
+          "evidence": "The conclusion separates the LINQ iterator/sort/list path, three interpolated strings or their UI setter, and Debug.LogFormat's formatted/params path; the allocation contract also separately names sort helpers, boxing, strings, and log formatting."
+        },
+        {
+          "text": "One smallest initial source is selected, with direct loops/reused storage compared against ZLinq and a reason to avoid a broad simultaneous rewrite.",
+          "passed": false,
+          "evidence": "Although direct/reused storage is compared with deferred ZLinq and broader refactoring is deferred, the stated first slice changes two distinct candidate boundaries at once: the LINQ path and the per-refresh logging policy. This is not one smallest initial source."
+        },
+        {
+          "text": "Any ZLinq recommendation remains conditional on the installed version/compiler, closure/materialization semantics, exact provenance/license, and target-player measurement.",
+          "passed": false,
+          "evidence": "ZLinq is deferred pending IL2CPP proof, but the artifact does not require an installed-version/compiler check, closure and terminal-materialization analysis, exact provenance, license review, or an explicit target-player ZLinq measurement."
+        },
+        {
+          "text": "Functional tests preserve filtered values, ordering/ties, empty cases, label output, localization/formatting, and logging policy before allocation success is assessed.",
+          "passed": false,
+          "evidence": "The functional section covers filter results, zero/all matches, duplicate sort keys, labels, and enabled/disabled diagnostics, but it does not explicitly test localization, culture, or formatting semantics. The full required functional contract is therefore incomplete."
+        },
+        {
+          "text": "Verification repeats the same warmed workload in a target player, checks GC.Alloc on all relevant threads, and separately records CPU and retained/native trade-offs.",
+          "passed": false,
+          "evidence": "The artifact proposes warmed Development and Release captures and a CPU secondary check, but only directs inspection of the CombatHud.Refresh subtree/main-thread symptom. It neither checks all relevant threads nor records retained and native memory trade-offs."
+        },
+        {
+          "text": "The result is labeled provisional until the proposed source inspection and target-player after-capture exist; zero-allocation success is not asserted from the prompt alone.",
+          "passed": false,
+          "evidence": "The response avoids claiming zero-allocation success and asks for future captures, but it never explicitly labels the result provisional pending source inspection and a target-player after-capture, nor does it propose the necessary source inspection as a gate."
+        }
+      ],
+      "notes": [
+        "Per-leaf allocation attribution, text-setter behavior, production log configuration, and Release allocation remain unknown.",
+        "No worker-thread capture, retained-memory comparison, or CPU baseline exists.",
+        "The exact filter/sort contract and text implementation are unresolved.",
+        "Establish whether 80 is a true capacity maximum and define overflow behavior.",
+        "Add all-relevant-thread, managed-heap/collection, retained-memory, and native-memory acceptance checks.",
+        "Specify localized/culture-sensitive formatting cases and an exact logging policy before evaluating allocation success.",
+        "Inspect source and obtain a target-player after-capture before labeling the result successful.",
+        "Use a HUD-owned reusable list with stable tie handling as the direct-query candidate.",
+        "Keep text tooling deferred until label/UI-setter allocation is isolated.",
+        "Use a disabled-by-default diagnostic log gate, subject to an explicitly approved behavior contract."
+      ]
+    },
+    {
+      "eval_id": 2,
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.3333,
+        "passed": 3,
+        "failed": 6,
+        "total": 9,
+        "time_seconds": 0.0,
+        "tokens": 11853,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "The response rejects a blanket three-library migration and evaluates each measured source independently, including the option to keep or directly rewrite existing code.",
+          "passed": true,
+          "evidence": "The Conclusion rejects replacing every LINQ, coroutine, and DOTween call at once. It separately recommends an imperative inventory loop, a direct cooldown scheduler/state machine, retained DOTween with capture removal, and optional one-path package pilots; the matrix also retains existing code as rollback baseline."
+        },
+        {
+          "text": "The LINQ decision addresses deferred/materialized output, query ordering, captures, reusable or pooled result ownership, direct-loop clarity, and ZLinq compatibility/provenance.",
+          "passed": false,
+          "evidence": "The inventory material covers ToArray/fresh-copy ownership, deferred execution, ordering, reusable-buffer aliasing, direct-loop preference, and ZLinq version/compiler/AOT/provenance gates. It never explicitly addresses captured delegates or captures in the LINQ/ZLinq query path, so the full assertion is not satisfied."
+        },
+        {
+          "text": "Unity Awaitable's supported-version fit, pooled single-await rule, synchronous continuation, and thread behavior are compared with UniTask rather than treated as interchangeable.",
+          "passed": false,
+          "evidence": "The Awaitable row only says Unity 2022.3 availability must be confirmed and mentions changed continuation semantics. It does not state the pooled single-await rule, synchronous continuation behavior, or Awaitable thread-affinity/background-thread behavior."
+        },
+        {
+          "text": "The UniTask option covers PlayerLoop timing/injection, first-step and cancellation semantics, promise/cancellation allocation boundaries, ECS-loop reset when relevant, and WebGL thread limits.",
+          "passed": false,
+          "evidence": "The artifact mentions scheduler/cancellation timing, async-state and cancellation-registration allocations, avoiding per-restart CancellationTokenSource creation, and WebGL verification. It does not explicitly cover PlayerLoop injection, promise-pool allocation boundaries, UniTask first-step execution, or WebGL's thread limitations; no ECS relevance determination is made."
+        },
+        {
+          "text": "The PrimeTween option covers captured closures, configured capacity and warm-up, non-reusable tween handles, sequence timing, overwrite/concurrent-target behavior, cancellation/completion, and pool/scene teardown.",
+          "passed": false,
+          "evidence": "The PrimeTween pilot maps overwrite, sequence nesting, delay/update mode, cancellation/kill, and completion, while the general evidence plan warms large tween sequences. It does not explicitly cover PrimeTween capture-free callback forms, non-reusable handles, configured PrimeTween capacity, or PrimeTween pool and scene-teardown lifecycle."
+        },
+        {
+          "text": "PrimeTween's non-MIT redistribution/repackaging constraints and exact package provenance require explicit project acceptance; no universal latest version is asserted.",
+          "passed": false,
+          "evidence": "The response requires an exact pinned version, provenance, and license/security acceptance and says not to float to latest. It never identifies PrimeTween's license as non-MIT or explains its redistribution/repackaging restrictions, so acceptance is not informed by the required constraints."
+        },
+        {
+          "text": "IL2CPP/AOT, stripping, compiler/editor minimums, Android and WebGL builds, and exact locked artifacts are part of compatibility verification.",
+          "passed": true,
+          "evidence": "The matrix and stages require Unity 2022.3 compiler/profile and package-support checks, exact versions/commits/hashes and package locks, generic AOT/linker and stripping verification, and Android IL2CPP plus WebGL release-player builds."
+        },
+        {
+          "text": "The migration is staged as one reversible measured source with functional red-green evidence, allocation before/after evidence, explicit rollback triggers, and no simultaneous semantic changes.",
+          "passed": true,
+          "evidence": "Stage 0 captures current behavior before editing and isolates paths behind flags, Stage 1 changes one source at a time while preserving its semantics, Stage 2 pilots one representative path, and Stage 3 promotes only after old/new correctness and target-player measurement. Behavior differences block migration, performance or memory regressions block promotion, and rollback is a one-change strategy/package-lock switch."
+        },
+        {
+          "text": "The response requires an identical warmed representative target-player workload across relevant threads and reports managed allocation separately from CPU, native, and retained memory.",
+          "passed": false,
+          "evidence": "The evidence plan warms a representative scene and separately collects GC.Alloc, memory snapshots, frame-time, and build metrics on target players. It does not explicitly require the identical workload/trace for every comparison, allocation capture across all relevant threads, or retained memory as a distinct reported dimension."
+        }
+      ],
+      "notes": [
+        "Inventory result lifetime, cooldown clock and timing contracts, DOTween behavior/configuration, exact package candidates, and the target Android/WebGL acceptance matrix remain open questions.",
+        "Unity Awaitable availability and behavior on Unity 2022.3 are left to future confirmation.",
+        "Awaitable pooling, continuation, and thread rules need explicit versioned review.",
+        "UniTask PlayerLoop/injection and WebGL thread constraints, plus PrimeTween handle/capacity/teardown and exact license restrictions, need explicit review.",
+        "Use an imperative reusable-buffer inventory path and a fixed-capacity cooldown scheduler without adding packages.",
+        "Keep DOTween, remove captures, and place each candidate behind a reversible feature flag for one-path target-player pilots."
+      ]
+    },
+    {
+      "eval_id": 3,
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.4444,
+        "passed": 4,
+        "failed": 5,
+        "total": 9,
+        "time_seconds": 0.0,
+        "tokens": 9799,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "The response defines one owner for the pool, Addressables load handle, active/inactive projectiles, damage buffer, and teardown, with acquisition and release paired exactly once.",
+          "passed": true,
+          "evidence": "The scene-owned pool is the sole owner of the prefab handle, active/free collections, reusable physics buffers, and lifetime CTS; its idempotent shutdown owns teardown, while atomic lease release and the reference-count tests require exactly-once release behavior."
+        },
+        {
+          "text": "Capacity distinguishes observed 64, believed peak 128, warm-up, max size, retained-memory cap, empty-pool exhaustion, overflow behavior, growth telemetry, and remeasurement rather than treating 128 as proven.",
+          "passed": false,
+          "evidence": "It discusses observed 64, warm-up, a hard cap of 128, configurable warm count, 129th-acquisition/exhaustion policies, metrics, and memory measurement, but the conclusion explicitly calls 128 the proven peak even though the prompt only says it is believed."
+        },
+        {
+          "text": "Get/release/reset/destroy behavior covers transforms, physics, visual/material state, subscriptions, PrimeTween cancellation/reset, UniTask cancellation, retained references, and a fresh lease generation or equivalent late-callback safeguard.",
+          "passed": false,
+          "evidence": "It covers generation checks, velocity and gameplay fields, trail alpha/tween cancellation, homing CTS cancellation, subscriptions, retained references, deactivation, and destruction. It does not explicitly reset transform state, broader physics state such as collision configuration, or material state, so the complete dirty-reset contract is missing."
+        },
+        {
+          "text": "Addressables instance/load APIs and reference counts are paired according to the installed package, and pooled instances cannot outlive the asset or bundle handle they depend on.",
+          "passed": true,
+          "evidence": "It requires one counted prefab or instance handle model around the project's exact Addressables API, exactly-once releases across completion/cancellation paths, immediate release of late operations/instances, and release of prefab handles only after dependent instances and pending operations are gone."
+        },
+        {
+          "text": "Additive scene unload stops new leases, handles in-flight completion/cancellation races, settles active/inactive objects, rejects late returns deterministically, and releases handles in a safe order.",
+          "passed": true,
+          "evidence": "The unload sequence stops acquisitions, cancels the pool token, releases active leases, settles pending Addressables work, destroys free pooled instances, then releases prefab handles; pool tokens and generations reject late activation or stale re-entry."
+        },
+        {
+          "text": "A full buffer is detected and receives an explicit tested truncation, ordering, telemetry, and fallback policy; the response does not assume the 32 results are nearest or complete.",
+          "passed": true,
+          "evidence": "It detects count == buffer.Length, records DamageBufferOverflow, defines a larger reusable or bounded allocating fallback, specifies deterministic sorting/filtering and a final first-32 truncation policy, and explicitly says a full result must never be treated as complete."
+        },
+        {
+          "text": "Tests begin with meaningful functional red cases and cover dirty reuse, exhaustion, overflow, double return, use after return, scene unload, Domain Reload configuration, cancellation, and Addressables late completion.",
+          "passed": false,
+          "evidence": "The failing tests cover dirty reuse, exhaustion, overflow, duplicate return, stale callbacks/use after return, cancellation, scene unload races, and late Addressables completion. Domain Reload disabled is addressed with a reset hook, but no explicit failing test of that configuration or play-session transition is specified."
+        },
+        {
+          "text": "Allocation red and green use the same representative burst workload after warm-up in a target player across all relevant threads, without placing test assertion overhead inside the measured window.",
+          "passed": false,
+          "evidence": "It calls for post-warm target-player captures and pooled/legacy comparisons, but it does not explicitly require the exact same representative workload for red and green, observation across all relevant threads, or keeping assertion/recorder overhead outside the measured window."
+        },
+        {
+          "text": "Managed allocation, pool-retained memory, Addressables residency, native physics memory, and CPU are measured separately, with rollback triggers if correctness, saturation, memory, or frame-time budgets fail.",
+          "passed": false,
+          "evidence": "It measures managed/native memory, active/overflow counts, refcounts, and correctness and provides correctness or memory rollback. It does not explicitly separate pool-retained memory, Addressables residency, native physics memory, and CPU, nor does it define a frame-time rollback trigger."
+        }
+      ],
+      "notes": [
+        "The desired empty-pool policy is not chosen among rejection, queuing, or bounded expansion.",
+        "The accepted greater-than-32 damage policy and larger-buffer memory budget are unresolved.",
+        "PrimeTween/UniTask kill and await semantics depend on unconfirmed project versions.",
+        "Target devices and release thresholds are unspecified.",
+        "Correct the unsupported description of 128 as proven and remeasure capacity.",
+        "Expand the dirty-reset contract to transforms, collision/physics configuration, and material state.",
+        "Add an explicit disabled-Domain-Reload test and a controlled red/green profiler protocol.",
+        "Define separate residency/native-physics/CPU measurements and frame-time rollback gates.",
+        "Retain the legacy path behind a feature flag while the pool is validated.",
+        "Prefer a second preallocated damage buffer over the allocating fallback.",
+        "Use a configurable warm count while preserving a tested hard cap pending memory evidence."
+      ]
+    }
+  ],
+  "run_summary": {
+    "with_skill": {
+      "pass_rate": {
+        "mean": 1.0,
+        "stddev": 0.0,
+        "min": 1.0,
+        "max": 1.0
+      },
+      "time_seconds": {
+        "mean": 0.0,
+        "stddev": 0.0,
+        "min": 0.0,
+        "max": 0.0
+      },
+      "tokens": {
+        "mean": 26860.0,
+        "stddev": 9966.0887,
+        "min": 19394,
+        "max": 38177
+      }
+    },
+    "without_skill": {
+      "pass_rate": {
+        "mean": 0.3333,
+        "stddev": 0.1111,
+        "min": 0.2222,
+        "max": 0.4444
+      },
+      "time_seconds": {
+        "mean": 0.0,
+        "stddev": 0.0,
+        "min": 0.0,
+        "max": 0.0
+      },
+      "tokens": {
+        "mean": 9207.3333,
+        "stddev": 2985.7954,
+        "min": 5970,
+        "max": 11853
+      }
+    },
+    "delta": {
+      "pass_rate": "+0.67",
+      "time_seconds": "+0.0",
+      "tokens": "+17653"
+    }
+  },
+  "notes": []
+}

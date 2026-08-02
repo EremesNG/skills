@@ -204,7 +204,7 @@ class UnityDeveloperEntryContractTests(unittest.TestCase):
 
     def test_readme_catalogs_installs_and_demonstrates_unity_developer(self) -> None:
         text = (REPO_ROOT / "README.md").read_text(encoding="utf-8")
-        self.assertIn("catalog currently contains four skills", text.lower())
+        self.assertIn("catalog currently contains five skills", text.lower())
         self.assertIn(
             "| `unity-developer` |",
             text,

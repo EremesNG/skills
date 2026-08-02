@@ -25,5 +25,6 @@ jobs:
           skills/progressive-context-router/scripts/repo_inventory.py
           skills/progressive-context-router/scripts/validate_context_setup.py
           skills/unity-developer/scripts/inspect_unity_project.py
+          skills/unity-gc-free/scripts/inspect_unity_gc.py
       - name: Run tests
         run: python -m unittest discover -s tests -v

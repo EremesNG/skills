@@ -1,0 +1,72 @@
+{
+  "skill_name": "unity-gc-free",
+  "iteration": 1,
+  "execution_model": "three isolated skill-enabled runs followed by three isolated no-skill runs; no expected outputs or assertions were supplied to executors",
+  "host_metrics": {
+    "duration_ms": "unavailable",
+    "total_tokens": "unavailable",
+    "reason": "Collaboration completion notifications exposed neither duration_ms nor total_tokens; no values were estimated."
+  },
+  "runs": [
+    {
+      "eval_id": 1,
+      "eval_name": "diagnosis",
+      "configuration": "with_skill",
+      "prompt_source": "skills/unity-gc-free/evals/evals.json#evals[id=1]",
+      "metadata": "diagnosis/with_skill/run_metadata.json",
+      "output": "diagnosis/with_skill/outputs/recommendation.md",
+      "output_bytes": 23026,
+      "skill_path": "skills/unity-gc-free"
+    },
+    {
+      "eval_id": 1,
+      "eval_name": "diagnosis",
+      "configuration": "without_skill",
+      "prompt_source": "skills/unity-gc-free/evals/evals.json#evals[id=1]",
+      "metadata": "diagnosis/without_skill/run_metadata.json",
+      "output": "diagnosis/without_skill/outputs/recommendation.md",
+      "output_bytes": 5974,
+      "skill_path": null
+    },
+    {
+      "eval_id": 2,
+      "eval_name": "dependency-selection",
+      "configuration": "with_skill",
+      "prompt_source": "skills/unity-gc-free/evals/evals.json#evals[id=2]",
+      "metadata": "dependency-selection/with_skill/run_metadata.json",
+      "output": "dependency-selection/with_skill/outputs/recommendation.md",
+      "output_bytes": 19408,
+      "skill_path": "skills/unity-gc-free"
+    },
+    {
+      "eval_id": 2,
+      "eval_name": "dependency-selection",
+      "configuration": "without_skill",
+      "prompt_source": "skills/unity-gc-free/evals/evals.json#evals[id=2]",
+      "metadata": "dependency-selection/without_skill/run_metadata.json",
+      "output": "dependency-selection/without_skill/outputs/recommendation.md",
+      "output_bytes": 11857,
+      "skill_path": null
+    },
+    {
+      "eval_id": 3,
+      "eval_name": "pool-lifecycle",
+      "configuration": "with_skill",
+      "prompt_source": "skills/unity-gc-free/evals/evals.json#evals[id=3]",
+      "metadata": "pool-lifecycle/with_skill/run_metadata.json",
+      "output": "pool-lifecycle/with_skill/outputs/recommendation.md",
+      "output_bytes": 38177,
+      "skill_path": "skills/unity-gc-free"
+    },
+    {
+      "eval_id": 3,
+      "eval_name": "pool-lifecycle",
+      "configuration": "without_skill",
+      "prompt_source": "skills/unity-gc-free/evals/evals.json#evals[id=3]",
+      "metadata": "pool-lifecycle/without_skill/run_metadata.json",
+      "output": "pool-lifecycle/without_skill/outputs/recommendation.md",
+      "output_bytes": 9813,
+      "skill_path": null
+    }
+  ]
+}
