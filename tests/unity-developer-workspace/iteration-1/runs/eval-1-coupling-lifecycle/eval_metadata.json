@@ -1,0 +1,14 @@
+{
+  "eval_id": 1,
+  "eval_name": "coupling-lifecycle",
+  "prompt": "We maintain a Unity 2022.3 LTS four-player co-op action game. Health is a MonoBehaviour that directly updates the HUD, plays audio, and writes save statistics; a static HealthChanged event was added to decouple it, but listeners now fire twice after returning to the menu and loading gameplay again. Domain Reload is disabled for faster iteration. The team has four programmers, existing EditMode and PlayMode tests, no profiler capture for this feature, and does not want a third-party framework. Recommend the smallest professional refactor, including ownership, subscription lifetime, scene reload behavior, tests, implementation boundaries, rejected alternatives, and when the design should be revisited.",
+  "assertions": [
+    "The response distinguishes supplied facts, likely causes, and unverified repository/runtime evidence, and does not claim that tests or profiling were run.",
+    "The selected solution is one bounded feature-level design with explicit publisher, state, HUD, audio, save-statistics, and scene/session ownership; it does not require a global bus, Service Locator, or third-party container.",
+    "The response connects duplicate delivery to static-event and Domain-Reload-disabled lifetime risk, and defines symmetric subscribe/unsubscribe plus an explicit static reset or removal of static ownership.",
+    "The implementation boundary keeps health rules/state testable independently from Unity-facing HUD, audio, save, and lifecycle adapters without forcing an interface or pattern for every class.",
+    "The test plan starts from a failing behavioral seam and covers repeated gameplay-menu-gameplay cycles, disable/enable or destroy cleanup, duplicate delivery, and the project's Domain Reload configuration across appropriate plain C#/EditMode/PlayMode tests.",
+    "At least two credible alternatives are rejected with concrete trade-offs, and the response states a measurable or structural condition that would justify revisiting the choice.",
+    "Performance is treated honestly: no improvement is asserted without a baseline, and any optimization claim is deferred to a representative build or target-device measurement plan."
+  ]
+}

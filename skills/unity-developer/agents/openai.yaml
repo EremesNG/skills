@@ -1,0 +1,4 @@
+interface:
+  display_name: "Unity Developer"
+  short_description: "Professional Unity architecture and game AI"
+  default_prompt: "Use $unity-developer to diagnose and implement this Unity + C# challenge with proportional patterns, explicit lifetimes, tests, and honest performance evidence."

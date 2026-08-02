@@ -1,0 +1,15 @@
+{
+  "eval_id": 3,
+  "eval_name": "networked-squad-ai",
+  "prompt": "Design enemy squad AI for a server-authoritative Unity 6 cooperative shooter targeting consoles. Up to 50 agents form squads, share sightings, claim cover, suppress, flank, retreat, navigate dynamic obstacles, and resume correctly after save/load; matches also support deterministic input replay for debugging. Designers need visual authoring and live explanations of why an agent chose an action. The total AI frame budget is 0.7 ms CPU on target hardware, but no representative profile exists yet. Compare direct rules, FSM/HFSM, behavior trees, Utility AI, GOAP, ML-Agents, and Sentis inference, then recommend a measurable pipeline covering perception, squad memory, decisions, action execution, navigation, animation, networking, scheduling, testing, and fallback behavior.",
+  "assertions": [
+    "The recommendation assigns explicit ownership across perception, squad memory/blackboard, decision, action execution, navigation, animation/presentation, and feedback rather than presenting only an algorithm list.",
+    "One proportional approach or hybrid is selected and direct rules, FSM/HFSM, behavior trees, Utility AI, GOAP, ML-Agents, and Sentis are compared or ruled out using the scenario's actual authoring, emergence, determinism, cost, and observability forces.",
+    "Server authority is explicit for sensing, shared squad state, decisions, reservations, and gameplay outcomes, while client replication/presentation is bounded and cannot silently become authoritative.",
+    "Designer authoring and runtime observability include inspectable facts, scores/state/plan, selected intent, action status, and concrete failure or interruption reasons.",
+    "Deterministic ordering, owned random seeds/time, save/load schema, replay inputs/version metadata, and the limits of cross-platform physics determinism are addressed.",
+    "The 0.7 ms frame budget is treated as an unverified acceptance target; sensing, thinking, planning/pathing, and presentation receive bounded or staggered scheduling plus a representative console profiling plan.",
+    "Actions and navigation define preconditions, success/failure, cancellation, stuck or invalid-path recovery, cleanup on despawn/pooling, and a safe fallback when a plan or learned inference fails.",
+    "The test strategy covers plain C# decision-policy cases plus minimum PlayMode, navigation, network authority, save/replay, load/latency, and target-build performance evidence without claiming those checks were run."
+  ]
+}

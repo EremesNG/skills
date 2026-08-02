@@ -1,0 +1,78 @@
+{
+  "expectations": [
+    {
+      "text": "The response distinguishes supplied facts, likely causes, and unverified repository/runtime evidence, and does not claim that tests or profiling were run.",
+      "passed": true,
+      "evidence": "The opening section separately labels \"User-stated\", \"Inferred, not yet observed in code\", and \"Unknown\" evidence. The verification section then says no project files or Unity Editor were supplied and that none of the tests, compilation checks, scene flows, builds, networking checks, or profiling were run."
+    },
+    {
+      "text": "The selected solution is one bounded feature-level design with explicit publisher, state, HUD, audio, save-statistics, and scene/session ownership; it does not require a global bus, Service Locator, or third-party container.",
+      "passed": true,
+      "evidence": "The decision selects a typed instance event on each authoritative Health plus three feature-scoped adapters. The ownership table assigns Health/player, HUD/view, audio/presentation, statistics/match-session, and gameplay composition-root lifetimes, while the rationale explicitly rejects a message bus, Service Locator, and container."
+    },
+    {
+      "text": "The response connects duplicate delivery to static-event and Domain-Reload-disabled lifetime risk, and defines symmetric subscribe/unsubscribe plus an explicit static reset or removal of static ownership.",
+      "passed": true,
+      "evidence": "It identifies a process-global publisher retaining old scene listeners and notes that disabled Domain Reload can retain mutable static handlers between Editor play sessions. It requires idempotent Start/Stop or OnEnable/OnDisable symmetry, removes the static health event, and confines an explicit runtime-initialization reset to any unavoidable, separately owned static cache."
+    },
+    {
+      "text": "The implementation boundary keeps health rules/state testable independently from Unity-facing HUD, audio, save, and lifecycle adapters without forcing an interface or pattern for every class.",
+      "passed": true,
+      "evidence": "Health owns only invariants/state and emits an immutable payload after commit; HUD, audio, statistics, persistence, networking, and lifecycle behavior remain in named adapters. The plan explicitly says to retain Health as-is unless rule complexity justifies a separate plain-C# model, avoiding pattern/interface proliferation."
+    },
+    {
+      "text": "The test plan starts from a failing behavioral seam and covers repeated gameplay-menu-gameplay cycles, disable/enable or destroy cleanup, duplicate delivery, and the project's Domain Reload configuration across appropriate plain C#/EditMode/PlayMode tests.",
+      "passed": true,
+      "evidence": "Step 1 requires a failing PlayMode characterization of gameplay -> menu -> gameplay before production edits. The verification matrix covers one-event/no-op state tests, duplicate Bind/Start calls, Stop cleanup, enable-disable-enable, destroy/despawn, four-player isolation, repeated scene flow, and the project's Domain-Reload-disabled setting across plain/EditMode, PlayMode, networking, and static checks."
+    },
+    {
+      "text": "At least two credible alternatives are rejected with concrete trade-offs, and the response states a measurable or structural condition that would justify revisiting the choice.",
+      "passed": true,
+      "evidence": "It rejects six alternatives, including static reset, a ScriptableObject channel/global bus, Service Locator, DI framework, direct calls, and ECS, each with a scenario-specific cost. Revisit triggers include cross-module consumers, ordering/history/replay requirements, repeated composition defects, complex UI logic, or a named target-build budget violation."
+    },
+    {
+      "text": "Performance is treated honestly: no improvement is asserted without a baseline, and any optimization claim is deferred to a representative build or target-device measurement plan.",
+      "passed": true,
+      "evidence": "The response characterizes the refactor as a correctness/ownership change rather than a performance improvement, states that profiling was not performed, and requires a reproducible target-build baseline before pooling, an update manager, ECS, or other optimization."
+    }
+  ],
+  "summary": {
+    "passed": 7,
+    "failed": 0,
+    "total": 7,
+    "pass_rate": 1.0
+  },
+  "execution_metrics": {
+    "output_chars": 13408,
+    "transcript_chars": 0
+  },
+  "claims": [
+    {
+      "claim": "The final artifact recommends one typed instance event with explicit feature-scoped bindings, not a global messaging framework.",
+      "type": "factual",
+      "verified": true,
+      "evidence": "The Decision and Why it fits sections state this directly and the architecture table consistently implements it."
+    },
+    {
+      "claim": "A retained static event or duplicate/missing subscription is the actual cause in the user's project.",
+      "type": "factual",
+      "verified": false,
+      "evidence": "The artifact correctly labels these as hypotheses; no repository, runtime trace, or execution transcript was available to prove the causal mechanism."
+    },
+    {
+      "claim": "The proposed verification was not represented as already executed.",
+      "type": "process",
+      "verified": true,
+      "evidence": "The artifact explicitly disclaims test, compilation, scene, build, networking, and profiling execution. Artifact-only grading cannot independently establish executor actions because no transcript exists."
+    }
+  ],
+  "user_notes_summary": {
+    "uncertainties": [],
+    "needs_review": [],
+    "workarounds": []
+  },
+  "eval_feedback": {
+    "suggestions": [],
+    "overall": "The assertions test ownership, lifecycle correctness, bounded design, behavioral verification, and evidence honesty; no material assertion gap was exposed by this artifact."
+  }
+}

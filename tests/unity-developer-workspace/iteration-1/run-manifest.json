@@ -1,0 +1,59 @@
+{
+  "skill_name": "unity-developer",
+  "iteration": 1,
+  "execution_model": "balanced pairs constrained by two available evaluation slots",
+  "timing": {
+    "available": false,
+    "reason": "The collaboration completion notifications did not expose total_tokens or duration_ms; no values were estimated."
+  },
+  "runs": [
+    {
+      "eval_id": 1,
+      "eval_name": "coupling-lifecycle",
+      "configuration": "with_skill",
+      "output": "coupling-lifecycle/with_skill/outputs/recommendation.md",
+      "output_bytes": 13412,
+      "skill_path": "skills/unity-developer"
+    },
+    {
+      "eval_id": 1,
+      "eval_name": "coupling-lifecycle",
+      "configuration": "without_skill",
+      "output": "coupling-lifecycle/without_skill/outputs/recommendation.md",
+      "output_bytes": 9378,
+      "skill_path": null
+    },
+    {
+      "eval_id": 2,
+      "eval_name": "manager-architecture",
+      "configuration": "with_skill",
+      "output": "manager-architecture/with_skill/outputs/recommendation.md",
+      "output_bytes": 22376,
+      "skill_path": "skills/unity-developer"
+    },
+    {
+      "eval_id": 2,
+      "eval_name": "manager-architecture",
+      "configuration": "without_skill",
+      "output": "manager-architecture/without_skill/outputs/recommendation.md",
+      "output_bytes": 12851,
+      "skill_path": null
+    },
+    {
+      "eval_id": 3,
+      "eval_name": "networked-squad-ai",
+      "configuration": "with_skill",
+      "output": "networked-squad-ai/with_skill/outputs/recommendation.md",
+      "output_bytes": 23081,
+      "skill_path": "skills/unity-developer"
+    },
+    {
+      "eval_id": 3,
+      "eval_name": "networked-squad-ai",
+      "configuration": "without_skill",
+      "output": "networked-squad-ai/without_skill/outputs/recommendation.md",
+      "output_bytes": 15577,
+      "skill_path": null
+    }
+  ]
+}

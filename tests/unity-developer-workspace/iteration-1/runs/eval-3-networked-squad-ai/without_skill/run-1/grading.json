@@ -1,0 +1,89 @@
+{
+  "expectations": [
+    {
+      "text": "The recommendation assigns explicit ownership across perception, squad memory/blackboard, decision, action execution, navigation, animation/presentation, and feedback rather than presenting only an algorithm list.",
+      "passed": true,
+      "evidence": "The staged pipeline assigns server perception facts, squad-owned blackboard/claims, HFSM and utility choice, bounded behavior-tree actions, a server navigation service, client animation/presentation, and decision traces/live inspection."
+    },
+    {
+      "text": "One proportional approach or hybrid is selected and direct rules, FSM/HFSM, behavior trees, Utility AI, GOAP, ML-Agents, and Sentis are compared or ruled out using the scenario's actual authoring, emergence, determinism, cost, and observability forces.",
+      "passed": true,
+      "evidence": "It selects direct guards + HFSM + Utility AI + bounded behavior trees + a squad blackboard. The comparison table covers all named alternatives with explicit visual-authoring, plan emergence, deterministic replay, runtime cost, and explanation trade-offs."
+    },
+    {
+      "text": "Server authority is explicit for sensing, shared squad state, decisions, reservations, and gameplay outcomes, while client replication/presentation is bounded and cannot silently become authoritative.",
+      "passed": true,
+      "evidence": "It assigns perception, blackboards, cover claims, decisions, navigation intent, weapon authorization, and outcomes to the server; clients receive only compact presentation state and cannot authorize shots, damage, reservations, or tactical choices."
+    },
+    {
+      "text": "Designer authoring and runtime observability include inspectable facts, scores/state/plan, selected intent, action status, and concrete failure or interruption reasons.",
+      "passed": true,
+      "evidence": "Designers author score curves, thresholds, HFSM transitions, and bounded action trees. The trace includes mode, inputs, eligible/rejected actions, scores, winner, tie-break, and interruption reason; the live inspector adds top candidates and active tree path, while nodes return typed NoPath/ReservationLost/TargetInvalid/TimedOut failures."
+    },
+    {
+      "text": "Deterministic ordering, owned random seeds/time, save/load schema, replay inputs/version metadata, and the limits of cross-platform physics determinism are addressed.",
+      "passed": true,
+      "evidence": "The response uses fixed ticks, match/squad/agent RNG streams, stable ordering/ties, versioned engine-independent save DTOs, recorded player/exogenous inputs and hashes, and explicitly limits exact replay when physics/pathfinding differ across platforms."
+    },
+    {
+      "text": "The 0.7 ms frame budget is treated as an unverified acceptance target; sensing, thinking, planning/pathing, and presentation receive bounded or staggered scheduling plus a representative console profiling plan.",
+      "passed": true,
+      "evidence": "It calls the 0.7 ms target unproven, defines deterministic staggered sensing/decision cadences, per-stage provisional caps including navigation and network/animation packaging, overload behavior, and a reproducible 50-agent target-console capture with percentiles, allocations, and queue/query counts."
+    },
+    {
+      "text": "Actions and navigation define preconditions, success/failure, cancellation, stuck or invalid-path recovery, cleanup on despawn/pooling, and a safe fallback when a plan or learned inference fails.",
+      "passed": false,
+      "evidence": "The artifact provides hard guards, Running/Success/typed failure states, bounded no-path recovery, and a deterministic fallback. Cancellation appears only as a test topic, and the runtime contract never defines teardown/reset for agent despawn or pooled reuse; pooling is not addressed at all. The compound lifecycle requirement is therefore not demonstrated."
+    },
+    {
+      "text": "The test strategy covers plain C# decision-policy cases plus minimum PlayMode, navigation, network authority, save/replay, load/latency, and target-build performance evidence without claiming those checks were run.",
+      "passed": false,
+      "evidence": "It proposes strong plain-C#, navigation, headless/network latency, save/replay, and target-console tests, but never identifies a Unity PlayMode test layer or its lifecycle/scene boundary, and it does not explicitly distinguish proposed tests from executed checks. With no transcript available, the full compound expectation lacks sufficient evidence."
+    }
+  ],
+  "summary": {
+    "passed": 6,
+    "failed": 2,
+    "total": 8,
+    "pass_rate": 0.75
+  },
+  "execution_metrics": {
+    "output_chars": 15575,
+    "transcript_chars": 0
+  },
+  "claims": [
+    {
+      "claim": "The final artifact selects a server-authoritative HFSM/Utility AI/bounded behavior-tree hybrid with direct fallback rules.",
+      "type": "factual",
+      "verified": true,
+      "evidence": "The opening recommendation, technique comparison, pipeline, and implementation sequence consistently present this hybrid."
+    },
+    {
+      "claim": "The proposed provisional schedule satisfies the 0.7 ms target.",
+      "type": "quality",
+      "verified": false,
+      "evidence": "The artifact explicitly calls the partition an investigation target and says representative profiling is absent; no console measurements were supplied."
+    },
+    {
+      "claim": "The action lifecycle is safe for despawned or pooled agents.",
+      "type": "quality",
+      "verified": false,
+      "evidence": "Some reservation exit cases are named, but no complete cancellation, despawn teardown, pooled reset, or stale-result contract is defined."
+    },
+    {
+      "claim": "The proposed checks were not represented as completed.",
+      "type": "process",
+      "verified": true,
+      "evidence": "The artifact consistently uses recommendation/future language and explicitly notes the absence of representative profiling. There is no transcript to independently verify whether any executor-side checks occurred."
+    }
+  ],
+  "user_notes_summary": {
+    "uncertainties": [],
+    "needs_review": [],
+    "workarounds": []
+  },
+  "eval_feedback": {
+    "suggestions": [],
+    "overall": "The failed assertions expose concrete missing lifecycle and Unity-specific verification contracts; the remaining assertions require substantive design evidence rather than mere algorithm mentions."
+  }
+}

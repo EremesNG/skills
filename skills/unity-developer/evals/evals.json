@@ -1,0 +1,49 @@
+{
+  "skill_name": "unity-developer",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "We maintain a Unity 2022.3 LTS four-player co-op action game. Health is a MonoBehaviour that directly updates the HUD, plays audio, and writes save statistics; a static HealthChanged event was added to decouple it, but listeners now fire twice after returning to the menu and loading gameplay again. Domain Reload is disabled for faster iteration. The team has four programmers, existing EditMode and PlayMode tests, no profiler capture for this feature, and does not want a third-party framework. Recommend the smallest professional refactor, including ownership, subscription lifetime, scene reload behavior, tests, implementation boundaries, rejected alternatives, and when the design should be revisited.",
+      "expected_output": "An evidence-labeled, proportional recommendation that distinguishes the observed duplicate-listener symptom from assumptions, chooses a bounded direct/event/mediator design rather than a global bus or container, names publisher and subscriber lifetimes, handles static reset and symmetric cleanup, separates plain C# health rules from Unity adapters where valuable, defines failing tests first, rejects credible alternatives with trade-offs, and makes no unsupported performance claim.",
+      "assertions": [
+        "The response distinguishes supplied facts, likely causes, and unverified repository/runtime evidence, and does not claim that tests or profiling were run.",
+        "The selected solution is one bounded feature-level design with explicit publisher, state, HUD, audio, save-statistics, and scene/session ownership; it does not require a global bus, Service Locator, or third-party container.",
+        "The response connects duplicate delivery to static-event and Domain-Reload-disabled lifetime risk, and defines symmetric subscribe/unsubscribe plus an explicit static reset or removal of static ownership.",
+        "The implementation boundary keeps health rules/state testable independently from Unity-facing HUD, audio, save, and lifecycle adapters without forcing an interface or pattern for every class.",
+        "The test plan starts from a failing behavioral seam and covers repeated gameplay-menu-gameplay cycles, disable/enable or destroy cleanup, duplicate delivery, and the project's Domain Reload configuration across appropriate plain C#/EditMode/PlayMode tests.",
+        "At least two credible alternatives are rejected with concrete trade-offs, and the response states a measurable or structural condition that would justify revisiting the choice.",
+        "Performance is treated honestly: no improvement is asserted without a baseline, and any optimization claim is deferred to a representative build or target-device measurement plan."
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Refactor the architecture of a Unity 6 project whose 1,800-line GameManager is marked DontDestroyOnLoad and owns input, audio, saving, combat, UI navigation, and scene transitions. Components use GameObject.Find to reach it, two shared ScriptableObject assets are mutated as runtime session state, and additive scene loading occasionally leaves stale UI listeners. Twelve developers work in feature teams; the project has a few PlayMode tests but almost no plain C# tests. We can add assembly definitions, but a DI container or ECS/DOTS must be justified rather than assumed. Produce an incremental target architecture and migration plan that can ship safely without a rewrite.",
+      "expected_output": "A staged architecture grounded in the stated project facts: feature-scoped composition roots, explicit scene/session ownership and teardown, dependency direction toward plain C# policy, authored ScriptableObject data separated from owned runtime state, scoped messaging and UI presentation seams, assembly boundaries, characterization tests and safe migration slices. It should compare manual injection, DI, Service Locator, and ECS/DOTS proportionally, preserve behavior, define rollback and verification, and call unresolved repository facts assumptions.",
+      "assertions": [
+        "The response separates stated project facts from repository facts that still need inspection and avoids claiming that the migration, tests, Unity Editor, or profiling were executed.",
+        "The target design decomposes the GameManager into feature-scoped responsibilities with explicit composition roots, dependency direction, and component/scene/session lifetimes rather than replacing it with another global manager.",
+        "Shared ScriptableObject assets are treated as authored definitions, while mutable session/runtime state receives an explicit owner, reset policy, and persistence boundary.",
+        "The migration is incremental and behavior-preserving, beginning with characterization tests and naming safe slices, compatibility seams, rollback points, and verification before old paths are removed.",
+        "The design introduces plain C# domain/application seams and acyclic assembly-definition boundaries only where they improve testability or team ownership, with Unity adapters at the edges.",
+        "Manual composition, a DI container, Service Locator, and ECS/DOTS are compared proportionally; container/ECS adoption is rejected unless concrete graph complexity or measured scale justifies the cost.",
+        "Additive-scene readiness, stale listener cleanup, initialization, teardown, return-to-menu, and repeated load/unload tests are explicitly addressed.",
+        "Performance and scalability claims remain hypotheses until a representative target build is profiled with a reproducible baseline."
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Design enemy squad AI for a server-authoritative Unity 6 cooperative shooter targeting consoles. Up to 50 agents form squads, share sightings, claim cover, suppress, flank, retreat, navigate dynamic obstacles, and resume correctly after save/load; matches also support deterministic input replay for debugging. Designers need visual authoring and live explanations of why an agent chose an action. The total AI frame budget is 0.7 ms CPU on target hardware, but no representative profile exists yet. Compare direct rules, FSM/HFSM, behavior trees, Utility AI, GOAP, ML-Agents, and Sentis inference, then recommend a measurable pipeline covering perception, squad memory, decisions, action execution, navigation, animation, networking, scheduling, testing, and fallback behavior.",
+      "expected_output": "A complete, budget-conscious AI system rather than an algorithm list: explicit perception-memory-decision-action-navigation-animation ownership, server authority and replication boundaries, a proportional hybrid with simpler alternatives rejected for concrete reasons, designer authoring plus runtime traces, deterministic ordering/randomness and save/replay state, bounded staggered scheduling, failure/cancellation behavior, plain C# decision tests and engine/network integration tests, and a target-console profiling plan that treats 0.7 ms as an unverified acceptance budget rather than a measured result.",
+      "assertions": [
+        "The recommendation assigns explicit ownership across perception, squad memory/blackboard, decision, action execution, navigation, animation/presentation, and feedback rather than presenting only an algorithm list.",
+        "One proportional approach or hybrid is selected and direct rules, FSM/HFSM, behavior trees, Utility AI, GOAP, ML-Agents, and Sentis are compared or ruled out using the scenario's actual authoring, emergence, determinism, cost, and observability forces.",
+        "Server authority is explicit for sensing, shared squad state, decisions, reservations, and gameplay outcomes, while client replication/presentation is bounded and cannot silently become authoritative.",
+        "Designer authoring and runtime observability include inspectable facts, scores/state/plan, selected intent, action status, and concrete failure or interruption reasons.",
+        "Deterministic ordering, owned random seeds/time, save/load schema, replay inputs/version metadata, and the limits of cross-platform physics determinism are addressed.",
+        "The 0.7 ms frame budget is treated as an unverified acceptance target; sensing, thinking, planning/pathing, and presentation receive bounded or staggered scheduling plus a representative console profiling plan.",
+        "Actions and navigation define preconditions, success/failure, cancellation, stuck or invalid-path recovery, cleanup on despawn/pooling, and a safe fallback when a plan or learned inference fails.",
+        "The test strategy covers plain C# decision-policy cases plus minimum PlayMode, navigation, network authority, save/replay, load/latency, and target-build performance evidence without claiming those checks were run."
+      ]
+    }
+  ]
+}

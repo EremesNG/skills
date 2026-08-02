@@ -1,0 +1,89 @@
+{
+  "expectations": [
+    {
+      "text": "The response separates stated project facts from repository facts that still need inspection and avoids claiming that the migration, tests, Unity Editor, or profiling were executed.",
+      "passed": false,
+      "evidence": "The response uses the prompt facts and proposes an inventory, but never identifies which repository, package, scene, call-graph, test, build, or profiler facts remain unobserved. It makes no false execution claim, yet the required supplied-versus-unverified evidence separation is absent, so the compound expectation fails."
+    },
+    {
+      "text": "The target design decomposes the GameManager into feature-scoped responsibilities with explicit composition roots, dependency direction, and component/scene/session lifetimes rather than replacing it with another global manager.",
+      "passed": true,
+      "evidence": "The AppBootstrap/CompositionRoot diagram decomposes audio, save, scene transition, input, session, UI, and combat across application, session, scene, and temporary lifetimes. It keeps MonoBehaviours as edge adapters and explicitly rejects replacing the god object with global managers."
+    },
+    {
+      "text": "Shared ScriptableObject assets are treated as authored definitions, while mutable session/runtime state receives an explicit owner, reset policy, and persistence boundary.",
+      "passed": true,
+      "evidence": "It makes the two ScriptableObjects authored configuration only, copies their values into GameSession at new/load session, tests session reset/restoration, and serializes SaveData DTOs instead of asset or scene references."
+    },
+    {
+      "text": "The migration is incremental and behavior-preserving, beginning with characterization tests and naming safe slices, compatibility seams, rollback points, and verification before old paths are removed.",
+      "passed": true,
+      "evidence": "The plan starts by mapping callers and adding characterization tests, retains GameManager as a delegating facade, migrates vertical slices one consumer at a time, defines facade-based rollback, and removes old routes only after characterization and contract gates pass."
+    },
+    {
+      "text": "The design introduces plain C# domain/application seams and acyclic assembly-definition boundaries only where they improve testability or team ownership, with Unity adapters at the edges.",
+      "passed": true,
+      "evidence": "It keeps domain/application behavior in ordinary C#, MonoBehaviours as adapters, and asmdefs in an acyclic graph introduced around stable boundaries. It explicitly avoids one interface per class and an all-at-once asmdef split, while assigning feature-team ownership by vertical slice."
+    },
+    {
+      "text": "Manual composition, a DI container, Service Locator, and ECS/DOTS are compared proportionally; container/ECS adoption is rejected unless concrete graph complexity or measured scale justifies the cost.",
+      "passed": true,
+      "evidence": "Manual composition is selected while the graph remains understandable; DI is deferred until scopes/factories/decorators or wiring complexity justify it. Service Locator is rejected as hidden coupling, and ECS/DOTS is limited to measured high-entity bottlenecks."
+    },
+    {
+      "text": "Additive-scene readiness, stale listener cleanup, initialization, teardown, return-to-menu, and repeated load/unload tests are explicitly addressed.",
+      "passed": false,
+      "evidence": "The artifact covers stale listener cleanup, scene-scoped cancellation/disposal, transition phases, and repeated additive load/unload tests. It does not explicitly specify a return-to-menu/new-session scenario, and its Binding/Entering states do not define an observable destination-readiness contract or failure gate. Because every named lifecycle case is required, evidence is incomplete."
+    },
+    {
+      "text": "Performance and scalability claims remain hypotheses until a representative target build is profiled with a reproducible baseline.",
+      "passed": false,
+      "evidence": "The response appropriately avoids speedup claims and says optimization should follow target-device measurement, but it never defines a representative player-build capture or a reproducible before/after performance baseline as the acceptance evidence required by this expectation."
+    }
+  ],
+  "summary": {
+    "passed": 5,
+    "failed": 3,
+    "total": 8,
+    "pass_rate": 0.625
+  },
+  "execution_metrics": {
+    "output_chars": 12618,
+    "transcript_chars": 0
+  },
+  "claims": [
+    {
+      "claim": "The recommended migration temporarily retains GameManager as a compatibility facade and extracts vertical slices behind it.",
+      "type": "factual",
+      "verified": true,
+      "evidence": "The introduction, facade example, migration stages, and rollback criterion consistently specify this approach."
+    },
+    {
+      "claim": "Shared ScriptableObject mutation is eliminated by making GameSession the mutable owner and SaveData the persistence contract.",
+      "type": "quality",
+      "verified": true,
+      "evidence": "This is clearly the proposed target and migration boundary; it is not evidence that the unsupplied project was modified."
+    },
+    {
+      "claim": "The proposed migration and tests were performed successfully.",
+      "type": "process",
+      "verified": false,
+      "evidence": "The artifact uses future-tense recommendations and supplies no transcript, repository, test output, or build evidence. It does not itself make this completion claim."
+    },
+    {
+      "claim": "The target-device performance gate is fully reproducible.",
+      "type": "quality",
+      "verified": false,
+      "evidence": "Only a general requirement for target-device measurement appears; benchmark content, build configuration, capture procedure, and before/after baseline are not defined."
+    }
+  ],
+  "user_notes_summary": {
+    "uncertainties": [],
+    "needs_review": [],
+    "workarounds": []
+  },
+  "eval_feedback": {
+    "suggestions": [],
+    "overall": "The failures expose meaningful omissions in evidence labeling, complete scene lifecycle acceptance, and reproducible profiling rather than superficial formatting differences."
+  }
+}

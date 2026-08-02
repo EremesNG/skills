@@ -1,0 +1,15 @@
+{
+  "eval_id": 2,
+  "eval_name": "manager-architecture",
+  "prompt": "Refactor the architecture of a Unity 6 project whose 1,800-line GameManager is marked DontDestroyOnLoad and owns input, audio, saving, combat, UI navigation, and scene transitions. Components use GameObject.Find to reach it, two shared ScriptableObject assets are mutated as runtime session state, and additive scene loading occasionally leaves stale UI listeners. Twelve developers work in feature teams; the project has a few PlayMode tests but almost no plain C# tests. We can add assembly definitions, but a DI container or ECS/DOTS must be justified rather than assumed. Produce an incremental target architecture and migration plan that can ship safely without a rewrite.",
+  "assertions": [
+    "The response separates stated project facts from repository facts that still need inspection and avoids claiming that the migration, tests, Unity Editor, or profiling were executed.",
+    "The target design decomposes the GameManager into feature-scoped responsibilities with explicit composition roots, dependency direction, and component/scene/session lifetimes rather than replacing it with another global manager.",
+    "Shared ScriptableObject assets are treated as authored definitions, while mutable session/runtime state receives an explicit owner, reset policy, and persistence boundary.",
+    "The migration is incremental and behavior-preserving, beginning with characterization tests and naming safe slices, compatibility seams, rollback points, and verification before old paths are removed.",
+    "The design introduces plain C# domain/application seams and acyclic assembly-definition boundaries only where they improve testability or team ownership, with Unity adapters at the edges.",
+    "Manual composition, a DI container, Service Locator, and ECS/DOTS are compared proportionally; container/ECS adoption is rejected unless concrete graph complexity or measured scale justifies the cost.",
+    "Additive-scene readiness, stale listener cleanup, initialization, teardown, return-to-menu, and repeated load/unload tests are explicitly addressed.",
+    "Performance and scalability claims remain hypotheses until a representative target build is profiled with a reproducible baseline."
+  ]
+}

@@ -1,0 +1,89 @@
+{
+  "expectations": [
+    {
+      "text": "The recommendation assigns explicit ownership across perception, squad memory/blackboard, decision, action execution, navigation, animation/presentation, and feedback rather than presenting only an algorithm list.",
+      "passed": true,
+      "evidence": "The architecture pipeline and lifetime table assign perception snapshots, typed squad memory/cover leases, squad and agent decision ownership, shallow-tree/action execution, a server navigation/motor adapter, client presentation, and structured explanation/trace ownership across AiSessionRoot, SquadRuntime, AgentBrain, and Unity adapters."
+    },
+    {
+      "text": "One proportional approach or hybrid is selected and direct rules, FSM/HFSM, behavior trees, Utility AI, GOAP, ML-Agents, and Sentis are compared or ruled out using the scenario's actual authoring, emergence, determinism, cost, and observability forces.",
+      "passed": true,
+      "evidence": "The Decision selects direct guards + squad coordination + deterministic Utility AI + shallow visual trees + finite-state action executors. The comparison table addresses every named technique and ties acceptance/rejection to visual authoring, enumerable tactics versus emergence, replay determinism, 0.7 ms cost risk, and explanation quality."
+    },
+    {
+      "text": "Server authority is explicit for sensing, shared squad state, decisions, reservations, and gameplay outcomes, while client replication/presentation is bounded and cannot silently become authoritative.",
+      "passed": true,
+      "evidence": "The network section assigns facts, squad memory, random streams, intent, cover claims, paths, action state, movement validity, and gameplay effects to the server. Clients receive a compact presentation contract, and animation events/clients are explicitly forbidden from authorizing damage or decisions."
+    },
+    {
+      "text": "Designer authoring and runtime observability include inspectable facts, scores/state/plan, selected intent, action status, and concrete failure or interruption reasons.",
+      "passed": true,
+      "evidence": "The authoring section specifies validated immutable tactic, curve, cadence, threshold, and visual-tree assets. The live inspector enumerates perceived and squad facts, rejected conditions, every score component and winner, intent/tree path, action progress, navigation state, abort/failure reason, fallback level, and replay hashes."
+    },
+    {
+      "text": "Deterministic ordering, owned random seeds/time, save/load schema, replay inputs/version metadata, and the limits of cross-platform physics determinism are addressed.",
+      "passed": true,
+      "evidence": "The design uses integer AiTick, versioned per-squad/agent random streams, stable-ID iteration and tie-breaking, quantized comparisons, config/schema hashes, recorded authoritative inputs, two replay modes, and versioned save DTOs. It explicitly refuses to promise bitwise cross-platform physics/navigation replay."
+    },
+    {
+      "text": "The 0.7 ms frame budget is treated as an unverified acceptance target; sensing, thinking, planning/pathing, and presentation receive bounded or staggered scheduling plus a representative console profiling plan.",
+      "passed": true,
+      "evidence": "The artifact labels all cadences and sub-budgets as starting hypotheses, provides a full 0.70 ms stage partition and deterministic staggered scheduler with starvation/latency limits, bounds path requests and presentation bookkeeping, and defines a 50-agent representative console gate with P50/P95/P99/max and allocation/query metrics."
+    },
+    {
+      "text": "Actions and navigation define preconditions, success/failure, cancellation, stuck or invalid-path recovery, cleanup on despawn/pooling, and a safe fallback when a plan or learned inference fails.",
+      "passed": true,
+      "evidence": "Actions expose CanStart, Start, Tick, Cancel, Succeeded, Failed, and resume tokens; impossible actions are filtered before scoring. Navigation owns validity, invalidation, stuck detection, and bounded repath/alternate-cover/regroup recovery. Despawn/pooling cleanup cancels work, releases leases, clears state, and stale requests are rejected; missing graphs/actions fall back to seek-cover or hold/regroup."
+    },
+    {
+      "text": "The test strategy covers plain C# decision-policy cases plus minimum PlayMode, navigation, network authority, save/replay, load/latency, and target-build performance evidence without claiming those checks were run.",
+      "passed": true,
+      "evidence": "The verification plan explicitly separates plain C#, EditMode/PlayMode, network, and target-device gates. It covers utility/policy, reservations, action cleanup, navigation failure, save/load migration and resume, deterministic replay, latency/loss/reordering, server authority, and representative-console performance, while stating none of the compilation, network, console, or profile checks were available or run."
+    }
+  ],
+  "summary": {
+    "passed": 8,
+    "failed": 0,
+    "total": 8,
+    "pass_rate": 1.0
+  },
+  "execution_metrics": {
+    "output_chars": 23067,
+    "transcript_chars": 0
+  },
+  "claims": [
+    {
+      "claim": "The recommended hybrid uses Utility AI for tactical choice, shallow visual trees for orchestration, finite-state actions for execution, and direct rules for safety/fallback.",
+      "type": "factual",
+      "verified": true,
+      "evidence": "The Decision, alternatives table, architecture, and implementation sequence consistently assign those roles."
+    },
+    {
+      "claim": "The proposed architecture meets the 0.7 ms console budget.",
+      "type": "quality",
+      "verified": false,
+      "evidence": "The artifact correctly labels the budget split as a hypothesis and says a representative console profile does not yet exist. No runtime or profiling artifact was supplied."
+    },
+    {
+      "claim": "The design promises only same-build AI-domain replay, not bitwise cross-platform world determinism.",
+      "type": "factual",
+      "verified": true,
+      "evidence": "The replay section defines same-build input and portable trace modes and explicitly states that a cross-platform bitwise guarantee would require a different simulation/network contract."
+    },
+    {
+      "claim": "No implementation or verification run is represented as complete.",
+      "type": "process",
+      "verified": true,
+      "evidence": "The verification plan disclaims Unity compilation, network testing, console builds, and target-device profiling. No execution transcript exists for additional process verification."
+    }
+  ],
+  "user_notes_summary": {
+    "uncertainties": [],
+    "needs_review": [],
+    "workarounds": []
+  },
+  "eval_feedback": {
+    "suggestions": [],
+    "overall": "The assertions require a coherent authority, lifecycle, observability, determinism, scheduling, failure, and evidence contract rather than keyword coverage; no material gap was found."
+  }
+}

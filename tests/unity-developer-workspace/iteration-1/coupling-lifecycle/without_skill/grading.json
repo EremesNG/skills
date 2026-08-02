@@ -1,0 +1,78 @@
+{
+  "expectations": [
+    {
+      "text": "The response distinguishes supplied facts, likely causes, and unverified repository/runtime evidence, and does not claim that tests or profiling were run.",
+      "passed": false,
+      "evidence": "The artifact responsibly calls the duplicate behavior \"consistent with\" static delegate retention and explicitly says tests/profiling were not run, but it never separates the supplied scenario facts from repository/runtime facts that remain uninspected. Because this is a compound requirement, the missing evidence classification fails it."
+    },
+    {
+      "text": "The selected solution is one bounded feature-level design with explicit publisher, state, HUD, audio, save-statistics, and scene/session ownership; it does not require a global bus, Service Locator, or third-party container.",
+      "passed": true,
+      "evidence": "It selects an instance-scoped Health.Changed event plus three adapters. Its ownership table covers Health/player, HUD/gameplay UI, audio/player or scene, statistics/session or scene, and gameplay composition, while explicitly rejecting a global bus, Singleton/Service Locator, and DI framework."
+    },
+    {
+      "text": "The response connects duplicate delivery to static-event and Domain-Reload-disabled lifetime risk, and defines symmetric subscribe/unsubscribe plus an explicit static reset or removal of static ownership.",
+      "passed": true,
+      "evidence": "It connects retained static delegates and disabled Domain Reload to accumulated listeners, requires named symmetric OnEnable/OnDisable or Bind/Unbind behavior, removes the old static delegate, and gives any unrelated unavoidable static event an explicit SubsystemRegistration reset."
+    },
+    {
+      "text": "The implementation boundary keeps health rules/state testable independently from Unity-facing HUD, audio, save, and lifecycle adapters without forcing an interface or pattern for every class.",
+      "passed": true,
+      "evidence": "Health exposes only state and a value notification, while HUD, audio, statistics, persistence, networking, and lifecycle wiring are separate adapters. The response asks for existing interfaces/components and a small presenter rather than a framework or interface for every class."
+    },
+    {
+      "text": "The test plan starts from a failing behavioral seam and covers repeated gameplay-menu-gameplay cycles, disable/enable or destroy cleanup, duplicate delivery, and the project's Domain Reload configuration across appropriate plain C#/EditMode/PlayMode tests.",
+      "passed": true,
+      "evidence": "It starts with a regression reproducing enable/load/disable/reload, then lists state and adapter EditMode checks plus PlayMode enable-disable-enable, gameplay-menu-gameplay, despawn/respawn, and networking cases. It separately requires a manual repeated-Play-Mode check with Domain Reload disabled and explains the limit of an ordinary PlayMode test."
+    },
+    {
+      "text": "At least two credible alternatives are rejected with concrete trade-offs, and the response states a measurable or structural condition that would justify revisiting the choice.",
+      "passed": true,
+      "evidence": "Six alternatives are rejected with concrete lifetime, scope, or cost trade-offs. Revisit criteria include cross-scene consumers, replay/rollback requirements, repeated dynamic-binding duplication, prediction/reconciliation needs, and measured target-hardware cost."
+    },
+    {
+      "text": "Performance is treated honestly: no improvement is asserted without a baseline, and any optimization claim is deferred to a representative build or target-device measurement plan.",
+      "passed": true,
+      "evidence": "It says no profiler capture is needed for the correctness refactor, makes no speedup claim, and defers performance conclusions to target-hardware profiling if the signal becomes high volume or listener work becomes expensive."
+    }
+  ],
+  "summary": {
+    "passed": 6,
+    "failed": 1,
+    "total": 7,
+    "pass_rate": 0.8571428571
+  },
+  "execution_metrics": {
+    "output_chars": 9374,
+    "transcript_chars": 0
+  },
+  "claims": [
+    {
+      "claim": "The recommended change removes the static health signal in favor of an instance event and three adapters.",
+      "type": "factual",
+      "verified": true,
+      "evidence": "The opening recommendation, ownership table, implementation boundaries, and rejected alternatives all maintain this same design."
+    },
+    {
+      "claim": "Static delegate retention is the demonstrated root cause of the observed duplicate callbacks.",
+      "type": "factual",
+      "verified": false,
+      "evidence": "The artifact only says the symptom is consistent with this cause; no source inspection, runtime capture, or transcript is available."
+    },
+    {
+      "claim": "The proposed tests and profiling were not represented as completed.",
+      "type": "process",
+      "verified": true,
+      "evidence": "The testing section explicitly calls them proposed checks and states that no tests or profiling were run. No execution transcript was available for independent process verification."
+    }
+  ],
+  "user_notes_summary": {
+    "uncertainties": [],
+    "needs_review": [],
+    "workarounds": []
+  },
+  "eval_feedback": {
+    "suggestions": [],
+    "overall": "The assertions are substantive. The baseline's single failure reflects missing evidence classification, not a weak presence-only check."
+  }
+}

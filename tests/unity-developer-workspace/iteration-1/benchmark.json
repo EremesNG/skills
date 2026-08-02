@@ -1,0 +1,439 @@
+{
+  "metadata": {
+    "skill_name": "unity-developer",
+    "skill_path": "C:\\DEV\\Proyectos\\Webstorm\\skills\\skills\\unity-developer",
+    "executor_model": "Codex collaboration agents (exact host model not exposed)",
+    "analyzer_model": "Independent grader/analyzer agents (exact host model not exposed)",
+    "timestamp": "2026-08-02T04:02:39Z",
+    "evals_run": [
+      1,
+      2,
+      3
+    ],
+    "runs_per_configuration": 1
+  },
+  "runs": [
+    {
+      "eval_id": 1,
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 7,
+        "failed": 0,
+        "total": 7,
+        "time_seconds": 0.0,
+        "tokens": 0,
+        "tool_calls": 0,
+        "errors": 0,
+        "output_chars": 13408
+      },
+      "expectations": [
+        {
+          "text": "The response distinguishes supplied facts, likely causes, and unverified repository/runtime evidence, and does not claim that tests or profiling were run.",
+          "passed": true,
+          "evidence": "The opening section separately labels \"User-stated\", \"Inferred, not yet observed in code\", and \"Unknown\" evidence. The verification section then says no project files or Unity Editor were supplied and that none of the tests, compilation checks, scene flows, builds, networking checks, or profiling were run."
+        },
+        {
+          "text": "The selected solution is one bounded feature-level design with explicit publisher, state, HUD, audio, save-statistics, and scene/session ownership; it does not require a global bus, Service Locator, or third-party container.",
+          "passed": true,
+          "evidence": "The decision selects a typed instance event on each authoritative Health plus three feature-scoped adapters. The ownership table assigns Health/player, HUD/view, audio/presentation, statistics/match-session, and gameplay composition-root lifetimes, while the rationale explicitly rejects a message bus, Service Locator, and container."
+        },
+        {
+          "text": "The response connects duplicate delivery to static-event and Domain-Reload-disabled lifetime risk, and defines symmetric subscribe/unsubscribe plus an explicit static reset or removal of static ownership.",
+          "passed": true,
+          "evidence": "It identifies a process-global publisher retaining old scene listeners and notes that disabled Domain Reload can retain mutable static handlers between Editor play sessions. It requires idempotent Start/Stop or OnEnable/OnDisable symmetry, removes the static health event, and confines an explicit runtime-initialization reset to any unavoidable, separately owned static cache."
+        },
+        {
+          "text": "The implementation boundary keeps health rules/state testable independently from Unity-facing HUD, audio, save, and lifecycle adapters without forcing an interface or pattern for every class.",
+          "passed": true,
+          "evidence": "Health owns only invariants/state and emits an immutable payload after commit; HUD, audio, statistics, persistence, networking, and lifecycle behavior remain in named adapters. The plan explicitly says to retain Health as-is unless rule complexity justifies a separate plain-C# model, avoiding pattern/interface proliferation."
+        },
+        {
+          "text": "The test plan starts from a failing behavioral seam and covers repeated gameplay-menu-gameplay cycles, disable/enable or destroy cleanup, duplicate delivery, and the project's Domain Reload configuration across appropriate plain C#/EditMode/PlayMode tests.",
+          "passed": true,
+          "evidence": "Step 1 requires a failing PlayMode characterization of gameplay -> menu -> gameplay before production edits. The verification matrix covers one-event/no-op state tests, duplicate Bind/Start calls, Stop cleanup, enable-disable-enable, destroy/despawn, four-player isolation, repeated scene flow, and the project's Domain-Reload-disabled setting across plain/EditMode, PlayMode, networking, and static checks."
+        },
+        {
+          "text": "At least two credible alternatives are rejected with concrete trade-offs, and the response states a measurable or structural condition that would justify revisiting the choice.",
+          "passed": true,
+          "evidence": "It rejects six alternatives, including static reset, a ScriptableObject channel/global bus, Service Locator, DI framework, direct calls, and ECS, each with a scenario-specific cost. Revisit triggers include cross-module consumers, ordering/history/replay requirements, repeated composition defects, complex UI logic, or a named target-build budget violation."
+        },
+        {
+          "text": "Performance is treated honestly: no improvement is asserted without a baseline, and any optimization claim is deferred to a representative build or target-device measurement plan.",
+          "passed": true,
+          "evidence": "The response characterizes the refactor as a correctness/ownership change rather than a performance improvement, states that profiling was not performed, and requires a reproducible target-build baseline before pooling, an update manager, ECS, or other optimization."
+        }
+      ],
+      "notes": [],
+      "eval_name": "coupling-lifecycle"
+    },
+    {
+      "eval_id": 1,
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.8571428571,
+        "passed": 6,
+        "failed": 1,
+        "total": 7,
+        "time_seconds": 0.0,
+        "tokens": 0,
+        "tool_calls": 0,
+        "errors": 0,
+        "output_chars": 9374
+      },
+      "expectations": [
+        {
+          "text": "The response distinguishes supplied facts, likely causes, and unverified repository/runtime evidence, and does not claim that tests or profiling were run.",
+          "passed": false,
+          "evidence": "The artifact responsibly calls the duplicate behavior \"consistent with\" static delegate retention and explicitly says tests/profiling were not run, but it never separates the supplied scenario facts from repository/runtime facts that remain uninspected. Because this is a compound requirement, the missing evidence classification fails it."
+        },
+        {
+          "text": "The selected solution is one bounded feature-level design with explicit publisher, state, HUD, audio, save-statistics, and scene/session ownership; it does not require a global bus, Service Locator, or third-party container.",
+          "passed": true,
+          "evidence": "It selects an instance-scoped Health.Changed event plus three adapters. Its ownership table covers Health/player, HUD/gameplay UI, audio/player or scene, statistics/session or scene, and gameplay composition, while explicitly rejecting a global bus, Singleton/Service Locator, and DI framework."
+        },
+        {
+          "text": "The response connects duplicate delivery to static-event and Domain-Reload-disabled lifetime risk, and defines symmetric subscribe/unsubscribe plus an explicit static reset or removal of static ownership.",
+          "passed": true,
+          "evidence": "It connects retained static delegates and disabled Domain Reload to accumulated listeners, requires named symmetric OnEnable/OnDisable or Bind/Unbind behavior, removes the old static delegate, and gives any unrelated unavoidable static event an explicit SubsystemRegistration reset."
+        },
+        {
+          "text": "The implementation boundary keeps health rules/state testable independently from Unity-facing HUD, audio, save, and lifecycle adapters without forcing an interface or pattern for every class.",
+          "passed": true,
+          "evidence": "Health exposes only state and a value notification, while HUD, audio, statistics, persistence, networking, and lifecycle wiring are separate adapters. The response asks for existing interfaces/components and a small presenter rather than a framework or interface for every class."
+        },
+        {
+          "text": "The test plan starts from a failing behavioral seam and covers repeated gameplay-menu-gameplay cycles, disable/enable or destroy cleanup, duplicate delivery, and the project's Domain Reload configuration across appropriate plain C#/EditMode/PlayMode tests.",
+          "passed": true,
+          "evidence": "It starts with a regression reproducing enable/load/disable/reload, then lists state and adapter EditMode checks plus PlayMode enable-disable-enable, gameplay-menu-gameplay, despawn/respawn, and networking cases. It separately requires a manual repeated-Play-Mode check with Domain Reload disabled and explains the limit of an ordinary PlayMode test."
+        },
+        {
+          "text": "At least two credible alternatives are rejected with concrete trade-offs, and the response states a measurable or structural condition that would justify revisiting the choice.",
+          "passed": true,
+          "evidence": "Six alternatives are rejected with concrete lifetime, scope, or cost trade-offs. Revisit criteria include cross-scene consumers, replay/rollback requirements, repeated dynamic-binding duplication, prediction/reconciliation needs, and measured target-hardware cost."
+        },
+        {
+          "text": "Performance is treated honestly: no improvement is asserted without a baseline, and any optimization claim is deferred to a representative build or target-device measurement plan.",
+          "passed": true,
+          "evidence": "It says no profiler capture is needed for the correctness refactor, makes no speedup claim, and defers performance conclusions to target-hardware profiling if the signal becomes high volume or listener work becomes expensive."
+        }
+      ],
+      "notes": [],
+      "eval_name": "coupling-lifecycle"
+    },
+    {
+      "eval_id": 2,
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 8,
+        "failed": 0,
+        "total": 8,
+        "time_seconds": 0.0,
+        "tokens": 0,
+        "tool_calls": 0,
+        "errors": 0,
+        "output_chars": 22376
+      },
+      "expectations": [
+        {
+          "text": "The response separates stated project facts from repository facts that still need inspection and avoids claiming that the migration, tests, Unity Editor, or profiling were executed.",
+          "passed": true,
+          "evidence": "The context explicitly separates \"User-stated\", \"Observed\" absence of repository/editor/build/profile evidence, and working assumptions. The verification section says no tests, Unity compilation, build, migration, or profiling were run."
+        },
+        {
+          "text": "The target design decomposes the GameManager into feature-scoped responsibilities with explicit composition roots, dependency direction, and component/scene/session lifetimes rather than replacing it with another global manager.",
+          "passed": true,
+          "evidence": "The target diagram defines ApplicationRoot, SessionScope, SceneCompositionRoot, views/adapters, and inward dependency direction. The lifetime table covers application, session, scene, and encounter/actor ownership, and the response explicitly warns against six globally accessible replacement managers."
+        },
+        {
+          "text": "Shared ScriptableObject assets are treated as authored definitions, while mutable session/runtime state receives an explicit owner, reset policy, and persistence boundary.",
+          "passed": true,
+          "evidence": "The ScriptableObject section makes assets read-only authored definitions, creates plain SessionState in SessionScope from their values, discards it on return to menu, and maps it through a versioned save DTO. It also rejects dual writable sources of truth and specifies ownership/destruction for any necessary runtime clone."
+        },
+        {
+          "text": "The migration is incremental and behavior-preserving, beginning with characterization tests and naming safe slices, compatibility seams, rollback points, and verification before old paths are removed.",
+          "passed": true,
+          "evidence": "The seven-stage strangler plan begins with characterization and diagnostics, keeps GameManager behind LegacyGameRuntimeAdapter, moves one authoritative capability at a time, names rollback behavior for early slices, and removes the shell only after inventory and lifecycle gates pass."
+        },
+        {
+          "text": "The design introduces plain C# domain/application seams and acyclic assembly-definition boundaries only where they improve testability or team ownership, with Unity adapters at the edges.",
+          "passed": true,
+          "evidence": "It places session/combat rules and use cases in plain C# domain/application assemblies, keeps input/audio/save/scene/view concerns in Unity adapters, gives an acyclic assembly graph, avoids a broad Common assembly, and says to split assemblies only for real change/team or compilation boundaries."
+        },
+        {
+          "text": "Manual composition, a DI container, Service Locator, and ECS/DOTS are compared proportionally; container/ECS adoption is rejected unless concrete graph complexity or measured scale justifies the cost.",
+          "passed": true,
+          "evidence": "Manual composition is selected for its explicit/reversible graph; Service Locator is rejected as hidden global access. DI requires repeated non-trivial scoped graphs plus a target-compatible spike, and ECS/DOTS requires a measured homogeneous simulation bottleneck plus a representative prototype."
+        },
+        {
+          "text": "Additive-scene readiness, stale listener cleanup, initialization, teardown, return-to-menu, and repeated load/unload tests are explicitly addressed.",
+          "passed": true,
+          "evidence": "The scene coordinator waits for explicit destination readiness before retiring the prior scope and cleans partially loaded destinations on failure. The UI contract defines Initialize/Start/Stop/Dispose; the plan and gates cover stale listeners, repeated additive load/unload, disable/enable, cancellation, and boot -> game -> additive UI -> unload -> return to menu -> new game."
+        },
+        {
+          "text": "Performance and scalability claims remain hypotheses until a representative target build is profiled with a reproducible baseline.",
+          "passed": true,
+          "evidence": "The response explicitly rejects code-shape speed claims, requires a representative player/build and same-content target procedure before and after any performance claim, and makes measured target-device pressure a prerequisite for ECS/DOTS or other optimization."
+        }
+      ],
+      "notes": [],
+      "eval_name": "manager-architecture"
+    },
+    {
+      "eval_id": 2,
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.625,
+        "passed": 5,
+        "failed": 3,
+        "total": 8,
+        "time_seconds": 0.0,
+        "tokens": 0,
+        "tool_calls": 0,
+        "errors": 0,
+        "output_chars": 12618
+      },
+      "expectations": [
+        {
+          "text": "The response separates stated project facts from repository facts that still need inspection and avoids claiming that the migration, tests, Unity Editor, or profiling were executed.",
+          "passed": false,
+          "evidence": "The response uses the prompt facts and proposes an inventory, but never identifies which repository, package, scene, call-graph, test, build, or profiler facts remain unobserved. It makes no false execution claim, yet the required supplied-versus-unverified evidence separation is absent, so the compound expectation fails."
+        },
+        {
+          "text": "The target design decomposes the GameManager into feature-scoped responsibilities with explicit composition roots, dependency direction, and component/scene/session lifetimes rather than replacing it with another global manager.",
+          "passed": true,
+          "evidence": "The AppBootstrap/CompositionRoot diagram decomposes audio, save, scene transition, input, session, UI, and combat across application, session, scene, and temporary lifetimes. It keeps MonoBehaviours as edge adapters and explicitly rejects replacing the god object with global managers."
+        },
+        {
+          "text": "Shared ScriptableObject assets are treated as authored definitions, while mutable session/runtime state receives an explicit owner, reset policy, and persistence boundary.",
+          "passed": true,
+          "evidence": "It makes the two ScriptableObjects authored configuration only, copies their values into GameSession at new/load session, tests session reset/restoration, and serializes SaveData DTOs instead of asset or scene references."
+        },
+        {
+          "text": "The migration is incremental and behavior-preserving, beginning with characterization tests and naming safe slices, compatibility seams, rollback points, and verification before old paths are removed.",
+          "passed": true,
+          "evidence": "The plan starts by mapping callers and adding characterization tests, retains GameManager as a delegating facade, migrates vertical slices one consumer at a time, defines facade-based rollback, and removes old routes only after characterization and contract gates pass."
+        },
+        {
+          "text": "The design introduces plain C# domain/application seams and acyclic assembly-definition boundaries only where they improve testability or team ownership, with Unity adapters at the edges.",
+          "passed": true,
+          "evidence": "It keeps domain/application behavior in ordinary C#, MonoBehaviours as adapters, and asmdefs in an acyclic graph introduced around stable boundaries. It explicitly avoids one interface per class and an all-at-once asmdef split, while assigning feature-team ownership by vertical slice."
+        },
+        {
+          "text": "Manual composition, a DI container, Service Locator, and ECS/DOTS are compared proportionally; container/ECS adoption is rejected unless concrete graph complexity or measured scale justifies the cost.",
+          "passed": true,
+          "evidence": "Manual composition is selected while the graph remains understandable; DI is deferred until scopes/factories/decorators or wiring complexity justify it. Service Locator is rejected as hidden coupling, and ECS/DOTS is limited to measured high-entity bottlenecks."
+        },
+        {
+          "text": "Additive-scene readiness, stale listener cleanup, initialization, teardown, return-to-menu, and repeated load/unload tests are explicitly addressed.",
+          "passed": false,
+          "evidence": "The artifact covers stale listener cleanup, scene-scoped cancellation/disposal, transition phases, and repeated additive load/unload tests. It does not explicitly specify a return-to-menu/new-session scenario, and its Binding/Entering states do not define an observable destination-readiness contract or failure gate. Because every named lifecycle case is required, evidence is incomplete."
+        },
+        {
+          "text": "Performance and scalability claims remain hypotheses until a representative target build is profiled with a reproducible baseline.",
+          "passed": false,
+          "evidence": "The response appropriately avoids speedup claims and says optimization should follow target-device measurement, but it never defines a representative player-build capture or a reproducible before/after performance baseline as the acceptance evidence required by this expectation."
+        }
+      ],
+      "notes": [],
+      "eval_name": "manager-architecture"
+    },
+    {
+      "eval_id": 3,
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 8,
+        "failed": 0,
+        "total": 8,
+        "time_seconds": 0.0,
+        "tokens": 0,
+        "tool_calls": 0,
+        "errors": 0,
+        "output_chars": 23067
+      },
+      "expectations": [
+        {
+          "text": "The recommendation assigns explicit ownership across perception, squad memory/blackboard, decision, action execution, navigation, animation/presentation, and feedback rather than presenting only an algorithm list.",
+          "passed": true,
+          "evidence": "The architecture pipeline and lifetime table assign perception snapshots, typed squad memory/cover leases, squad and agent decision ownership, shallow-tree/action execution, a server navigation/motor adapter, client presentation, and structured explanation/trace ownership across AiSessionRoot, SquadRuntime, AgentBrain, and Unity adapters."
+        },
+        {
+          "text": "One proportional approach or hybrid is selected and direct rules, FSM/HFSM, behavior trees, Utility AI, GOAP, ML-Agents, and Sentis are compared or ruled out using the scenario's actual authoring, emergence, determinism, cost, and observability forces.",
+          "passed": true,
+          "evidence": "The Decision selects direct guards + squad coordination + deterministic Utility AI + shallow visual trees + finite-state action executors. The comparison table addresses every named technique and ties acceptance/rejection to visual authoring, enumerable tactics versus emergence, replay determinism, 0.7 ms cost risk, and explanation quality."
+        },
+        {
+          "text": "Server authority is explicit for sensing, shared squad state, decisions, reservations, and gameplay outcomes, while client replication/presentation is bounded and cannot silently become authoritative.",
+          "passed": true,
+          "evidence": "The network section assigns facts, squad memory, random streams, intent, cover claims, paths, action state, movement validity, and gameplay effects to the server. Clients receive a compact presentation contract, and animation events/clients are explicitly forbidden from authorizing damage or decisions."
+        },
+        {
+          "text": "Designer authoring and runtime observability include inspectable facts, scores/state/plan, selected intent, action status, and concrete failure or interruption reasons.",
+          "passed": true,
+          "evidence": "The authoring section specifies validated immutable tactic, curve, cadence, threshold, and visual-tree assets. The live inspector enumerates perceived and squad facts, rejected conditions, every score component and winner, intent/tree path, action progress, navigation state, abort/failure reason, fallback level, and replay hashes."
+        },
+        {
+          "text": "Deterministic ordering, owned random seeds/time, save/load schema, replay inputs/version metadata, and the limits of cross-platform physics determinism are addressed.",
+          "passed": true,
+          "evidence": "The design uses integer AiTick, versioned per-squad/agent random streams, stable-ID iteration and tie-breaking, quantized comparisons, config/schema hashes, recorded authoritative inputs, two replay modes, and versioned save DTOs. It explicitly refuses to promise bitwise cross-platform physics/navigation replay."
+        },
+        {
+          "text": "The 0.7 ms frame budget is treated as an unverified acceptance target; sensing, thinking, planning/pathing, and presentation receive bounded or staggered scheduling plus a representative console profiling plan.",
+          "passed": true,
+          "evidence": "The artifact labels all cadences and sub-budgets as starting hypotheses, provides a full 0.70 ms stage partition and deterministic staggered scheduler with starvation/latency limits, bounds path requests and presentation bookkeeping, and defines a 50-agent representative console gate with P50/P95/P99/max and allocation/query metrics."
+        },
+        {
+          "text": "Actions and navigation define preconditions, success/failure, cancellation, stuck or invalid-path recovery, cleanup on despawn/pooling, and a safe fallback when a plan or learned inference fails.",
+          "passed": true,
+          "evidence": "Actions expose CanStart, Start, Tick, Cancel, Succeeded, Failed, and resume tokens; impossible actions are filtered before scoring. Navigation owns validity, invalidation, stuck detection, and bounded repath/alternate-cover/regroup recovery. Despawn/pooling cleanup cancels work, releases leases, clears state, and stale requests are rejected; missing graphs/actions fall back to seek-cover or hold/regroup."
+        },
+        {
+          "text": "The test strategy covers plain C# decision-policy cases plus minimum PlayMode, navigation, network authority, save/replay, load/latency, and target-build performance evidence without claiming those checks were run.",
+          "passed": true,
+          "evidence": "The verification plan explicitly separates plain C#, EditMode/PlayMode, network, and target-device gates. It covers utility/policy, reservations, action cleanup, navigation failure, save/load migration and resume, deterministic replay, latency/loss/reordering, server authority, and representative-console performance, while stating none of the compilation, network, console, or profile checks were available or run."
+        }
+      ],
+      "notes": [],
+      "eval_name": "networked-squad-ai"
+    },
+    {
+      "eval_id": 3,
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.75,
+        "passed": 6,
+        "failed": 2,
+        "total": 8,
+        "time_seconds": 0.0,
+        "tokens": 0,
+        "tool_calls": 0,
+        "errors": 0,
+        "output_chars": 15575
+      },
+      "expectations": [
+        {
+          "text": "The recommendation assigns explicit ownership across perception, squad memory/blackboard, decision, action execution, navigation, animation/presentation, and feedback rather than presenting only an algorithm list.",
+          "passed": true,
+          "evidence": "The staged pipeline assigns server perception facts, squad-owned blackboard/claims, HFSM and utility choice, bounded behavior-tree actions, a server navigation service, client animation/presentation, and decision traces/live inspection."
+        },
+        {
+          "text": "One proportional approach or hybrid is selected and direct rules, FSM/HFSM, behavior trees, Utility AI, GOAP, ML-Agents, and Sentis are compared or ruled out using the scenario's actual authoring, emergence, determinism, cost, and observability forces.",
+          "passed": true,
+          "evidence": "It selects direct guards + HFSM + Utility AI + bounded behavior trees + a squad blackboard. The comparison table covers all named alternatives with explicit visual-authoring, plan emergence, deterministic replay, runtime cost, and explanation trade-offs."
+        },
+        {
+          "text": "Server authority is explicit for sensing, shared squad state, decisions, reservations, and gameplay outcomes, while client replication/presentation is bounded and cannot silently become authoritative.",
+          "passed": true,
+          "evidence": "It assigns perception, blackboards, cover claims, decisions, navigation intent, weapon authorization, and outcomes to the server; clients receive only compact presentation state and cannot authorize shots, damage, reservations, or tactical choices."
+        },
+        {
+          "text": "Designer authoring and runtime observability include inspectable facts, scores/state/plan, selected intent, action status, and concrete failure or interruption reasons.",
+          "passed": true,
+          "evidence": "Designers author score curves, thresholds, HFSM transitions, and bounded action trees. The trace includes mode, inputs, eligible/rejected actions, scores, winner, tie-break, and interruption reason; the live inspector adds top candidates and active tree path, while nodes return typed NoPath/ReservationLost/TargetInvalid/TimedOut failures."
+        },
+        {
+          "text": "Deterministic ordering, owned random seeds/time, save/load schema, replay inputs/version metadata, and the limits of cross-platform physics determinism are addressed.",
+          "passed": true,
+          "evidence": "The response uses fixed ticks, match/squad/agent RNG streams, stable ordering/ties, versioned engine-independent save DTOs, recorded player/exogenous inputs and hashes, and explicitly limits exact replay when physics/pathfinding differ across platforms."
+        },
+        {
+          "text": "The 0.7 ms frame budget is treated as an unverified acceptance target; sensing, thinking, planning/pathing, and presentation receive bounded or staggered scheduling plus a representative console profiling plan.",
+          "passed": true,
+          "evidence": "It calls the 0.7 ms target unproven, defines deterministic staggered sensing/decision cadences, per-stage provisional caps including navigation and network/animation packaging, overload behavior, and a reproducible 50-agent target-console capture with percentiles, allocations, and queue/query counts."
+        },
+        {
+          "text": "Actions and navigation define preconditions, success/failure, cancellation, stuck or invalid-path recovery, cleanup on despawn/pooling, and a safe fallback when a plan or learned inference fails.",
+          "passed": false,
+          "evidence": "The artifact provides hard guards, Running/Success/typed failure states, bounded no-path recovery, and a deterministic fallback. Cancellation appears only as a test topic, and the runtime contract never defines teardown/reset for agent despawn or pooled reuse; pooling is not addressed at all. The compound lifecycle requirement is therefore not demonstrated."
+        },
+        {
+          "text": "The test strategy covers plain C# decision-policy cases plus minimum PlayMode, navigation, network authority, save/replay, load/latency, and target-build performance evidence without claiming those checks were run.",
+          "passed": false,
+          "evidence": "It proposes strong plain-C#, navigation, headless/network latency, save/replay, and target-console tests, but never identifies a Unity PlayMode test layer or its lifecycle/scene boundary, and it does not explicitly distinguish proposed tests from executed checks. With no transcript available, the full compound expectation lacks sufficient evidence."
+        }
+      ],
+      "notes": [],
+      "eval_name": "networked-squad-ai"
+    }
+  ],
+  "run_summary": {
+    "with_skill": {
+      "pass_rate": {
+        "mean": 1.0,
+        "stddev": 0.0,
+        "min": 1.0,
+        "max": 1.0
+      },
+      "time_seconds": {
+        "mean": 0.0,
+        "stddev": 0.0,
+        "min": 0.0,
+        "max": 0.0
+      },
+      "tokens": {
+        "mean": 0,
+        "stddev": 0,
+        "min": 0,
+        "max": 0
+      },
+      "output_chars": {
+        "mean": 19617.0,
+        "stddev": 5388.2401,
+        "min": 13408,
+        "max": 23067
+      }
+    },
+    "without_skill": {
+      "pass_rate": {
+        "mean": 0.744,
+        "stddev": 0.1162,
+        "min": 0.625,
+        "max": 0.8571
+      },
+      "time_seconds": {
+        "mean": 0.0,
+        "stddev": 0.0,
+        "min": 0.0,
+        "max": 0.0
+      },
+      "tokens": {
+        "mean": 0,
+        "stddev": 0,
+        "min": 0,
+        "max": 0
+      },
+      "output_chars": {
+        "mean": 12522.3333,
+        "stddev": 3101.6067,
+        "min": 9374,
+        "max": 15575
+      }
+    },
+    "delta": {
+      "pass_rate": "+0.26",
+      "time_seconds": "+0.0",
+      "tokens": "+0",
+      "output_chars": "+7095"
+    }
+  },
+  "notes": [
+    "Across all 23 assertions, 17 pass in both configurations and therefore do not discriminate in this single-run sample: coupling-lifecycle assertions 2-7, manager-architecture assertions 2-6, and networked-squad-ai assertions 1-6.",
+    "The 17 shared passes cover the bounded health-event design and lifecycle cleanup; GameManager decomposition, ScriptableObject/runtime-state separation, incremental migration, plain-C#/asmdef seams, and proportional DI/ECS decisions; and the squad-AI pipeline, technique selection, server authority, observability, determinism, and budget scheduling.",
+    "Six assertions uniquely separate the skill: coupling-lifecycle #1; manager-architecture #1, #7, and #8; and networked-squad-ai #7 and #8. Every one passes with the skill and fails without it; no assertion shows the reverse pattern.",
+    "Evidence classification is the only separator recurring in more than one eval: the no-skill coupling and manager outputs fail to separate supplied facts from uninspected repository/runtime facts, while the with-skill outputs label them explicitly. The no-skill AI verification assertion also lacks an explicit proposed-versus-executed distinction.",
+    "Complex lifecycle acceptance is another cross-eval separator: the no-skill manager output omits observable destination readiness and a return-to-menu/new-session flow, while the no-skill AI output leaves cancellation/despawn/pooled-reuse teardown and a PlayMode layer incomplete; the corresponding with-skill outputs pass.",
+    "Performance treatment is mostly shared rather than globally discriminating: both configurations pass the coupling and AI performance assertions; only manager-architecture separates, where the no-skill output lacks a representative player-build capture and reproducible before/after baseline.",
+    "In this sample, no-skill pass counts are 6/7 for coupling-lifecycle, 5/8 for manager-architecture, and 6/8 for networked-squad-ai; with-skill is 7/7, 8/8, and 8/8. The largest absolute separation is manager-architecture (+3 assertions), followed by AI (+2) and coupling (+1).",
+    "With-skill outputs are longer in every eval: 13,408 vs 9,374 chars (+4,034) for coupling, 22,376 vs 12,618 (+9,758) for manager, and 23,067 vs 15,575 (+7,492) for AI. The mean delta is +7,095 chars (+56.7%), alongside +1, +3, and +2 passed assertions respectively; this association does not establish causal efficiency.",
+    "Each eval has only one run per configuration, so these results do not support claims about variance, consistency, or flakiness; the aggregate standard deviation is across different eval prompts, not repeat executions.",
+    "Timing and token metrics were unavailable from the host. Their zero placeholders are not measurements, so this benchmark cannot support speed or token-cost comparisons."
+  ]
+}

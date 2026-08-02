@@ -1,0 +1,89 @@
+{
+  "expectations": [
+    {
+      "text": "The response separates stated project facts from repository facts that still need inspection and avoids claiming that the migration, tests, Unity Editor, or profiling were executed.",
+      "passed": true,
+      "evidence": "The context explicitly separates \"User-stated\", \"Observed\" absence of repository/editor/build/profile evidence, and working assumptions. The verification section says no tests, Unity compilation, build, migration, or profiling were run."
+    },
+    {
+      "text": "The target design decomposes the GameManager into feature-scoped responsibilities with explicit composition roots, dependency direction, and component/scene/session lifetimes rather than replacing it with another global manager.",
+      "passed": true,
+      "evidence": "The target diagram defines ApplicationRoot, SessionScope, SceneCompositionRoot, views/adapters, and inward dependency direction. The lifetime table covers application, session, scene, and encounter/actor ownership, and the response explicitly warns against six globally accessible replacement managers."
+    },
+    {
+      "text": "Shared ScriptableObject assets are treated as authored definitions, while mutable session/runtime state receives an explicit owner, reset policy, and persistence boundary.",
+      "passed": true,
+      "evidence": "The ScriptableObject section makes assets read-only authored definitions, creates plain SessionState in SessionScope from their values, discards it on return to menu, and maps it through a versioned save DTO. It also rejects dual writable sources of truth and specifies ownership/destruction for any necessary runtime clone."
+    },
+    {
+      "text": "The migration is incremental and behavior-preserving, beginning with characterization tests and naming safe slices, compatibility seams, rollback points, and verification before old paths are removed.",
+      "passed": true,
+      "evidence": "The seven-stage strangler plan begins with characterization and diagnostics, keeps GameManager behind LegacyGameRuntimeAdapter, moves one authoritative capability at a time, names rollback behavior for early slices, and removes the shell only after inventory and lifecycle gates pass."
+    },
+    {
+      "text": "The design introduces plain C# domain/application seams and acyclic assembly-definition boundaries only where they improve testability or team ownership, with Unity adapters at the edges.",
+      "passed": true,
+      "evidence": "It places session/combat rules and use cases in plain C# domain/application assemblies, keeps input/audio/save/scene/view concerns in Unity adapters, gives an acyclic assembly graph, avoids a broad Common assembly, and says to split assemblies only for real change/team or compilation boundaries."
+    },
+    {
+      "text": "Manual composition, a DI container, Service Locator, and ECS/DOTS are compared proportionally; container/ECS adoption is rejected unless concrete graph complexity or measured scale justifies the cost.",
+      "passed": true,
+      "evidence": "Manual composition is selected for its explicit/reversible graph; Service Locator is rejected as hidden global access. DI requires repeated non-trivial scoped graphs plus a target-compatible spike, and ECS/DOTS requires a measured homogeneous simulation bottleneck plus a representative prototype."
+    },
+    {
+      "text": "Additive-scene readiness, stale listener cleanup, initialization, teardown, return-to-menu, and repeated load/unload tests are explicitly addressed.",
+      "passed": true,
+      "evidence": "The scene coordinator waits for explicit destination readiness before retiring the prior scope and cleans partially loaded destinations on failure. The UI contract defines Initialize/Start/Stop/Dispose; the plan and gates cover stale listeners, repeated additive load/unload, disable/enable, cancellation, and boot -> game -> additive UI -> unload -> return to menu -> new game."
+    },
+    {
+      "text": "Performance and scalability claims remain hypotheses until a representative target build is profiled with a reproducible baseline.",
+      "passed": true,
+      "evidence": "The response explicitly rejects code-shape speed claims, requires a representative player/build and same-content target procedure before and after any performance claim, and makes measured target-device pressure a prerequisite for ECS/DOTS or other optimization."
+    }
+  ],
+  "summary": {
+    "passed": 8,
+    "failed": 0,
+    "total": 8,
+    "pass_rate": 1.0
+  },
+  "execution_metrics": {
+    "output_chars": 22376,
+    "transcript_chars": 0
+  },
+  "claims": [
+    {
+      "claim": "The recommended target is a manual-composition strangler migration with GameManager retained temporarily as a compatibility shell.",
+      "type": "factual",
+      "verified": true,
+      "evidence": "The Decision, target architecture, and staged migration all consistently specify that design."
+    },
+    {
+      "claim": "The stale UI listener symptom is caused by missed unsubscription rather than duplicate roots, late async completion, or a static publisher.",
+      "type": "factual",
+      "verified": false,
+      "evidence": "The artifact explicitly presents all four as unresolved candidates and requires characterization; no repository or runtime evidence was available."
+    },
+    {
+      "claim": "The final artifact does not present the migration or its verification gates as executed.",
+      "type": "process",
+      "verified": true,
+      "evidence": "It explicitly states that tests, Unity compilation, builds, migration, and profiling were not run. No transcript exists to independently verify executor behavior beyond the artifact."
+    },
+    {
+      "claim": "The proposed assembly and lifetime boundaries are incremental rather than an assembly-first rewrite.",
+      "type": "quality",
+      "verified": true,
+      "evidence": "The plan introduces assemblies only around extracted code, retains legacy-side adapters, and supplies capability-level exit and rollback gates."
+    }
+  ],
+  "user_notes_summary": {
+    "uncertainties": [],
+    "needs_review": [],
+    "workarounds": []
+  },
+  "eval_feedback": {
+    "suggestions": [],
+    "overall": "The assertion set exercises the material architectural, lifecycle, migration, testability, proportionality, and evidence-quality decisions; no significant untested outcome was apparent."
+  }
+}
