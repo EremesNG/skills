@@ -1,5 +1,12 @@
 # Validation report
 
+## Skill versions 1.0.1 — 2026-09-02
+
+All five skills now declare `metadata.version: "1.0.1"`. YAML parsing confirms
+each value is a string, and the instruction bodies are unchanged. The README
+example and distribution checksums are synchronized. No behavioral tests
+were rerun for this metadata-only version change.
+
 ## Standard skill metadata — 2026-09-02
 
 All five published skills now declare `license: MIT` and string-valued

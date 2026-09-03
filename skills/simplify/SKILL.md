@@ -4,7 +4,7 @@ description: Simplify and refine recently changed code without changing behavior
 license: MIT
 metadata:
   author: EremesNG
-  version: "1.0.0"
+  version: "1.0.1"
   repository: https://github.com/EremesNG/skills
 ---
 

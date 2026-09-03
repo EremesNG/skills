@@ -5,7 +5,7 @@ license: MIT
 compatibility: Requires access to repository files. Python 3.9+ is optional for the bundled read-only inventory, validation, and context-budget scripts. No network access is required.
 metadata:
   author: EremesNG
-  version: "1.0.0"
+  version: "1.0.1"
   repository: https://github.com/EremesNG/skills
 ---
 

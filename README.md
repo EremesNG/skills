@@ -55,13 +55,12 @@ description: Simplify recently changed code while preserving behavior. Use for f
 license: MIT
 metadata:
   author: EremesNG
-  version: "1.0.0"
+  version: "1.0.1"
   repository: https://github.com/EremesNG/skills
 ---
 ```
 
-Each skill has its own version. Existing versions are preserved; skills without
-a declared version start at `"1.0.0"` with this metadata update. This identifies
+Each skill has its own version. All five current skills declare `"1.0.1"`. This identifies
 the skill package, not a Git tag or a supported tool version. Keep versions
 quoted so YAML reads them as strings.
 

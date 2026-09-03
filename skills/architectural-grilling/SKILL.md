@@ -4,7 +4,7 @@ description: Relentlessly interview and challenge the user about a plan, softwar
 license: MIT
 metadata:
   author: EremesNG
-  version: "1.0.0"
+  version: "1.0.1"
   repository: https://github.com/EremesNG/skills
 ---
 
