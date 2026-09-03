@@ -17,9 +17,12 @@ class ArchitecturalGrillingPackageTests(unittest.TestCase):
         self.assertTrue(text.startswith("---\n"))
         _, frontmatter, body = text.split("---", 2)
 
-        fields = re.findall(r"(?m)^([a-z][a-z0-9_-]*):\s*(.+)$", frontmatter)
-        self.assertEqual([name for name, _ in fields], ["name", "description"])
+        fields = re.findall(r"(?m)^([a-z][a-z0-9_-]*):[ \t]*(.*)$", frontmatter)
         values = dict(fields)
+        self.assertTrue({"name", "description"}.issubset(values))
+        self.assertTrue(set(values).issubset({
+            "name", "description", "license", "compatibility", "metadata", "allowed-tools",
+        }))
         self.assertEqual(values["name"], SKILL_ROOT.name)
         self.assertRegex(values["name"], r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
         self.assertLessEqual(len(values["name"]), 64)
@@ -38,7 +41,7 @@ class ArchitecturalGrillingPackageTests(unittest.TestCase):
     def test_operating_invariants_are_explicit(self) -> None:
         text = (SKILL_ROOT / "SKILL.md").read_text(encoding="utf-8").lower()
         required_phrases = (
-            "exactly one material question per turn",
+            "exactly one outstanding material question at a time",
             "clear recommended answer with every question",
             "investigate discoverable facts before asking",
             "living decision map",
@@ -57,7 +60,11 @@ class ArchitecturalGrillingPackageTests(unittest.TestCase):
         links = re.findall(r"\[[^\]]+\]\((references/[^)]+)\)", skill_text)
         self.assertEqual(
             set(links),
-            {"references/decision-lenses.md", "references/blueprint-format.md"},
+            {
+                "references/decision-lenses.md",
+                "references/blueprint-format.md",
+                "references/architecture-and-stack.md",
+            },
         )
         for link in links:
             self.assertTrue((SKILL_ROOT / link).is_file())

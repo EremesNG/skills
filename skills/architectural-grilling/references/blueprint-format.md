@@ -87,6 +87,19 @@ For each serious alternative, record:
 
 Always include the simplest credible baseline.
 
+### Recommended tech stack
+
+When technology selection is in scope, give a coherent recommendation, not a menu. Map the required capabilities to named technologies and show how requests, data, and deployment fit together. Keep established choices when no change is justified; omit roles the product does not need.
+
+| Capability | Technology and responsibility | Present requirement or team fit | Accepted cost or drawback | Evidence or validation condition |
+| --- | --- | --- | --- | --- |
+
+Include the actual operating owner and enough cost context to judge affordability. Cite material current product facts; separate estimates and conditional provider/version choices from verified facts. Reuse the alternatives above rather than duplicating a decision record for every library.
+
+### Build now, prepare cheaply, defer
+
+Record the chosen delivery horizon, current workload, credible commitments, and the evidence behind growth assumptions. Distinguish the architecture being delivered from inexpensive preparation and deferred complexity. For material deferrals, include the safe baseline, owner, observable trigger or dated evidence check, intended response, migration lead time, and accepted risk. Do not turn distant non-goals into an implementation backlog or defer applicable safeguards.
+
 ## 7. Quality, security, and operations
 
 Record only relevant measurable commitments:

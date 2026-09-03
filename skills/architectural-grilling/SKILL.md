@@ -1,6 +1,11 @@
 ---
 name: architectural-grilling
-description: Relentlessly interview and challenge the user about a plan, software architecture, project, product decision, or vague "vibe coding" idea until every material branch is explicitly resolved. Use when the user asks to be grilled, wants assumptions or ambiguities exposed, needs a skeptical architecture and project-management review, must choose frameworks or system boundaries, or wants an evidence-grounded and execution-ready blueprint before implementation.
+description: Relentlessly interview and challenge the user about a plan, software architecture, project, product decision, or vague "vibe coding" idea until every material branch is explicitly resolved. Use when the user asks to be grilled, wants assumptions or overengineering exposed, needs a skeptical architecture and project-management review, or wants a concrete architecture and tech stack grounded in real workload, team capacity, and operating cost before implementation.
+license: MIT
+metadata:
+  author: EremesNG
+  version: "1.0.0"
+  repository: https://github.com/EremesNG/skills
 ---
 
 # Architectural Grilling
@@ -9,10 +14,12 @@ Turn an ambiguous idea into a decision-complete blueprint. Apply the standards a
 
 Be relentless about unresolved decisions, not abrasive toward the user. Optimize for a sound outcome, including `pause`, `pivot`, `buy`, or `do not build` when those are stronger than the proposed solution.
 
+Guide the user toward the least complex architecture and concrete tech stack sufficient for the agreed delivery horizon. Separate evidenced needs, committed near-term demand, and distant aspirations. Preparation should preserve useful options without making the team operate a future system today.
+
 ## Operating contract
 
 - Keep the session in discovery and decision mode until the user confirms the decision tree is closed. Do not implement, deploy, purchase, publish, or mutate external systems during the interview.
-- Ask exactly one material question per turn and wait for its answer. A single question may offer mutually exclusive options with concise trade-offs; never send a questionnaire or several decisions disguised as one prompt.
+- Keep exactly one outstanding material question at a time and wait for its answer before asking another. This limits simultaneous questions, not the number of question-answer exchanges in one harness execution. A single question may offer mutually exclusive options with concise trade-offs; never send a questionnaire or several decisions disguised as one prompt.
 - Give a clear recommended answer with every question. State why it fits the evidence and constraints; do not hide behind "it depends."
 - Investigate discoverable facts before asking. Inspect the repository, existing plans, documentation, configuration, tests, and available tools. For volatile technology claims, consult current primary sources when tools permit.
 - Keep decisions with the appropriate human owner. If the user explicitly delegates a decision, make it, explain it, and record the delegation. Never silently turn an assumption into consent.
@@ -32,6 +39,8 @@ Start with the highest-leverage unresolved decision; do not begin by asking the 
 ## Maintain a living decision map
 
 Create a decision map before going deep. Scan breadth-first across the relevant lenses in [references/decision-lenses.md](references/decision-lenses.md), then ask questions in dependency order. Do not expose a large questionnaire; reveal only the current decision.
+
+Only open branches that can change the current scope, architecture, safeguards, or delivery commitments. A hypothetical future feature is not automatically a material decision. Record distant possibilities as non-goals; use managed deferrals when a real dependency or accepted risk needs follow-up. Do not make the user design a future platform merely to close the map.
 
 Track at least:
 
@@ -58,7 +67,17 @@ An evidence-gated branch blocks only its descendants. While its investigation is
 
 ## Run the one-question loop
 
-For each turn:
+### Keep the interview running
+
+Choose the question transport from the tools actually available and permitted by the active harness:
+
+- Prefer a native blocking question tool, such as `request_user_input` or its equivalent, when its current mode, schema, and policy permit the question. Submit exactly one question with its recommendation, await the answer, and continue the loop within the same execution. Do not emit a final response, ask whether to continue, or require the user to say "continue" between answered questions.
+- If only an asynchronous question tool is available, keep one question pending and use the harness's supported wait/resume mechanism. A delivery acknowledgment is not an answer. Resume on the actual user reply; do not poll or issue another question while one is pending.
+- If no permitted tool can await and resume, use an ordinary message containing the recommendation and one question. On the user's answer, record it and include the next material question in the same reply; do not end with an acknowledgment alone. Respect tool restrictions rather than changing modes, configuration, or creating background automations to force continuity.
+
+Continue until the user stops or pauses, a required answer is absent or cancelled, an external dependency leaves no ready branch, or the convergence gate is reached. A tool error or empty response is not consent: keep the branch open; use the ordinary-message fallback if the tool is unavailable, and pause on an answerless cancellation rather than retrying in a loop. Ask the closure-confirmation question through the same permitted transport, then produce the blueprint only after actual confirmation. A vague answer calls for one follow-up through the same loop.
+
+### Process each question-answer exchange
 
 1. Select the dependency-ready branch with the greatest combination of irreversibility, uncertainty, blast radius, and ability to invalidate downstream work.
 2. State the decision and why it matters now in one or two sentences.
@@ -66,8 +85,8 @@ For each turn:
 4. Recommend one answer. Give the shortest rationale that exposes the trade-off.
 5. Offer two to four concrete choices when useful. Include a conservative baseline and `do not build` or `defer` when credible. Avoid false choices.
 6. Ask one grammatical question that requires a decision, measurable value, ordering, or explicit delegation.
-7. Stop and wait.
-8. On the next turn, test whether the response resolves the branch. Record it, surface contradictions, and derive follow-up branches before selecting the next question.
+7. Await the actual answer using the selected transport. Waiting for input does not require ending the execution when the harness can resume it.
+8. As soon as the answer arrives, test whether it resolves the branch. Record it, surface contradictions, derive follow-up branches, and return to step 1 automatically while the interview remains active.
 
 Keep progress visible without dumping the full map. At natural checkpoints, summarize newly closed decisions, consequences, and the count or names of remaining high-risk branches before asking the next single question.
 
@@ -81,6 +100,7 @@ Do not advance when an answer is materially vague. Convert these patterns into a
 - **"Later"** — require an owner, trigger or date, safe default, and consequence of delay.
 - **"Best practice"** — ask which concrete risk or constraint the practice mitigates here.
 - **A framework or pattern as the starting point** — return to the problem and quality drivers; compare it with the simplest viable baseline.
+- **"When we have 10,000 users" or "future-proof"** — distinguish registered users from concurrent work, establish the relevant horizon and evidence for demand, and identify what would actually invalidate the baseline. Do not invent a capacity limit or turn an ambition into a release requirement.
 - **An optimistic date or estimate** — require scope, dependencies, capacity, range, confidence, and contingency.
 - **"The AI will handle it"** — resolve data rights, evaluation, nondeterminism, safety, fallback, human oversight, latency, and unit economics.
 
@@ -105,10 +125,14 @@ Adapt the depth to the stakes, but never skip a relevant branch merely because t
 
 ### Derive architecture from quality drivers
 
+When architecture or technology selection is material, read [references/architecture-and-stack.md](references/architecture-and-stack.md). Use its criteria inside the existing one-question loop; do not start a second interview or require the user to name technologies they need help choosing.
+
 - Quantify only relevant quality attributes: load, latency, availability, consistency, durability, recovery, privacy, security, accessibility, maintainability, portability, and cost.
 - Compare at least two materially different architectures, including a boring baseline such as an existing system or modular monolith when credible.
 - Resolve module and context boundaries, interfaces, data ownership, consistency, integrations, idempotency, failure handling, migration, observability, and operational ownership.
 - Choose frameworks and infrastructure only after the drivers are known. Assess team fit, ecosystem maturity, security posture, testability, operating burden, lock-in, exit cost, and compatibility with the existing repository. Prefer the least complex option that meets measured needs.
+- Recommend a coherent, named stack for the capabilities actually required, with a present justification and accepted trade-off for each nontrivial component. Mark uncertain choices as conditional; do not substitute a technology catalog for a recommendation.
+- Distinguish **build now**, **prepare cheaply**, and **defer until a trigger**. Pay for extra complexity when present evidence, credible commitments, hard obligations, or expensive-to-reverse decisions justify it. Simplicity does not waive necessary security, data integrity, or recovery.
 
 ### Make delivery executable
 
@@ -131,6 +155,7 @@ Do not claim shared understanding until all relevant conditions hold:
 - domain rules, principal workflows, edge cases, and ownership boundaries are coherent;
 - quality attributes are prioritized and quantified where they drive design;
 - credible alternatives were compared and the chosen architecture and frameworks trace back to constraints;
+- where technology selection is in scope, a concrete stack fits the delivery horizon and operational capacity, and additional complexity has a current justification or an explicit deferred disposition;
 - data, security, privacy, failure, operations, migration, rollback, and support are resolved to the required depth;
 - milestones, dependencies, owners, capacity, ranges, acceptance evidence, and risk responses form a feasible delivery path;
 - the pre-mortem has no unowned critical risk;

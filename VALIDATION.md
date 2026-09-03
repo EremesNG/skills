@@ -1,5 +1,145 @@
 # Validation report
 
+## Standard skill metadata — 2026-09-02
+
+All five published skills now declare `license: MIT` and string-valued
+`metadata.author`, `metadata.version`, and `metadata.repository`. The author and
+license match the repository's existing license; previously unversioned skills
+start at `"1.0.0"`, preserving the router's existing version. Skill names,
+descriptions, Markdown instructions, and existing compatibility requirements are
+preserved. The README documents this convention for future contributions.
+
+- YAML validation against the field names, types, name rules, and length limits
+  in the [Agent Skills specification](https://agentskills.io/specification):
+  **5/5 PASS**. Custom metadata is nested and every key/value is a string.
+- Existing repository suite: **58/58 PASS**. Four package checks now allow the
+  standard optional fields while retaining required name/description checks.
+- Bundled `skill-creator` validator: **4/5 PASS**. Its local allowlist omits the
+  standard `compatibility` field and rejects the router's pre-existing field.
+  The full-schema check above accepts it; the installed validator was not edited.
+- Focused simplification review retained the existing checks and dependencies;
+  no runtime scripts or skill workflows changed.
+- `git diff --check`: **PASS**. The distribution checksum manifest is refreshed
+  for the current files, including the pre-existing architecture/stack reference.
+
+These are structural checks for a Direct metadata update, not a new behavioral
+benchmark. Earlier validation checkpoints below remain historical evidence.
+
+## Architectural Grilling: continuous interview follow-up — 2026-09-02
+
+The reported interruption is consistent with the earlier instructions "one
+material question per turn", "Stop and wait", and "On the next turn". This
+follow-up replaces that execution boundary with one outstanding question at a
+time and explicitly resumes the decision loop after each actual answer.
+
+The entry point now prefers a permitted blocking native question tool, supports
+asynchronous delivery with a host wait/resume mechanism, and falls back to normal
+messages when continuous execution is unavailable. In normal chat, the reply to
+an answer includes the next question instead of only an acknowledgment. Stop,
+cancellation, unavailable tools, unanswered input, and final blueprint
+confirmation retain explicit boundaries. No host settings or modes were changed.
+
+- Focused package tests: **4/4 PASS**.
+- `skill-creator` structural validation: **PASS**.
+- `git diff --check`: **PASS**.
+- Three scripted interaction fixtures added before the instructions changed:
+  blocking continuation, ordinary-chat continuation, and asynchronous
+  pending/answer/cancellation. There are now **13 evaluation scenarios**.
+- The existing single-question invariant and one older evaluation's "turn"
+  wording were aligned with question-answer exchanges. The architecture and
+  stack behavior added in the checkpoint below is retained.
+
+These checks do not constitute a live end-to-end harness test. The fixture
+definitions support isolated evaluation without sending test questions to the
+real user. The earlier 58-test and 29-assertion results below belong to the prior
+architecture/stack checkpoint and are not claimed as reruns of this follow-up.
+
+A fresh read-only Oracle returned **PASS** for this instruction update with no
+actionable blockers. Its paper walkthrough supported all **13 expected
+assertions** across fixtures 11–13 (5/5, 4/4, 4/4). Those are protocol-review
+results, not runtime passes: actual host suspension/resumption and model
+adherence were not exercised. The review also confirmed consistent wording
+across the entry point, reference, README, scenario 2, and structural invariant.
+
+## Architectural Grilling: grounded architecture and stack — 2026-09-02
+
+This Direct update preserves the existing one-question interview, recommended
+answers, decision states, confirmation gate, and implementation boundary. It adds
+a conditional architecture/stack reference and extends the blueprint with named
+technology choices, present justification, accepted operating costs, inexpensive
+preparation, and explicit evolution criteria. The entry point remains 157 lines.
+
+Primary-source review covered `architecture-pattern-selector`,
+`architecture-designer`, and `tech-stack-recommender`; attribution is in the new
+reference. Numeric cutoffs, fixed scores, frozen vendor tables, and external skill
+installation requirements were not adopted.
+
+### Automated evidence
+
+- Existing architectural-grilling package tests: **4/4 passed** before and after
+  the update. The reference-link expectation now includes the new guide.
+- Repository suite: **58/58 passed** after the update.
+- Installed `skill-creator` structural validator: **PASS** (`Skill is valid!`).
+- Local Markdown reference audit: **5/5 links resolve** across the entry point
+  and its references.
+- Evaluation JSON: **10 unique scenarios**, retaining the original five and
+  adding five for speculative scale, a concrete stack blueprint, an established
+  operational platform, committed demand/irreversible choices, and a conscious
+  learning preference.
+- `git diff --check`: **PASS**.
+
+The five new prompts and behavioral assertions were written before the skill
+instructions changed. Package checks validate structure and declared invariants;
+they do not prove interview quality. No before/after behavioral benchmark or
+red/green model-performance result is claimed.
+
+### Commands
+
+```powershell
+python -m unittest tests.test_architectural_grilling -v
+python -m unittest discover -s tests -v
+$env:PYTHONUTF8='1'; python 'C:\Users\EremesNG\.codex\skills\.system\skill-creator\scripts\quick_validate.py' skills\architectural-grilling
+git diff --check
+```
+
+The focused simplification review kept the added selection procedure in one
+conditional reference, reused the existing interview and decision ledger, and
+introduced no tool dependency or separate architecture workflow.
+
+### Independent forward evaluation and final review
+
+Two isolated executors received the skill and raw prompts only, without expected
+outputs or assertions. One produced the next interview turn for scenarios 6, 8,
+9, and 10; the other produced the confirmed-checkpoint blueprint for scenario 7.
+They used only the supplied project facts, with no implementation or new product
+research. A fresh read-only Oracle then reviewed the completed package and graded
+the actual outputs against the frozen assertions.
+
+| Scenario | Result |
+| --- | --- |
+| 6: Speculative 10,000-user scale | 6/6 PASS |
+| 7: Concrete Spanish stack blueprint | 8/8 PASS |
+| 8: Established Kubernetes operating platform | 6/6 PASS |
+| 9: Committed demand and irreversible tenancy choices | 5/5 PASS |
+| 10: Conscious Kubernetes learning preference | 4/4 PASS |
+| **Total** | **29/29 PASS** |
+
+Final independent package verdict: **PASS**, with no actionable blockers. The
+reviewer confirmed that the original five evaluation cases are unchanged and
+that one-question progression, recommendations, decision ownership, confirmation,
+and the implementation boundary remain explicit. Automated results above were
+run by root; the reviewer did not rerun them.
+
+This is one forward sample per new scenario, not a general reliability estimate
+or proof of improvement over the previous version. The blueprint fixture does
+not supply detailed business-role or state definitions; its output explicitly
+avoids inventing them. No full live multi-turn interview was evaluated.
+
+Temporary outputs are `interview-6.md`, `blueprint-7.md`, `interview-8.md`,
+`interview-9.md`, and `interview-10.md` under
+`C:\Users\EremesNG\AppData\Local\Temp\architectural-grilling-01a064ba`.
+Reproducible prompts and assertions are maintained in the skill's `evals.json`.
+
 ## Unity GC-Free checkpoint — 2026-08-02
 
 This checkpoint covers the final pre-checksum `unity-gc-free` package, its public

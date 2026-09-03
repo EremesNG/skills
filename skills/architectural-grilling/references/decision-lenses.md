@@ -1,6 +1,6 @@
 # Decision Lenses
 
-Use this as a coverage map, not a questionnaire. Select only branches material to the current decision, ask one question per turn, and let early answers reshape later branches.
+Use this as a coverage map, not a questionnaire. Select only branches material to the current decision, keep one question pending at a time, and let each answer reshape the next question. Follow the entry point's question transport to continue automatically when the harness permits it.
 
 ## Routing order
 
@@ -124,6 +124,7 @@ Pressure tests:
 Prioritize and quantify only attributes capable of changing the design:
 
 - throughput, concurrency, payload size, and growth horizon;
+- current workload, committed demand before the next milestone, and speculative growth kept separate;
 - user-visible and machine-to-machine latency percentiles;
 - availability, durability, consistency, and degraded-mode expectations;
 - recovery point and recovery time objectives;
@@ -162,6 +163,8 @@ Compare at least:
 
 Compare complexity, delivery speed, operating burden, failure modes, cost, reversibility, and migration path. Do not introduce distributed systems merely for theoretical scale or organizational fashion.
 
+Use [architecture-and-stack.md](architecture-and-stack.md) to justify consequential additions, compare the cost of acting now versus later, and distinguish cheap preparation from deferred infrastructure. Existing operational capacity and expensive-to-reverse choices can change which baseline is simplest.
+
 ## 8. Frameworks, platforms, and vendors
 
 Resolve:
@@ -175,6 +178,8 @@ Resolve:
 - proprietary surface area, data portability, and exit plan;
 - migration cost from the current system and to the next likely option;
 - explicit trigger for revisiting the choice.
+
+Turn these findings into one coherent, named stack for the required capabilities. Explain each consequential choice and its strongest alternative; leave unused roles out. Recommend the next choice inside the interview rather than asking the user to supply a stack. Follow [architecture-and-stack.md](architecture-and-stack.md) for selection and evidence criteria.
 
 Pressure tests:
 

@@ -20,7 +20,7 @@
       "assertions": [
         "Repository evidence is gathered before asking factual questions.",
         "Contradictions between the stated plan and existing behavior are surfaced.",
-        "Each turn contains one question and a recommended answer.",
+        "Each question-answer exchange contains one question and a recommended answer.",
         "Migration, reconciliation, partial failure, rollback, PCI-related boundaries, and operational ownership are considered.",
         "The final blueprint is withheld until the user confirms closure."
       ]
@@ -59,6 +59,123 @@
         "No 'Open decisions: none' claim is made.",
         "The user is not coerced into continuing.",
         "Implementation remains unauthorized."
+      ]
+    },
+    {
+      "id": 6,
+      "prompt": "Use architectural-grilling. We already agreed the problem: replace a spreadsheet for 25 staff handling service requests. I am the only developer, know Python and PostgreSQL, have six weeks and little operations time. There are no external customers or special availability requirements. Someday, perhaps in ten years, we might have 10000 users, so I want Kubernetes, microservices, Redis and Kafka from day one. Continue the interview; I have not confirmed a blueprint.",
+      "expected_output": "The agent challenges the operational burden with a concrete simpler candidate grounded in known skills, separates current workload from speculative registered-user growth, and asks one decision that can close the present architecture branch. It offers cheap preparation and a revisit signal instead of designing the distant system or claiming capacity without evidence.",
+      "assertions": [
+        "Exactly one material question is asked, with a recommendation and trade-off; no blueprint is declared confirmed.",
+        "The answer distinguishes 25 current staff from the unsupported 10000-user ambition and does not treat user count alone as a capacity threshold.",
+        "A concrete simpler architecture or stack candidate fits the known team, timeline and maintenance capacity.",
+        "The added deployment, monitoring, upgrades or incident burden is connected to the proposed distributed components.",
+        "Future infrastructure is deferred with a safe present approach and a relevant evidence-based revisit signal, without a speculative implementation backlog.",
+        "No universal claim says that a named stack supports 10000 users, or that Kubernetes is always wrong."
+      ]
+    },
+    {
+      "id": 7,
+      "prompt": "Continue architectural-grilling in Spanish from this decision-map checkpoint. I am the sole developer, proficient in Python, Django and PostgreSQL. We decided to proceed with a six-week internal service-request app for 25 employees: browser forms, staff sign-in, two roles, request assignment/status and a history of changes; no payments, attachments, offline use, public registration or live collaboration. A single application and managed PostgreSQL meet our accepted requirements. Peak workload is provisionally under 10 concurrent form submissions, to validate before release; no capacity has been measured. The budget is USD 100/month, hosting procurement is approved in principle, but no provider, current price or version has been verified. Company-managed access, authorization checks, audit history, daily backups, an accepted one-business-day recovery target and a restore check remain required. I own operations and all follow-ups. Delivery is three two-week vertical slices covering sign-in/roles, requests/history and recovery/release checks; migration is a reviewed CSV import with rollback to the spreadsheet. We accepted the risk of single-app downtime and the pre-mortem found no unowned critical risk. I explicitly delegate remaining technology choices to you. I confirm the map and request the final blueprint; record conditional choices if provider facts remain unverified. Recommend a concrete stack for this release, including what we do not need yet. Do not implement.",
+      "expected_output": "The confirmed Spanish blueprint recommends a coherent concrete stack tied to known competence and requirements, maps responsibilities and deployment/data flow, and omits unused components. It records alternatives, accepted costs, conditional vendor verification and evolution triggers rather than dumping a technology catalog or reopening settled facts.",
+      "assertions": [
+        "The artifact is in Spanish and respects the delegated technology choices and confirmed checkpoint without restarting the interview.",
+        "Named technologies form a coherent stack for the browser UI, application, persistence, authentication/authorization and deployment responsibilities; the existing Python/Django/PostgreSQL competence materially influences the choice.",
+        "Each nontrivial choice has a present requirement, team or operations rationale and an accepted trade-off, with at least one credible alternative considered.",
+        "An independent frontend service, cache, queue, orchestration platform or similar unused layer is omitted or justified by a concrete current requirement.",
+        "The blueprint separates build-now decisions, inexpensive preparation and deferred complexity, with observable revisit criteria and ownership.",
+        "The existing security, audit, backup and restore commitments survive simplification.",
+        "Unverified prices, product limits, versions and workload capacity are not presented as facts; provider selection retains an explicit verification condition.",
+        "No code is written or deployment started."
+      ]
+    },
+    {
+      "id": 8,
+      "prompt": "Use architectural-grilling to review our deployment choice. We already run a supported internal Kubernetes platform with a staffed platform team, standard observability, backups and deployment templates. Two product teams require independently released services with tested domain boundaries. Existing production measurements show sustained resource contention between request handling and long-running processing that violates an agreed latency objective. A move to a single new PaaS would require retraining, networking migration and new on-call procedures. Security isolation and recovery obligations are mandatory. Should we keep the existing platform? We have not confirmed a blueprint.",
+      "expected_output": "The agent evaluates marginal complexity in the actual environment and treats measured contention, independent releases and existing operational capability as evidence. It may recommend retaining the platform, asking one unresolved material question without applying a universal monolith preference or weakening safeguards.",
+      "assertions": [
+        "The response asks exactly one material question and gives a clear recommendation.",
+        "Existing platform ownership, templates and migration cost influence the comparison instead of counting tools in isolation.",
+        "Measured contention and independent release needs can justify separation or infrastructure already in use.",
+        "The recommendation preserves mandatory isolation, backups and recovery obligations.",
+        "No blanket ban on Kubernetes or microservices and no unrequested migration are introduced.",
+        "No implementation or final closure is claimed."
+      ]
+    },
+    {
+      "id": 9,
+      "prompt": "Continue architectural-grilling. Our service has no users today, but a signed onboarding agreement requires importing three million records and serving a specified peak workload in eight weeks. Data isolation and residency are contractual. We have an experienced operations owner and a known budget. No load test exists yet. Changing the tenancy keys after import would require a disruptive migration, while adding more application instances later is routine. Can we defer all scalability and tenant design until customers complain? I have not confirmed the blueprint.",
+      "expected_output": "The agent distinguishes a committed near-term obligation from speculative scale, addresses the expensive-to-reverse tenancy decision now, and proposes bounded validation with lead time for reversible capacity choices. It does not require production incidents before planning or invent load-test results.",
+      "assertions": [
+        "The signed eight-week workload and isolation commitments are treated as near-term design inputs despite having zero users today.",
+        "The answer distinguishes expensive-to-reverse data/tenancy choices from reversible application capacity.",
+        "The recommendation includes bounded prelaunch evidence gathering and enough lead time to act, without claiming a benchmark passed.",
+        "Deferral does not remove contractual isolation or residency requirements.",
+        "Exactly one material decision is asked with a recommendation; no blanket design-everything-now response is produced."
+      ]
+    },
+    {
+      "id": 10,
+      "prompt": "Continue architectural-grilling. You recommended a managed application host for my small hobby project. I understand it is cheaper and simpler to operate. My actual goal is to learn Kubernetes; I explicitly accept the extra maintenance, will fund a separate learning environment, and accept a later release. The project handles only synthetic data. I own these choices. Product scope is settled, but the time budget for the learning work is still open. Please respect that learning is the goal.",
+      "expected_output": "The agent accepts the conscious learning trade-off after it has been tested, records learning separately from production necessity, and asks the next material question about the bounded learning investment. It does not keep arguing or silently remove the requested technology.",
+      "assertions": [
+        "The explicit learning goal and accepted trade-off are respected rather than treated as an invalid motive.",
+        "Kubernetes is not claimed to be a production scalability requirement for the small project.",
+        "The next turn asks one material question with a recommended time or effort boundary and rationale.",
+        "The agent does not keep relitigating the managed-host recommendation or start implementation."
+      ]
+    },
+    {
+      "id": 11,
+      "prompt": "Use architectural-grilling for a small internal request tracker. The problem and actors are settled; architecture and the delivery horizon are still open. I know Django and PostgreSQL and operate the system alone. Interview me until the decisions are resolved.",
+      "interaction_fixture": {
+        "transport": "An isolated harness exposes a permitted blocking question tool that suspends and resumes the same execution. Do not contact a real user during this evaluation.",
+        "replies_in_order": [
+          "I accept one Django application with PostgreSQL and the shared-deployment trade-off.",
+          "Six weeks is the delivery horizon; I accept reducing optional scope to fit.",
+          "Stop the interview now and summarize the unresolved decisions."
+        ]
+      },
+      "expected_output": "The agent asks and awaits one question through the native tool, processes each genuine fixture reply, and immediately asks the next unresolved decision within the same execution. It stops when the fixture user requests it and marks the summary incomplete.",
+      "assertions": [
+        "A permitted native question tool is used with exactly one question per call and at most one outstanding question.",
+        "The next question is selected from the updated decision map after each reply, without a final response or a request to say continue between questions.",
+        "Every question includes a recommendation and concise rationale; later replies are not consumed before their corresponding question.",
+        "The stop reply ends the loop and produces an incomplete summary instead of another question or an implementation.",
+        "Continuation does not infer answers, accept recommended defaults silently, or replace final blueprint confirmation."
+      ]
+    },
+    {
+      "id": 12,
+      "prompt": "Continue architectural-grilling. My answer to your previous question is yes: one application and PostgreSQL for this release, with the shared-deployment trade-off accepted. The delivery horizon remains open. I do not want to type continue after every answer.",
+      "interaction_fixture": {
+        "transport": "The harness only supports ordinary user and assistant messages; it has no permitted interactive question tool. Evaluate the next assistant message without contacting a real user."
+      },
+      "expected_output": "The agent records the architecture answer and asks the next single material question with a recommendation in its ordinary reply. Ending that message is a transport necessity, not an extra acknowledgment or permission step.",
+      "assertions": [
+        "The response acknowledges the resolved architecture briefly and includes the next material question about the delivery horizon.",
+        "Exactly one question and a clear recommended answer appear in the response.",
+        "The agent does not send only an acknowledgment, ask whether to continue, or require a separate continue message.",
+        "No unavailable tool, mode change, background automation, or fabricated answer is used to force continuous execution."
+      ]
+    },
+    {
+      "id": 13,
+      "prompt": "Use architectural-grilling to resolve the architecture and release scope for our internal request tracker, one decision at a time.",
+      "interaction_fixture": {
+        "transport": "An isolated harness exposes only a permitted asynchronous question tool and an event-based wait/resume primitive. The question call returns pending, not an answer. Do not contact a real user.",
+        "events_in_order": [
+          "Question delivery acknowledged; no user answer yet.",
+          "The actual user accepts a single application for this release.",
+          "The next question is cancelled without an answer."
+        ]
+      },
+      "expected_output": "The agent keeps one pending question, waits for the actual answer through the host mechanism, then resumes the decision loop. An answerless cancellation leaves the current branch open and pauses the interview rather than repeatedly asking or assuming agreement.",
+      "assertions": [
+        "A pending tool acknowledgment does not resolve a decision or authorize another question.",
+        "The agent waits through the available event mechanism without polling or emitting a final interview response while the answer is pending.",
+        "After the real answer arrives, the next material question is asked automatically with a recommendation.",
+        "Cancellation without an answer preserves the open decision and pauses without choosing the default or retrying in a loop."
       ]
     }
   ]

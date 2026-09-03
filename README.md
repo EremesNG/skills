@@ -10,7 +10,7 @@ The catalog currently contains five skills:
 
 | Skill | Use it for | Documentation |
 | --- | --- | --- |
-| `architectural-grilling` | Relentlessly challenge an ambiguous product, architecture, or delivery idea until every material decision is explicit and the plan is safe to execute. | [`SKILL.md`](skills/architectural-grilling/SKILL.md) |
+| `architectural-grilling` | Interview one decision at a time to resolve product and delivery risks and recommend a concrete architecture and tech stack proportional to real needs and operating capacity. | [`SKILL.md`](skills/architectural-grilling/SKILL.md) |
 | `progressive-context-router` | Configure, refactor, audit, or refresh repository instructions and progressive context for coding agents without changing product logic. | [`SKILL.md`](skills/progressive-context-router/SKILL.md) |
 | `simplify` | Refine the current diff for clarity and maintainability while preserving observable behavior and unrelated workspace changes. | [`SKILL.md`](skills/simplify/SKILL.md) |
 | `unity-developer` | Select and implement proportional Unity + C# design patterns, architecture, lifecycle safeguards, and game AI systems from project evidence. | [`SKILL.md`](skills/unity-developer/SKILL.md) |
@@ -18,6 +18,8 @@ The catalog currently contains five skills:
 
 The core interview loop in `architectural-grilling` is inspired by the
 MIT-licensed [`grilling` skill from mattpocock/skills](https://github.com/mattpocock/skills/tree/main/skills/productivity/grilling). This version expands it with explicit decision states, architecture and project-management lenses, convergence criteria, red-team checks, and an implementation-ready blueprint.
+
+Its [architecture and stack guide](skills/architectural-grilling/references/architecture-and-stack.md) adapts decision criteria from `architecture-pattern-selector`, `architecture-designer`, and `tech-stack-recommender`. It weighs current needs, credible growth, team expertise, operating burden, and the cost of changing later; the source links are included in the guide. These skills do not need to be installed separately.
 
 ## Repository layout
 
@@ -38,6 +40,34 @@ MIT-licensed [`grilling` skill from mattpocock/skills](https://github.com/mattpo
 
 Supporting directories are included when a skill needs them; `SKILL.md` is the
 entry point for every skill.
+
+## Skill metadata
+
+Every skill follows the [Agent Skills frontmatter specification](https://agentskills.io/specification).
+Keep `name` and `description` at the top level, alongside `license: MIT`.
+Put author, version, repository, and any additional custom information inside
+`metadata`, whose keys and values must be strings:
+
+```yaml
+---
+name: simplify
+description: Simplify recently changed code while preserving behavior. Use for focused cleanup of the current diff.
+license: MIT
+metadata:
+  author: EremesNG
+  version: "1.0.0"
+  repository: https://github.com/EremesNG/skills
+---
+```
+
+Each skill has its own version. Existing versions are preserved; skills without
+a declared version start at `"1.0.0"` with this metadata update. This identifies
+the skill package, not a Git tag or a supported tool version. Keep versions
+quoted so YAML reads them as strings.
+
+Use the optional top-level `compatibility` field only for actual environment
+requirements. Keep `allowed-tools` optional and specific to a real tool policy;
+metadata additions do not require changing a skill's tool permissions.
 
 ## Discover and install from this repository
 
@@ -99,8 +129,8 @@ npx skills add https://github.com/EremesNG/skills --skill unity-gc-free
 
 Start with the skill's `SKILL.md`:
 
-1. Read its frontmatter for the skill name and description, plus optional license
-   or compatibility fields when present.
+1. Read its frontmatter for the skill name, description, license, and metadata,
+   plus compatibility requirements when present.
 2. Read the body for the workflow, boundaries, and expected behavior.
 3. Follow links to `assets/`, `references/`, `scripts/`, or `evals/` only when the
    current task needs them.
@@ -117,6 +147,10 @@ blueprint:
 Use architectural-grilling to challenge this idea relentlessly before any implementation.
 
 Expose assumptions, investigate facts available in the repository, and ask one decision at a time with your recommended answer. Challenge whether we should build it at all, then resolve product scope, domain rules, architecture, data, security, operations, delivery dependencies, ownership, estimates, rollout, and risks.
+
+When the harness supports interactive questions, wait for each answer and continue with the next question within the same execution. Keep only one question pending. In ordinary chat, include the next question when responding to my answer; do not require me to say "continue".
+
+Recommend a concrete architecture and tech stack that fit the next useful release, my team's skills, budget, and operating capacity. Separate what to build now, what to prepare cheaply, and what to defer until an observable trigger. Challenge speculative future scale without ignoring credible commitments or necessary safeguards.
 
 Do not accept vague qualities such as "scalable" or "secure" without measurable targets. Do not start implementation until every material branch is closed and I explicitly confirm the resulting blueprint.
 ```
@@ -199,7 +233,7 @@ To add a skill:
 
 1. Create `skills/<skill-name>/` and add its `SKILL.md` entry point.
 2. Use a lowercase, hyphen-separated directory name and keep the `name` in
-   `SKILL.md` consistent with that directory.
+   `SKILL.md` consistent with that directory. Follow the metadata convention above.
 3. Add supporting directories or files only when the skill needs them.
 4. Update this catalog and any relevant tests or validation documentation.
 5. Run the checks above and verify that every path referenced by the skill exists.
