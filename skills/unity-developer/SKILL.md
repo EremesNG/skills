@@ -1,6 +1,11 @@
 ---
 name: unity-developer
 description: Apply professional Unity and C# solutions by diagnosing project context, choosing proportionate design patterns and architecture, designing gameplay or NPC AI, implementing changes test-first, and verifying lifecycle and performance evidence. Use whenever a Unity task involves MonoBehaviours, ScriptableObjects, managers, events, dependency injection, UI boundaries, state or behavior systems, GOAP, utility AI, ML-Agents, pooling, testability, or optimization, even if the user asks for a feature or bug rather than naming architecture. Skip for non-Unity code, pure art creation, or generic C# with no Unity constraints.
+license: MIT
+metadata:
+  author: EremesNG
+  version: "1.0.0"
+  repository: https://github.com/EremesNG/skills
 ---
 
 # Unity Developer

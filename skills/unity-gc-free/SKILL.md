@@ -1,6 +1,11 @@
 ---
 name: unity-gc-free
 description: Diagnose, design, implement, review, and verify GC-free or low-allocation Unity C# hot paths using measured managed-allocation evidence, caller-owned buffers, pooling, and compatible libraries. Use for GC.Alloc spikes, garbage-collection stutter, per-frame allocations, LINQ or iterator churn, coroutines and async workflows, tweening, Instantiate/Destroy churn, strings and serialization, physics or array-return APIs, Native Collections, allocation tests, or migrations involving ZLinq, UniTask, PrimeTween, UnityEngine.Pool, ZString, MemoryPack, MessagePack-CSharp, R3, or similar tools. Skip for generic Unity architecture with no allocation concern, unmeasured micro-optimization, pure native/GPU memory work, or non-Unity C# unless Unity constraints still govern the result.
+license: MIT
+metadata:
+  author: EremesNG
+  version: "1.0.0"
+  repository: https://github.com/EremesNG/skills
 ---
 
 # Unity GC-Free

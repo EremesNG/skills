@@ -17,9 +17,12 @@ class SimplifyPackageTests(unittest.TestCase):
         self.assertTrue(text.startswith("---\n"))
         _, frontmatter, body = text.split("---", 2)
 
-        fields = re.findall(r"(?m)^([a-z][a-z0-9_-]*):\s*(.+)$", frontmatter)
-        self.assertEqual([name for name, _ in fields], ["name", "description"])
+        fields = re.findall(r"(?m)^([a-z][a-z0-9_-]*):[ \t]*(.*)$", frontmatter)
         values = dict(fields)
+        self.assertTrue({"name", "description"}.issubset(values))
+        self.assertTrue(set(values).issubset({
+            "name", "description", "license", "compatibility", "metadata", "allowed-tools",
+        }))
         self.assertEqual(values["name"], SKILL_ROOT.name)
         self.assertRegex(values["name"], r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
         self.assertLessEqual(len(values["name"]), 64)

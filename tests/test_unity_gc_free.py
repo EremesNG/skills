@@ -23,9 +23,12 @@ class UnityGcFreeEntryContractTests(unittest.TestCase):
         text = skill_file.read_text(encoding="utf-8")
         self.assertTrue(text.startswith("---\n"))
         _, frontmatter, body = text.split("---", 2)
-        fields = re.findall(r"(?m)^([a-z][a-z0-9_-]*):\s*(.+)$", frontmatter)
-        self.assertEqual([name for name, _ in fields], ["name", "description"])
+        fields = re.findall(r"(?m)^([a-z][a-z0-9_-]*):[ \t]*(.*)$", frontmatter)
         values = dict(fields)
+        self.assertTrue({"name", "description"}.issubset(values))
+        self.assertTrue(set(values).issubset({
+            "name", "description", "license", "compatibility", "metadata", "allowed-tools",
+        }))
         self.assertEqual(values["name"], "unity-gc-free")
         self.assertLessEqual(len(values["description"]), 1024)
         self.assertLess(len(body.splitlines()), 500)

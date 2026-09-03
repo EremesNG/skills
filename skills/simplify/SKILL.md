@@ -1,6 +1,11 @@
 ---
 name: simplify
 description: Simplify and refine recently changed code without changing behavior. Use after implementing or fixing code, before final verification, or whenever the user asks to clean up, reduce complexity, improve readability, remove duplication, or make a diff easier to maintain. Apply it even when the user does not explicitly say "simplify" if a completed implementation needs a focused behavior-preserving cleanup pass.
+license: MIT
+metadata:
+  author: EremesNG
+  version: "1.0.0"
+  repository: https://github.com/EremesNG/skills
 ---
 
 # Simplify
