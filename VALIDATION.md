@@ -539,3 +539,7 @@ time, and token usage are deliberately omitted because none has been measured at
 this checkpoint. A separate read-only PowerShell audit enumerated the checksum
 scope independently from the manifest, rejected forbidden `openspec/`, generated
 workspace, cache, and bytecode paths, and recomputed every SHA-256 digest.
+
+The distribution checksum manifest records SHA-256 digests of committed Git blob
+bytes. On this repository, those blobs use LF-normalized content; working-tree
+CRLF conversions must not be used when reproducing the manifest.
