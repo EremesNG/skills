@@ -1,0 +1,4 @@
+interface:
+  display_name: "Project Zomboid Modding"
+  short_description: "Develop PZ mods with version-aware API verification"
+  default_prompt: "Use $project-zomboid-modding to develop this mod feature against verified APIs for my installed Project Zomboid build."

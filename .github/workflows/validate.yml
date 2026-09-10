@@ -21,10 +21,10 @@ jobs:
       - name: Compile bundled scripts
         run: >-
           python -m py_compile
-          skills/progressive-context-router/scripts/context_budget.py
-          skills/progressive-context-router/scripts/repo_inventory.py
-          skills/progressive-context-router/scripts/validate_context_setup.py
-          skills/unity-developer/scripts/inspect_unity_project.py
-          skills/unity-gc-free/scripts/inspect_unity_gc.py
+          skills/agent-tooling/progressive-context-router/scripts/context_budget.py
+          skills/agent-tooling/progressive-context-router/scripts/repo_inventory.py
+          skills/agent-tooling/progressive-context-router/scripts/validate_context_setup.py
+          skills/game-dev/unity-developer/scripts/inspect_unity_project.py
+          skills/game-dev/unity-gc-free/scripts/inspect_unity_gc.py
       - name: Run tests
         run: python -m unittest discover -s tests -v

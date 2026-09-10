@@ -1,5 +1,105 @@
 # Validation report
 
+## Complete category organization — 2026-09-10
+
+All six skills now use `skills/<category>/<skill-name>/`. The remaining packages
+moved into `software-design/architectural-grilling`, `code-quality/simplify`, and
+`agent-tooling/progressive-context-router`; the three `game-dev` packages retain
+their already-verified locations. Categories follow the skill's primary purpose.
+README documents category scopes and requires this uniform depth for additions.
+
+- **26 newly moved distribution files** match their pre-move SHA-256 hashes;
+  skill contents, versions, and names are unchanged.
+- **6/6 categorized skills discovered** by the cached local skills CLI; no
+  `SKILL.md` remains directly under a category root.
+- **49 README/entrypoint local links resolve**. An initial broad link scan also
+  inspected asset templates and encountered an intentional generated-project
+  `docs/agent/index.md` link; the package-navigation check excludes template output
+  links rather than treating them as installed resources.
+- Active test roots, CI commands, and README paths updated; **58/58 tests PASS**
+  and all five bundled Python scripts compile successfully.
+- `git diff --check`: **PASS**; all 66 distribution paths and hashes synchronized.
+
+Historical reports and evaluation records retain paths from their original runs.
+Use the current README catalog to locate relocated packages. Root verified this
+deterministic Direct move through hashes and existing checks. Memory recall for
+project `skills` found no relevant records; the category convention remains
+canonical in README. No installation, publication, or skill behavior change.
+
+## Game-development category — 2026-09-10
+
+Moved `project-zomboid-modding`, `unity-developer`, and `unity-gc-free` into
+`skills/game-dev/` following explicit user selection. Category directories have
+no `SKILL.md`; each leaf remains a self-contained package. Names, versions,
+invocation prompts, and `--skill` selectors are unchanged.
+
+Updated active README paths/layout, CI compilation commands, and the two Unity
+test roots/path assertions. Earlier reports and recorded evaluation metadata
+retain their historical paths; map `skills/<game-skill>/` to
+`skills/game-dev/<game-skill>/` when revisiting those runs.
+
+- Isolated mixed flat/nested discovery: **PASS**, before moving packages.
+- Actual cached local skills CLI discovery after moving: **6/6 skills found**.
+- All **30 moved distribution files** have identical SHA-256 content to their
+  pre-move manifest entries. Internal Markdown links resolve; old roots are absent.
+- Three moved skills pass the `skill-creator` validator. For `unity-gc-free`,
+  use `python -X utf8`: the validator's platform-default CP1252 read failed on
+  existing UTF-8 content; no package encoding or content was changed.
+- Repository tests: **58/58 PASS**; five existing scripts compile successfully.
+- `git diff --check`: **PASS**; distribution paths and hashes synchronized.
+
+This was a deterministic Direct relocation, verified by root through file hashes,
+discovery, links, and existing checks; no behavioral skill edits or new runtime
+compatibility claims. No installation or publication was performed. Memory recall
+for project `skills` returned no relevant records; the category convention is
+documented in README rather than duplicated in memory.
+
+## Project Zomboid Modding 1.0.0 — 2026-09-10
+
+Created `skills/project-zomboid-modding/` through the installed `skill-creator`
+workflow, using the user-selected Direct route. The package contains a 78-line
+entry point, seven focused references, and discoverable UI metadata. It defaults
+new projects to B42 Stable while requiring exact-version evidence for APIs.
+Context7 is optional; its candidate IDs are explicitly unverified. No executable
+helpers, game source, or unverified runnable mod templates are bundled.
+
+Primary-source checks covered the official release page and GlobalObject docs,
+Umbrella, PZEventDoc, PZ API Docs, pz-scripts-data, pz-translation-data, the vanilla
+mirror, and ZomboidDecompiler. The dated source directory records the observed
+42.20.4 game-site header versus 42.20.2 script-doc version and the translation
+dataset move. Example mods remain discovery leads, not API authority.
+
+- Bundled `skill-creator/scripts/quick_validate.py`: **PASS**.
+- Relative Markdown links: **15/15 resolve**. UI metadata/default prompt and
+  implicit invocation default: **PASS**.
+- Cached local skills CLI `add . --list`: **6 skills discovered**, including
+  `project-zomboid-modding`; no installation or publication performed.
+- Repository suite `python -m unittest discover -s tests -q`: **58/58 PASS**.
+  Two existing tests required the old literal five-skill catalog count; their
+  assertions now require six. The discovery paragraph retains its existing form.
+- Existing five bundled Python scripts: **py_compile PASS**; no scripts added.
+- Focused simplification retained one source directory and conditional routing;
+  no redundant wrappers or standalone API templates were introduced.
+- `git diff --check`: **PASS**. Distribution hashes synchronized for this change.
+
+A fresh read-only Oracle returned **PASS**, with no blockers, after independently
+reading the package and checking all 15 local links. Four paper forward-tests
+produced appropriate candidate responses:
+
+| Scenario | Observed outcome |
+| --- | --- |
+| B41 recipe migration without source, exact B42 patch, game, or Context7 | Requests blocking inputs, avoids textual rename and ready-to-publish claims |
+| MP action duplicates objects and trusts supplied player ID/count | Uses authenticated sender, validates inputs, investigates duplicate commit paths, distinguishes replication |
+| Local hunger indicator only | Keeps UI client-side without adding networking or persistence |
+| Private JavaDoc member conflicts with another-version stub | Requires target Lua-exposure evidence before using the method |
+
+These are instruction-review results, not an automated behavior benchmark or
+in-game tests. No PZ runtime, dedicated server, save migration, or Workshop upload
+was exercised. Root owns the package and integration changes; Oracle remained
+read-only. Memory recall for project `skills` returned no relevant records; no
+duplicate canonical content or continuation handoff was saved for this completed
+Direct task.
+
 ## Skill versions 1.0.1 — 2026-09-02
 
 All five skills now declare `metadata.version: "1.0.1"`. YAML parsing confirms

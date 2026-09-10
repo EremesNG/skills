@@ -11,7 +11,7 @@ from pathlib import Path
 
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
-SKILL_ROOT = REPO_ROOT / "skills" / "unity-gc-free"
+SKILL_ROOT = REPO_ROOT / "skills" / "game-dev" / "unity-gc-free"
 INSPECTOR = SKILL_ROOT / "scripts" / "inspect_unity_gc.py"
 
 
@@ -140,9 +140,9 @@ class UnityGcFreeEntryContractTests(unittest.TestCase):
 
     def test_readme_catalogs_installs_and_demonstrates_unity_gc_free(self) -> None:
         text = (REPO_ROOT / "README.md").read_text(encoding="utf-8")
-        self.assertIn("catalog currently contains five skills", text.lower())
+        self.assertIn("catalog currently contains six skills", text.lower())
         self.assertIn("| `unity-gc-free` |", text)
-        self.assertIn("[`SKILL.md`](skills/unity-gc-free/SKILL.md)", text)
+        self.assertIn("[`SKILL.md`](skills/game-dev/unity-gc-free/SKILL.md)", text)
         self.assertIn("### Remote installation: `unity-gc-free`", text)
         self.assertIn(
             "npx skills add https://github.com/EremesNG/skills --skill unity-gc-free",
@@ -162,12 +162,12 @@ class UnityGcFreeEntryContractTests(unittest.TestCase):
         )
         self.assertIn('python-version: ["3.9", "3.13"]', workflow)
         self.assertNotIn("*.py", workflow)
-        self.assertIn("skills/unity-gc-free/scripts/inspect_unity_gc.py", workflow)
-        self.assertIn("skills/unity-developer/scripts/inspect_unity_project.py", workflow)
+        self.assertIn("skills/game-dev/unity-gc-free/scripts/inspect_unity_gc.py", workflow)
+        self.assertIn("skills/game-dev/unity-developer/scripts/inspect_unity_project.py", workflow)
         self.assertIn("python -m unittest discover -s tests -v", workflow)
 
         readme = (REPO_ROOT / "README.md").read_text(encoding="utf-8")
-        self.assertIn("skills/unity-gc-free/scripts/inspect_unity_gc.py", readme)
+        self.assertIn("skills/game-dev/unity-gc-free/scripts/inspect_unity_gc.py", readme)
 
 
 class UnityGcFreeReferenceContractTests(unittest.TestCase):

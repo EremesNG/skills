@@ -7,7 +7,7 @@ from pathlib import Path
 
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
-SKILL_ROOT = REPO_ROOT / "skills" / "architectural-grilling"
+SKILL_ROOT = REPO_ROOT / "skills" / "software-design" / "architectural-grilling"
 
 
 class ArchitecturalGrillingPackageTests(unittest.TestCase):

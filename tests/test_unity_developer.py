@@ -11,7 +11,7 @@ from pathlib import Path
 
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
-SKILL_ROOT = REPO_ROOT / "skills" / "unity-developer"
+SKILL_ROOT = REPO_ROOT / "skills" / "game-dev" / "unity-developer"
 INSPECTOR = SKILL_ROOT / "scripts" / "inspect_unity_project.py"
 
 
@@ -207,13 +207,13 @@ class UnityDeveloperEntryContractTests(unittest.TestCase):
 
     def test_readme_catalogs_installs_and_demonstrates_unity_developer(self) -> None:
         text = (REPO_ROOT / "README.md").read_text(encoding="utf-8")
-        self.assertIn("catalog currently contains five skills", text.lower())
+        self.assertIn("catalog currently contains six skills", text.lower())
         self.assertIn(
             "| `unity-developer` |",
             text,
         )
         self.assertIn(
-            "[`SKILL.md`](skills/unity-developer/SKILL.md)",
+            "[`SKILL.md`](skills/game-dev/unity-developer/SKILL.md)",
             text,
         )
         self.assertIn("### Remote installation: `unity-developer`", text)
@@ -238,10 +238,10 @@ class UnityDeveloperEntryContractTests(unittest.TestCase):
         self.assertIn('python-version: ["3.9", "3.13"]', workflow)
         self.assertNotIn("*.py", workflow)
         for script in (
-            "skills/progressive-context-router/scripts/context_budget.py",
-            "skills/progressive-context-router/scripts/repo_inventory.py",
-            "skills/progressive-context-router/scripts/validate_context_setup.py",
-            "skills/unity-developer/scripts/inspect_unity_project.py",
+            "skills/agent-tooling/progressive-context-router/scripts/context_budget.py",
+            "skills/agent-tooling/progressive-context-router/scripts/repo_inventory.py",
+            "skills/agent-tooling/progressive-context-router/scripts/validate_context_setup.py",
+            "skills/game-dev/unity-developer/scripts/inspect_unity_project.py",
         ):
             self.assertIn(script, workflow)
         self.assertIn("python -m unittest discover -s tests -v", workflow)

@@ -1,45 +1,62 @@
 # Agent Skills
 
 This repository contains reusable Agent Skills. Each skill is self-contained under
-`skills/<skill-name>/` and keeps its instructions, supporting files, and validation
-context together.
+`skills/<category>/<skill-name>/` and keeps its instructions, supporting files,
+and validation context together.
 
 ## Available skills
 
-The catalog currently contains five skills:
+The catalog currently contains six skills:
 
 | Skill | Use it for | Documentation |
 | --- | --- | --- |
-| `architectural-grilling` | Interview one decision at a time to resolve product and delivery risks and recommend a concrete architecture and tech stack proportional to real needs and operating capacity. | [`SKILL.md`](skills/architectural-grilling/SKILL.md) |
-| `progressive-context-router` | Configure, refactor, audit, or refresh repository instructions and progressive context for coding agents without changing product logic. | [`SKILL.md`](skills/progressive-context-router/SKILL.md) |
-| `simplify` | Refine the current diff for clarity and maintainability while preserving observable behavior and unrelated workspace changes. | [`SKILL.md`](skills/simplify/SKILL.md) |
-| `unity-developer` | Select and implement proportional Unity + C# design patterns, architecture, lifecycle safeguards, and game AI systems from project evidence. | [`SKILL.md`](skills/unity-developer/SKILL.md) |
-| `unity-gc-free` | Diagnose and migrate measured Unity managed-allocation hot paths with behavior-safe reuse, pooling, libraries, and target-player evidence. | [`SKILL.md`](skills/unity-gc-free/SKILL.md) |
+| `architectural-grilling` | Interview one decision at a time to resolve product and delivery risks and recommend a concrete architecture and tech stack proportional to real needs and operating capacity. | [`SKILL.md`](skills/software-design/architectural-grilling/SKILL.md) |
+| `progressive-context-router` | Configure, refactor, audit, or refresh repository instructions and progressive context for coding agents without changing product logic. | [`SKILL.md`](skills/agent-tooling/progressive-context-router/SKILL.md) |
+| `simplify` | Refine the current diff for clarity and maintainability while preserving observable behavior and unrelated workspace changes. | [`SKILL.md`](skills/code-quality/simplify/SKILL.md) |
+| `project-zomboid-modding` | Develop and migrate PZ mods with version-matched vanilla/API evidence, B42 crafting, multiplayer authority, and honest runtime verification. | [`SKILL.md`](skills/game-dev/project-zomboid-modding/SKILL.md) |
+| `unity-developer` | Select and implement proportional Unity + C# design patterns, architecture, lifecycle safeguards, and game AI systems from project evidence. | [`SKILL.md`](skills/game-dev/unity-developer/SKILL.md) |
+| `unity-gc-free` | Diagnose and migrate measured Unity managed-allocation hot paths with behavior-safe reuse, pooling, libraries, and target-player evidence. | [`SKILL.md`](skills/game-dev/unity-gc-free/SKILL.md) |
 
 The core interview loop in `architectural-grilling` is inspired by the
 MIT-licensed [`grilling` skill from mattpocock/skills](https://github.com/mattpocock/skills/tree/main/skills/productivity/grilling). This version expands it with explicit decision states, architecture and project-management lenses, convergence criteria, red-team checks, and an implementation-ready blueprint.
 
-Its [architecture and stack guide](skills/architectural-grilling/references/architecture-and-stack.md) adapts decision criteria from `architecture-pattern-selector`, `architecture-designer`, and `tech-stack-recommender`. It weighs current needs, credible growth, team expertise, operating burden, and the cost of changing later; the source links are included in the guide. These skills do not need to be installed separately.
+Its [architecture and stack guide](skills/software-design/architectural-grilling/references/architecture-and-stack.md) adapts decision criteria from `architecture-pattern-selector`, `architecture-designer`, and `tech-stack-recommender`. It weighs current needs, credible growth, team expertise, operating burden, and the cost of changing later; the source links are included in the guide. These skills do not need to be installed separately.
 
 ## Repository layout
 
 ```text
 .
 ├── skills/
-│   └── <skill-name>/
-│       ├── SKILL.md
-│       ├── assets/       # optional supporting templates
-│       ├── references/   # optional reference documents
-│       ├── scripts/      # optional helper scripts
-│       └── evals/        # optional evaluations
+│   ├── agent-tooling/
+│   │   └── progressive-context-router/
+│   ├── code-quality/
+│   │   └── simplify/
+│   ├── game-dev/
+│   │   ├── project-zomboid-modding/
+│   │   ├── unity-developer/
+│   │   └── unity-gc-free/
+│   └── software-design/
+│       └── architectural-grilling/
 ├── tests/                # repository-level tests
 ├── VALIDATION.md         # validation report and commands
 ├── LICENSE
 └── README.md
 ```
 
-Supporting directories are included when a skill needs them; `SKILL.md` is the
-entry point for every skill.
+Each skill directory contains its `SKILL.md` entry point and any needed
+`agents/`, `assets/`, `references/`, `scripts/`, or `evals/` supporting directories.
+
+Category folders group related packages and do not contain their own `SKILL.md`.
+Keep each skill self-contained at its leaf directory. The validated discovery
+command finds all six categorized packages; selection still uses the
+skill's name, such as `--skill unity-developer`, without a category prefix.
+
+| Category | Scope |
+| --- | --- |
+| `agent-tooling` | Coding-agent instructions, context management, and supporting tools |
+| `code-quality` | Refactoring, maintainability, and code-quality improvements |
+| `game-dev` | Game engines, gameplay development, and modding |
+| `software-design` | Requirements exploration, architecture, and technical design decisions |
 
 ## Skill metadata
 
@@ -60,7 +77,8 @@ metadata:
 ---
 ```
 
-Each skill has its own version. All five current skills declare `"1.0.1"`. This identifies
+Each skill has its own version. The five existing skills declare `"1.0.1"`;
+`project-zomboid-modding` starts at `"1.0.0"`. This identifies
 the skill package, not a Git tag or a supported tool version. Keep versions
 quoted so YAML reads them as strings.
 
@@ -78,11 +96,19 @@ npx skills add . --list
 ```
 
 It currently discovers `architectural-grilling`, `progressive-context-router`,
-`simplify`, `unity-developer`, and `unity-gc-free`.
+`simplify`, `project-zomboid-modding`, `unity-developer`, and `unity-gc-free`.
 For installation, point your Agent Skills-compatible installer at this repository
 and select the required skill. Each package root under `skills/` contains its
 `SKILL.md` and supporting files. Client-specific installer options are
 intentionally not prescribed here.
+
+### Remote installation: `project-zomboid-modding`
+
+Once this change is published to the repository, install with:
+
+```bash
+npx skills add https://github.com/EremesNG/skills --skill project-zomboid-modding
+```
 
 ### Remote installation: `architectural-grilling`
 
@@ -204,6 +230,15 @@ Inspect the Unity and package versions, profiler evidence, target platform, scri
 Preserve results, ordering, timing, cancellation, thread affinity, overflow, and owner teardown. Implement one measured source at a time with functional tests first, then verify the same representative workload in a target player. Report native memory, retained memory, and CPU separately; do not call the result GC-free without scoped evidence.
 ```
 
+### Usage example: `project-zomboid-modding`
+
+```text
+Use $project-zomboid-modding to implement this Project Zomboid mod feature.
+Inspect the target game build and mod layout, find equivalent vanilla code,
+and verify the required APIs/events before writing code. Preserve the intended
+single-player or multiplayer scope and report source evidence and runtime gaps.
+```
+
 When more skills are added, keep this per-skill pattern: a labeled installation
 subsection in discovery/install and a concise usage subsection in read/use.
 
@@ -213,11 +248,11 @@ Run the repository checks locally from the repository root:
 
 ```bash
 python3 -m py_compile \
-  skills/progressive-context-router/scripts/context_budget.py \
-  skills/progressive-context-router/scripts/repo_inventory.py \
-  skills/progressive-context-router/scripts/validate_context_setup.py \
-  skills/unity-developer/scripts/inspect_unity_project.py \
-  skills/unity-gc-free/scripts/inspect_unity_gc.py
+  skills/agent-tooling/progressive-context-router/scripts/context_budget.py \
+  skills/agent-tooling/progressive-context-router/scripts/repo_inventory.py \
+  skills/agent-tooling/progressive-context-router/scripts/validate_context_setup.py \
+  skills/game-dev/unity-developer/scripts/inspect_unity_project.py \
+  skills/game-dev/unity-gc-free/scripts/inspect_unity_gc.py
 python3 -m unittest discover -s tests -v
 npx skills add . --list
 ```
@@ -230,7 +265,9 @@ scripts and runs the unit tests with Python 3.9 and 3.13.
 
 To add a skill:
 
-1. Create `skills/<skill-name>/` and add its `SKILL.md` entry point.
+1. Create `skills/<category>/<skill-name>/` and add its `SKILL.md` entry point.
+   Choose the existing category that best describes the skill's primary purpose.
+   Add a focused category only when none fits; keep all skills at this depth.
 2. Use a lowercase, hyphen-separated directory name and keep the `name` in
    `SKILL.md` consistent with that directory. Follow the metadata convention above.
 3. Add supporting directories or files only when the skill needs them.

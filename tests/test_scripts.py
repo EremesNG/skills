@@ -9,7 +9,7 @@ import unittest
 from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
-SKILL_ROOT = REPO_ROOT / "skills" / "progressive-context-router"
+SKILL_ROOT = REPO_ROOT / "skills" / "agent-tooling" / "progressive-context-router"
 SCRIPTS = SKILL_ROOT / "scripts"
 
 

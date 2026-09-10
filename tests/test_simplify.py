@@ -7,7 +7,7 @@ from pathlib import Path
 
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
-SKILL_ROOT = REPO_ROOT / "skills" / "simplify"
+SKILL_ROOT = REPO_ROOT / "skills" / "code-quality" / "simplify"
 
 
 class SimplifyPackageTests(unittest.TestCase):
