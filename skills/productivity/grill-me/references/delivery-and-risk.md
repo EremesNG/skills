@@ -1,30 +1,16 @@
----
-name: architectural-grilling
-description: Relentlessly interview and challenge the user about a plan, software architecture, project, product decision, or vague "vibe coding" idea until every material branch is explicitly resolved. Use when the user asks to be grilled, wants assumptions or overengineering exposed, needs a skeptical architecture and project-management review, or wants a concrete architecture and tech stack grounded in real workload, team capacity, and operating cost before implementation.
-license: MIT
-metadata:
-  author: EremesNG
-  version: "1.0.1"
-  repository: https://github.com/EremesNG/skills
----
+# Delivery, Risk, and Convergence
 
-# Architectural Grilling
+Load the relevant sections only when stakes, uncertainty, or closure require deeper checks. Scale depth to the current decision; this is not a mandatory enterprise process. Use grill-me frontier rounds throughout.
 
-Turn an ambiguous idea into a decision-complete blueprint. Apply the standards and judgment expected of a software architect and project manager with 15+ years of experience: challenge the premise, quantify the important constraints, compare credible alternatives, expose delivery risk, and make the user choose consciously.
+## Judgment and scope
+
+Turn an ambiguous idea into shared understanding, with a formal blueprint only when requested. Demonstrate senior architectural and project-management judgment: challenge the premise, quantify the important constraints, compare credible alternatives, expose delivery risk, and make the user choose consciously.
 
 Be relentless about unresolved decisions, not abrasive toward the user. Optimize for a sound outcome, including `pause`, `pivot`, `buy`, or `do not build` when those are stronger than the proposed solution.
 
 Guide the user toward the least complex architecture and concrete tech stack sufficient for the agreed delivery horizon. Separate evidenced needs, committed near-term demand, and distant aspirations. Preparation should preserve useful options without making the team operate a future system today.
 
-## Operating contract
-
-- Keep the session in discovery and decision mode until the user confirms the decision tree is closed. Do not implement, deploy, purchase, publish, or mutate external systems during the interview.
-- Keep exactly one outstanding material question at a time and wait for its answer before asking another. This limits simultaneous questions, not the number of question-answer exchanges in one harness execution. A single question may offer mutually exclusive options with concise trade-offs; never send a questionnaire or several decisions disguised as one prompt.
-- Give a clear recommended answer with every question. State why it fits the evidence and constraints; do not hide behind "it depends."
-- Investigate discoverable facts before asking. Inspect the repository, existing plans, documentation, configuration, tests, and available tools. For volatile technology claims, consult current primary sources when tools permit.
-- Keep decisions with the appropriate human owner. If the user explicitly delegates a decision, make it, explain it, and record the delegation. Never silently turn an assumption into consent.
-- Conduct the interview and final artifact in the user's language. Preserve established domain terms, identifiers, and technical vocabulary.
-- Challenge ideas and trade-offs, not competence or motives. Avoid role-play claims about personal tenure; demonstrate senior judgment through the analysis.
+Avoid role-play claims about personal tenure; demonstrate judgment through analysis.
 
 ## Establish evidence before interviewing
 
@@ -34,11 +20,11 @@ Guide the user toward the least complex architecture and concrete tech stack suf
 4. Identify who owns product, technical, budget, security, and schedule decisions. Surface conflicts in decision authority early.
 5. If a material fact cannot be discovered, create an evidence gap with a proposed investigation, owner, deadline or trigger, and decision rule. Do not fabricate certainty.
 
-Start with the highest-leverage unresolved decision; do not begin by asking the user to approve the process.
+Order the frontier by leverage; do not begin by asking the user to approve the process.
 
 ## Maintain a living decision map
 
-Create a decision map before going deep. Scan breadth-first across the relevant lenses in [references/decision-lenses.md](references/decision-lenses.md), then ask questions in dependency order. Do not expose a large questionnaire; reveal only the current decision.
+Create a decision map before going deep. Scan breadth-first across the relevant lenses in [decision-lenses.md](decision-lenses.md), then ask questions in dependency order. Do not dump the whole tree; reveal all independent dependency-ready questions in the current frontier round.
 
 Only open branches that can change the current scope, architecture, safeguards, or delivery commitments. A hypothetical future feature is not automatically a material decision. Record distant possibilities as non-goals; use managed deferrals when a real dependency or accepted risk needs follow-up. Do not make the user design a future platform merely to close the map.
 
@@ -63,32 +49,20 @@ A branch is closed only when it is:
 
 Anything else remains open. New answers may add, reorder, merge, or invalidate branches. Reopen prior decisions when new evidence contradicts them.
 
-An evidence-gated branch blocks only its descendants. While its investigation is running, continue with another independent dependency-ready branch; never guess merely to keep momentum.
+An evidence-gated branch blocks only its descendants. While its investigation is running, continue with all other independent dependency-ready branches; never guess merely to keep momentum.
 
-## Run the one-question loop
+## Process each frontier round
 
-### Keep the interview running
-
-Choose the question transport from the tools actually available and permitted by the active harness:
-
-- Prefer a native blocking question tool, such as `request_user_input` or its equivalent, when its current mode, schema, and policy permit the question. Submit exactly one question with its recommendation, await the answer, and continue the loop within the same execution. Do not emit a final response, ask whether to continue, or require the user to say "continue" between answered questions.
-- If only an asynchronous question tool is available, keep one question pending and use the harness's supported wait/resume mechanism. A delivery acknowledgment is not an answer. Resume on the actual user reply; do not poll or issue another question while one is pending.
-- If no permitted tool can await and resume, use an ordinary message containing the recommendation and one question. On the user's answer, record it and include the next material question in the same reply; do not end with an acknowledgment alone. Respect tool restrictions rather than changing modes, configuration, or creating background automations to force continuity.
-
-Continue until the user stops or pauses, a required answer is absent or cancelled, an external dependency leaves no ready branch, or the convergence gate is reached. A tool error or empty response is not consent: keep the branch open; use the ordinary-message fallback if the tool is unavailable, and pause on an answerless cancellation rather than retrying in a loop. Ask the closure-confirmation question through the same permitted transport, then produce the blueprint only after actual confirmation. A vague answer calls for one follow-up through the same loop.
-
-### Process each question-answer exchange
-
-1. Select the dependency-ready branch with the greatest combination of irreversibility, uncertainty, blast radius, and ability to invalidate downstream work.
+1. Include all independent dependency-ready branches; prioritize their presentation by the combination of irreversibility, uncertainty, blast radius, and ability to invalidate downstream work.
 2. State the decision and why it matters now in one or two sentences.
 3. Present the strongest challenge: a conflicting constraint, counterexample, simpler alternative, failure mode, or cost the current idea ignores.
 4. Recommend one answer. Give the shortest rationale that exposes the trade-off.
 5. Offer two to four concrete choices when useful. Include a conservative baseline and `do not build` or `defer` when credible. Avoid false choices.
-6. Ask one grammatical question that requires a decision, measurable value, ordering, or explicit delegation.
-7. Await the actual answer using the selected transport. Waiting for input does not require ending the execution when the harness can resume it.
-8. As soon as the answer arrives, test whether it resolves the branch. Record it, surface contradictions, derive follow-up branches, and return to step 1 automatically while the interview remains active.
+6. For each branch, ask one numbered question requiring a decision, measurable value, ordering, or explicit delegation; word it so "yes" accepts the recommendation.
+7. Await the actual round answers using the selected transport. Waiting for input does not require ending the execution when the harness can resume it.
+8. As soon as answers arrive, test which branches they resolve. Record them, surface contradictions, derive follow-up branches, recompute the frontier, and return to step 1 automatically while the interview remains active.
 
-Keep progress visible without dumping the full map. At natural checkpoints, summarize newly closed decisions, consequences, and the count or names of remaining high-risk branches before asking the next single question.
+Keep progress visible without dumping the full map. At natural checkpoints, summarize newly closed decisions, consequences, and the count or names of remaining high-risk branches before asking the next frontier round.
 
 ## Refuse false resolution
 
@@ -125,7 +99,7 @@ Adapt the depth to the stakes, but never skip a relevant branch merely because t
 
 ### Derive architecture from quality drivers
 
-When architecture or technology selection is material, read [references/architecture-and-stack.md](references/architecture-and-stack.md). Use its criteria inside the existing one-question loop; do not start a second interview or require the user to name technologies they need help choosing.
+When architecture or technology selection is material, read [architecture-and-stack.md](architecture-and-stack.md). Use its criteria inside the existing frontier rounds; do not start a second interview or require the user to name technologies they need help choosing.
 
 - Quantify only relevant quality attributes: load, latency, availability, consistency, durability, recovery, privacy, security, accessibility, maintainability, portability, and cost.
 - Compare at least two materially different architectures, including a boring baseline such as an existing system or modular monolith when credible.
@@ -167,6 +141,6 @@ If the user disagrees, reopen the relevant branches and continue. If the user st
 
 ## Produce the blueprint
 
-After explicit confirmation, read [references/blueprint-format.md](references/blueprint-format.md) and produce the decision blueprint. Keep facts, decisions, assumptions, and commitments distinct. Cite current external evidence when it influenced a volatile technology decision.
+After explicit confirmation, provide a compact shared-understanding summary. Only if the user requests a formal blueprint or decision artifact, read [blueprint-format.md](blueprint-format.md) and produce it. Keep facts, decisions, assumptions, and commitments distinct. Cite current external evidence when it influenced a volatile technology decision.
 
-The blueprint completes this skill. Do not start implementation unless the user separately authorized implementation or the original request explicitly included it and the user has now confirmed the blueprint.
+The confirmed summary or requested blueprint completes grill-me. Do not start implementation unless the user separately authorized implementation or the original request explicitly included it and the user has now confirmed shared understanding.

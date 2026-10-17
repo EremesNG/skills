@@ -1,0 +1,4 @@
+interface:
+  display_name: "Grill Me"
+  short_description: "Grill ideas into grounded architecture and tech stacks"
+  default_prompt: "Use $grill-me to challenge this idea in dependency-ready frontier rounds and recommend a concrete architecture and tech stack that fit real needs and operating capacity before implementation."

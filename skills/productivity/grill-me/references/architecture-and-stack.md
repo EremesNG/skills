@@ -1,6 +1,6 @@
 # Grounded Architecture and Tech Stack
 
-Use this guide when the interview must choose or challenge architecture, frameworks, infrastructure, or a tech stack. Apply it through the existing one-question loop. The goal is a justified recommendation the user can accept, not a separate questionnaire, scoring ritual, or mandatory stack template.
+Use this guide when the interview must choose or challenge architecture, frameworks, infrastructure, or a tech stack. Apply it through the existing frontier rounds. The goal is a justified recommendation the user can accept, not a separate questionnaire, scoring ritual, or mandatory stack template.
 
 ## Establish the decision horizon
 
@@ -41,7 +41,7 @@ Once the drivers are sufficient, recommend technologies rather than asking the u
 4. Favor team competence and maintained existing assets when they meet the requirements. Compare realistic learning, hiring, integration, testing, maintenance, licensing, support, lock-in, and migration costs when proposing a change. An existing tool is a useful default, not an obligation to retain an unsuitable one.
 5. State the strongest credible alternative, why it loses here, and the accepted drawback of the recommendation. Use qualitative trade-offs unless actual measurements justify numbers; avoid arbitrary weighted scores or fixed rankings.
 
-Recommend a direction as soon as the evidence supports it, then refine only decisions affected by new answers. Do not withhold all guidance until the final blueprint. If a missing fact could change the choice, name the provisional choice and its validation condition, and ask only the next blocking question.
+Recommend a direction as soon as the evidence supports it, then refine only decisions affected by new answers. Do not withhold all guidance until the final blueprint. If a missing fact could change the choice, name the provisional choice and its validation condition, and include the question in the next dependency-ready frontier.
 
 Check current primary documentation for material version support, compatibility, pricing, quotas, licensing, and product capabilities. If verification is unavailable, label the claim unverified and retain an evidence gate with an owner and decision rule. Do not promise a cost or capacity based on a remembered vendor table. The final blueprint can name a technology family or product conditionally without pretending an exact version or provider has been validated.
 
@@ -63,7 +63,7 @@ Do not defer required authorization, data integrity, backups, recovery, or other
 
 ## Example of interview pressure
 
-For a small internal product with a distant ambition of 10,000 users, challenge whether the proposed distribution solves a current workload or ownership problem. Recommend a concrete candidate using the team's known tools, explain the operating cost it avoids, and propose a relevant revisit signal. Then ask one decision, for example: "Do you accept a single deployable application for this release, with service extraction reconsidered if measured contention prevents meeting the agreed latency target?"
+For a small internal product with a distant ambition of 10,000 users, challenge whether the proposed distribution solves a current workload or ownership problem. Recommend a concrete candidate using the team's known tools, explain the operating cost it avoids, and propose a relevant revisit signal. Then include this decision in the frontier round, for example: "Do you accept a single deployable application for this release, with service extraction reconsidered if measured contention prevents meeting the agreed latency target?"
 
 Do not use that answer automatically when a committed launch, isolation obligation, or existing staffed platform changes the evidence.
 

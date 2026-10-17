@@ -1,5 +1,45 @@
 # Validation report
 
+## Grill Me: productivity frontier rounds and rich questions — 2026-10-17
+
+Renamed the interview package to `grill-me` 2.0.0 and moved it with `git mv`
+to `skills/productivity/grill-me/`, adding the previously untracked
+`references/delivery-and-risk.md` before the move. Removed the empty former
+category. The entry point is **111 lines**, with dependency-ready frontier rounds,
+recommended answers, non-blocking fact-finding, and continuous native-tool
+interview execution. Its new rich-transport section calls for 2–4 real alternatives
+with trade-offs, a native recommended flag without preselection, comparison
+previews, multi-select for non-exclusive choices, and free text for values.
+Yes/no is reserved for binary decisions and closure in rich tools; plain-text
+rounds retain the ❓/➡️ recommendation-acceptance format.
+
+Deep evidence, decision-map states, delivery pressure, pre-mortem, convergence,
+closure, and incomplete-interview guidance live in `references/delivery-and-risk.md`;
+architecture/stack, breadth lenses, and the optional blueprint remain separately
+routed references. Updated metadata, **15 evaluation scenarios**, README category,
+catalog/install/usage and no-alias migration note, package paths and checksums.
+The catalog and categorized package count remain **six skills**.
+
+Checks observed on the final package and tests:
+
+- **TDD red:** the new-path tests failed with five missing-package errors before
+  the move; after moving, the rich-transport test failed on the missing section.
+  **Green: 6/6 package tests pass** after implementing the section and eval.
+- `python -m unittest discover -s tests` — **60/60 passed** (CI runner).
+- **19/19 relative Markdown links** in the package and README resolve.
+- **7/7 package files** match `CHECKSUMS.sha256` using SHA-256, two spaces,
+  and repo-relative paths. Package bytes are LF-normalized, consistent with Git
+  blobs. The renamed test manifest entry was corrected; other entries were
+  preserved verbatim, including existing README/report digests.
+- Active-reference scan: **no stale references** outside historical validation
+  sections and the OpenSpec archive; the README rename/migration note deliberately
+  mentions the former package name. CI has no old path to update.
+- `git diff --check`: **PASS**. Focused simplify review kept the new section
+  concise and qualified existing eval yes-acceptance rules as plain-text-only,
+  avoiding a conflict with rich-tool alternatives.
+- Historical validation and archive contents are unchanged. No commit,
+  installation, or live interactive model eval was run.
+
 ## Complete category organization — 2026-09-10
 
 All six skills now use `skills/<category>/<skill-name>/`. The remaining packages

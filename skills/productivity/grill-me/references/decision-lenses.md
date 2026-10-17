@@ -1,6 +1,6 @@
 # Decision Lenses
 
-Use this as a coverage map, not a questionnaire. Select only branches material to the current decision, keep one question pending at a time, and let each answer reshape the next question. Follow the entry point's question transport to continue automatically when the harness permits it.
+Use this as a coverage map, not a questionnaire. Select only branches material to the current decision, ask the whole dependency-ready frontier in each round, and let the answers reshape the next round. Follow the entry point's question transport to continue automatically when the harness permits it.
 
 ## Routing order
 

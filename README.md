@@ -10,17 +10,17 @@ The catalog currently contains six skills:
 
 | Skill | Use it for | Documentation |
 | --- | --- | --- |
-| `architectural-grilling` | Interview one decision at a time to resolve product and delivery risks and recommend a concrete architecture and tech stack proportional to real needs and operating capacity. | [`SKILL.md`](skills/software-design/architectural-grilling/SKILL.md) |
+| `grill-me` | Stress-test ideas, plans, and decisions through dependency-ready frontier rounds with evidence, recommendations, and explicit trade-offs. | [`SKILL.md`](skills/productivity/grill-me/SKILL.md) |
 | `progressive-context-router` | Configure, refactor, audit, or refresh repository instructions and progressive context for coding agents without changing product logic. | [`SKILL.md`](skills/agent-tooling/progressive-context-router/SKILL.md) |
 | `simplify` | Refine the current diff for clarity and maintainability while preserving observable behavior and unrelated workspace changes. | [`SKILL.md`](skills/code-quality/simplify/SKILL.md) |
 | `project-zomboid-modding` | Develop and migrate PZ mods with version-matched vanilla/API evidence, B42 crafting, multiplayer authority, and honest runtime verification. | [`SKILL.md`](skills/game-dev/project-zomboid-modding/SKILL.md) |
 | `unity-developer` | Select and implement proportional Unity + C# design patterns, architecture, lifecycle safeguards, and game AI systems from project evidence. | [`SKILL.md`](skills/game-dev/unity-developer/SKILL.md) |
 | `unity-gc-free` | Diagnose and migrate measured Unity managed-allocation hot paths with behavior-safe reuse, pooling, libraries, and target-player evidence. | [`SKILL.md`](skills/game-dev/unity-gc-free/SKILL.md) |
 
-The core interview loop in `architectural-grilling` is inspired by the
-MIT-licensed [`grilling` skill from mattpocock/skills](https://github.com/mattpocock/skills/tree/main/skills/productivity/grilling). This version expands it with explicit decision states, architecture and project-management lenses, convergence criteria, red-team checks, and an implementation-ready blueprint.
+The core interview loop in `grill-me` is inspired by the
+MIT-licensed [`grilling` skill from mattpocock/skills](https://github.com/mattpocock/skills/tree/main/skills/productivity/grilling). The short entry point uses design-tree frontier rounds; on-demand references add explicit decision states, architecture and project-management lenses, convergence criteria, red-team checks, and an optional formal blueprint.
 
-Its [architecture and stack guide](skills/software-design/architectural-grilling/references/architecture-and-stack.md) adapts decision criteria from `architecture-pattern-selector`, `architecture-designer`, and `tech-stack-recommender`. It weighs current needs, credible growth, team expertise, operating burden, and the cost of changing later; the source links are included in the guide. These skills do not need to be installed separately.
+Its [architecture and stack guide](skills/productivity/grill-me/references/architecture-and-stack.md) adapts decision criteria from `architecture-pattern-selector`, `architecture-designer`, and `tech-stack-recommender`. It weighs current needs, credible growth, team expertise, operating burden, and the cost of changing later; the source links are included in the guide. These skills do not need to be installed separately.
 
 ## Repository layout
 
@@ -35,8 +35,8 @@ Its [architecture and stack guide](skills/software-design/architectural-grilling
 │   │   ├── project-zomboid-modding/
 │   │   ├── unity-developer/
 │   │   └── unity-gc-free/
-│   └── software-design/
-│       └── architectural-grilling/
+│   └── productivity/
+│       └── grill-me/
 ├── tests/                # repository-level tests
 ├── VALIDATION.md         # validation report and commands
 ├── LICENSE
@@ -56,7 +56,7 @@ skill's name, such as `--skill unity-developer`, without a category prefix.
 | `agent-tooling` | Coding-agent instructions, context management, and supporting tools |
 | `code-quality` | Refactoring, maintainability, and code-quality improvements |
 | `game-dev` | Game engines, gameplay development, and modding |
-| `software-design` | Requirements exploration, architecture, and technical design decisions |
+| `productivity` | Thinking, planning, and decision workflows such as structured interviews and stress-testing ideas |
 
 ## Skill metadata
 
@@ -77,7 +77,8 @@ metadata:
 ---
 ```
 
-Each skill has its own version. The five existing skills declare `"1.0.1"`;
+Each skill has its own version. `grill-me` declares `"2.0.0"`; the other four
+established skills declare `"1.0.1"`;
 `project-zomboid-modding` starts at `"1.0.0"`. This identifies
 the skill package, not a Git tag or a supported tool version. Keep versions
 quoted so YAML reads them as strings.
@@ -95,7 +96,7 @@ discovery command:
 npx skills add . --list
 ```
 
-It currently discovers `architectural-grilling`, `progressive-context-router`,
+It currently discovers `grill-me`, `progressive-context-router`,
 `simplify`, `project-zomboid-modding`, `unity-developer`, and `unity-gc-free`.
 For installation, point your Agent Skills-compatible installer at this repository
 and select the required skill. Each package root under `skills/` contains its
@@ -110,12 +111,15 @@ Once this change is published to the repository, install with:
 npx skills add https://github.com/EremesNG/skills --skill project-zomboid-modding
 ```
 
-### Remote installation: `architectural-grilling`
+### Remote installation: `grill-me`
+
+`architectural-grilling` was renamed to `grill-me`; reinstall with `--skill grill-me`.
+There is no alias for the old name.
 
 Install this skill from the repository with:
 
 ```bash
-npx skills add https://github.com/EremesNG/skills --skill architectural-grilling
+npx skills add https://github.com/EremesNG/skills --skill grill-me
 ```
 
 ### Remote installation: `progressive-context-router`
@@ -163,17 +167,17 @@ Start with the skill's `SKILL.md`:
 Each skill's `SKILL.md` is the authoritative guide for its operation and bundled
 resources.
 
-### Usage example: `architectural-grilling`
+### Usage example: `grill-me`
 
 Use this copyable prompt to turn a vague software idea into a decision-complete
 blueprint:
 
 ```text
-Use architectural-grilling to challenge this idea relentlessly before any implementation.
+Use grill-me to challenge this idea relentlessly before any implementation.
 
-Expose assumptions, investigate facts available in the repository, and ask one decision at a time with your recommended answer. Challenge whether we should build it at all, then resolve product scope, domain rules, architecture, data, security, operations, delivery dependencies, ownership, estimates, rollout, and risks.
+Expose assumptions, investigate facts available in the repository, and ask all independent dependency-ready questions in one numbered frontier round, each with a recommended answer and its trade-off. Use rich question tools for real alternatives with descriptions and the native recommended flag (never preselected), previews for comparisons, multi-select for non-exclusive choices, and free text for values. Reserve yes/no for binary decisions and closure; in plain text use the ❓/➡️ format so "yes" accepts the recommendation. Challenge whether we should build it at all, then resolve product scope, domain rules, architecture, data, security, operations, delivery dependencies, ownership, estimates, rollout, and risks.
 
-When the harness supports interactive questions, wait for each answer and continue with the next question within the same execution. Keep only one question pending. In ordinary chat, include the next question when responding to my answer; do not require me to say "continue".
+When the harness supports interactive questions, submit the whole round, wait for actual answers, recompute the frontier, and immediately ask the next round within the same execution without ending the turn. Keep only one round pending. Questions depending on an open answer wait for a later round. In ordinary chat, include the next round when responding to my answers; do not require me to say "continue".
 
 Recommend a concrete architecture and tech stack that fit the next useful release, my team's skills, budget, and operating capacity. Separate what to build now, what to prepare cheaply, and what to defer until an observable trigger. Challenge speculative future scale without ignoring credible commitments or necessary safeguards.
 
