@@ -77,7 +77,7 @@ metadata:
 ---
 ```
 
-Each skill has its own version. `grill-me` declares `"2.0.0"`; the other four
+Each skill has its own version. `grill-me` declares `"2.0.1"`; the other four
 established skills declare `"1.0.1"`;
 `project-zomboid-modding` starts at `"1.0.0"`. This identifies
 the skill package, not a Git tag or a supported tool version. Keep versions

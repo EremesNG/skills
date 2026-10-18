@@ -1,5 +1,33 @@
 # Validation report
 
+## Grill Me evals with skill-creator — 2026-10-17
+
+Ran the skill-creator eval workflow on `grill-me` (executor `thoth-worker`,
+1 run per configuration) against `architectural-grilling` from commit `829d11c`,
+using evals 13, 12, 15, 6 and 11 (one per contract: frontier rounds, plain-text
+continuity, rich question tool, start small, stack with a blocking loop). Question
+tools were simulated as JSON payloads; the executors did not see evals or assertions.
+A fresh `thoth-oracle` graded the transcripts with `agents/grader.md`; a workspace script
+counted questions per call, question types, recommended flags and previews.
+
+- Iteration 1: **grill-me 25/26 (96%)** vs **old skill 18/26 (69%)**; 5 old failures are
+  expected from its one-question-per-turn design. grill-me batched 2–5 questions per
+  call and used single, multi, text and previews; the old skill always asked one.
+- Only grill-me failure (eval 13): a partially answered round was left waiting.
+  Added one SKILL.md rule (version bumped to **2.0.1**): a partially answered round is finished and its unanswered
+  questions carry into the next round. Iteration 2 of eval 13: **4/4** (fresh grader);
+  no contradiction with asynchronous one-pending-round handling.
+- Evals: eval 15 fixture now carries the simulated tool schema; eval 13 marks event 2
+  as the complete round reply and adds a carry-over assertion.
+- Description triggering (`claude -p`, 20 English/Spanish queries, 3 runs each, 180 s
+  timeout, Windows-compatible harness copy in the ignored workspace): **20/20 queries,
+  60/60 valid runs**, including "aterrizar esta idea" phrasings; no false positives.
+  The English-only description is unchanged; optimization was not needed.
+- `tests/grill-me-workspace/` is ignored by git. Repository tests: **60/60 PASS**;
+  `SKILL.md` remains 112 lines.
+
+Limits: single runs without variance, simulated question tools, one executor model.
+
 ## Grill Me: productivity frontier rounds and rich questions — 2026-10-17
 
 Renamed the interview package to `grill-me` 2.0.0 and moved it with `git mv`

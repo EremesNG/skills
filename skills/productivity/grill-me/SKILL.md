@@ -4,7 +4,7 @@ description: Grill me, grill this idea, or challenge my assumptions by relentles
 license: MIT
 metadata:
   author: EremesNG
-  version: "2.0.0"
+  version: "2.0.1"
   repository: https://github.com/EremesNG/skills
 ---
 
@@ -31,7 +31,8 @@ word each so **"yes"** accepts it. Use the user's language and established domai
 Wait for the answers, record decisions and consequences, test contradictions,
 and recompute the frontier. A question depending on another open question in
 this round belongs to a **later** round. Never bundle dependent decisions.
-Keep progress visible with brief checkpoints, not a dump of the entire tree.
+A partially answered round is finished: carry its unanswered questions into the
+next round. Keep progress visible with brief checkpoints, not a full tree dump.
 
 ## Use the richest question transport
 

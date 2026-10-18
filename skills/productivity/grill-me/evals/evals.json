@@ -205,7 +205,7 @@
         "transport": "An isolated harness exposes only a permitted asynchronous question tool and an event-based wait/resume primitive. The question call returns pending, not an answer. Do not contact a real user.",
         "events_in_order": [
           "Question delivery acknowledged; no user answer yet.",
-          "The actual user accepts a single application for this release.",
+          "The actual user's complete reply to the pending round accepts a single application for this release; other questions in that round are unanswered.",
           "The next question is cancelled without an answer."
         ]
       },
@@ -214,6 +214,7 @@
         "A pending tool acknowledgment does not resolve a decision or authorize another round.",
         "The agent waits through the available event mechanism without polling or emitting a final interview response while the answer is pending.",
         "After the real answer arrives, the next frontier round is asked automatically with a recommendation.",
+        "Unanswered questions from a partially answered round stay open and are carried into the next round with any newly unlocked questions.",
         "Cancellation without an answer preserves the open decision and pauses without choosing the default or retrying in a loop."
       ]
     },
@@ -243,7 +244,8 @@
         "transport": "An isolated harness exposes a permitted blocking rich question tool with options, descriptions, a native recommended flag, previews, multi-select and free text. Do not contact a real user.",
         "replies_in_order": [
           "Stop the interview and summarize the open decisions."
-        ]
+        ],
+        "tool_schema": "ask_user_question({questions:[{id, header, prompt, type: \"single\"|\"multi\"|\"text\"|\"confirm\", context?, options?:[{value, label, description?, recommended?: boolean, preview?: markdown}]}]}). Options are never preselected; recommended only marks. Emit each tool call as a JSON block."
       },
       "expected_output": "The agent submits the dependency-ready frontier through the rich question tool, comparing genuine hosting alternatives with trade-offs and a marked but unselected recommendation, using previews for comparison, multi-select for optional features and free text for the budget. It respects the fixture stop and labels the summary incomplete.",
       "assertions": [

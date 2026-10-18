@@ -29,7 +29,7 @@ class GrillMePackageTests(unittest.TestCase):
         self.assertLessEqual(len(values["description"]), 1024)
         self.assertLessEqual(len(text.splitlines()), 112)
         self.assertEqual(values["license"], "MIT")
-        for field in ('author: EremesNG', 'version: "2.0.0"',
+        for field in ('author: EremesNG', 'version: "2.0.1"',
                       'repository: https://github.com/EremesNG/skills'):
             self.assertIn(field, frontmatter)
         for trigger in ('grill', 'stress-test', 'architecture', 'tech stack', 'product'):
