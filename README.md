@@ -6,13 +6,14 @@ and validation context together.
 
 ## Available skills
 
-The catalog currently contains six skills:
+The catalog currently contains seven skills:
 
 | Skill | Use it for | Documentation |
 | --- | --- | --- |
 | `grill-me` | Stress-test ideas, plans, and decisions through dependency-ready frontier rounds with evidence, recommendations, and explicit trade-offs. | [`SKILL.md`](skills/productivity/grill-me/SKILL.md) |
 | `progressive-context-router` | Configure, refactor, audit, or refresh repository instructions and progressive context for coding agents without changing product logic. | [`SKILL.md`](skills/agent-tooling/progressive-context-router/SKILL.md) |
 | `simplify` | Refine the current diff for clarity and maintainability while preserving observable behavior and unrelated workspace changes. | [`SKILL.md`](skills/code-quality/simplify/SKILL.md) |
+| `software-design-patterns` | Choose, apply, and review design and architecture patterns across game engines and general software, with platform idiom maps and an anti-overengineering stance. | [`SKILL.md`](skills/code-quality/software-design-patterns/SKILL.md) |
 | `project-zomboid-modding` | Develop and migrate PZ mods with version-matched vanilla/API evidence, B42 crafting, multiplayer authority, and honest runtime verification. | [`SKILL.md`](skills/game-dev/project-zomboid-modding/SKILL.md) |
 | `unity-developer` | Select and implement proportional Unity + C# design patterns, architecture, lifecycle safeguards, and game AI systems from project evidence. | [`SKILL.md`](skills/game-dev/unity-developer/SKILL.md) |
 | `unity-gc-free` | Diagnose and migrate measured Unity managed-allocation hot paths with behavior-safe reuse, pooling, libraries, and target-player evidence. | [`SKILL.md`](skills/game-dev/unity-gc-free/SKILL.md) |
@@ -22,6 +23,8 @@ MIT-licensed [`grilling` skill from mattpocock/skills](https://github.com/mattpo
 
 Its [architecture and stack guide](skills/productivity/grill-me/references/architecture-and-stack.md) adapts decision criteria from `architecture-pattern-selector`, `architecture-designer`, and `tech-stack-recommender`. It weighs current needs, credible growth, team expertise, operating burden, and the cost of changing later; the source links are included in the guide. These skills do not need to be installed separately.
 
+The `software-design-patterns` references are independently written summaries citing Refactoring.Guru, the GoF book, and Robert Nystrom's *Game Programming Patterns*; see [sources and attribution](skills/code-quality/software-design-patterns/references/sources.md).
+
 ## Repository layout
 
 ```text
@@ -30,7 +33,8 @@ Its [architecture and stack guide](skills/productivity/grill-me/references/archi
 │   ├── agent-tooling/
 │   │   └── progressive-context-router/
 │   ├── code-quality/
-│   │   └── simplify/
+│   │   ├── simplify/
+│   │   └── software-design-patterns/
 │   ├── game-dev/
 │   │   ├── project-zomboid-modding/
 │   │   ├── unity-developer/
@@ -48,7 +52,7 @@ Each skill directory contains its `SKILL.md` entry point and any needed
 
 Category folders group related packages and do not contain their own `SKILL.md`.
 Keep each skill self-contained at its leaf directory. The validated discovery
-command finds all six categorized packages; selection still uses the
+command finds all seven categorized packages; selection still uses the
 skill's name, such as `--skill unity-developer`, without a category prefix.
 
 | Category | Scope |
@@ -78,10 +82,10 @@ metadata:
 ```
 
 Each skill has its own version. `grill-me` declares `"2.0.1"`; the other four
-established skills declare `"1.0.1"`;
-`project-zomboid-modding` starts at `"1.0.0"`. This identifies
-the skill package, not a Git tag or a supported tool version. Keep versions
-quoted so YAML reads them as strings.
+established skills declare `"1.0.1"`; `project-zomboid-modding` and
+`software-design-patterns` start at `"1.0.0"`. This identifies the skill package,
+not a Git tag or a supported tool version. Keep versions quoted so YAML reads
+them as strings.
 
 Use the optional top-level `compatibility` field only for actual environment
 requirements. Keep `allowed-tools` optional and specific to a real tool policy;
@@ -97,7 +101,8 @@ npx skills add . --list
 ```
 
 It currently discovers `grill-me`, `progressive-context-router`,
-`simplify`, `project-zomboid-modding`, `unity-developer`, and `unity-gc-free`.
+`simplify`, `software-design-patterns`, `project-zomboid-modding`,
+`unity-developer`, and `unity-gc-free`.
 For installation, point your Agent Skills-compatible installer at this repository
 and select the required skill. Each package root under `skills/` contains its
 `SKILL.md` and supporting files. Client-specific installer options are
@@ -136,6 +141,14 @@ Install this skill from the repository with:
 
 ```bash
 npx skills add https://github.com/EremesNG/skills --skill simplify
+```
+
+### Remote installation: `software-design-patterns`
+
+Install this skill from the repository with:
+
+```bash
+npx skills add https://github.com/EremesNG/skills --skill software-design-patterns
 ```
 
 ### Remote installation: `unity-developer`
@@ -208,6 +221,14 @@ Use this copyable prompt after an implementation is working:
 Use simplify for a final cleanup pass over the files changed by this task.
 
 Reduce accidental duplication, nesting, and indirection, but preserve public behavior, errors, ordering, performance constraints, and test meaning. Do not touch unrelated working-tree changes or redesign APIs. Run the nearest relevant checks and report any cleanup left out of scope.
+```
+
+### Usage example: `software-design-patterns`
+
+Use this copyable prompt for a design decision or review:
+
+```text
+Use software-design-patterns to decide how to restructure this code. Ground the decision in the actual code, engine or stack version, scale and constraints. Name the force behind any change, try the simplest alternative first, and compare two or three candidates with their costs. Prefer the platform's native idioms, migrate incrementally with tests at the seams, and state what would justify revisiting the choice. For reviews, flag both unnecessary indirection and missing structure.
 ```
 
 ### Usage example: `unity-developer`

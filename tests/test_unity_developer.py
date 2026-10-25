@@ -207,7 +207,7 @@ class UnityDeveloperEntryContractTests(unittest.TestCase):
 
     def test_readme_catalogs_installs_and_demonstrates_unity_developer(self) -> None:
         text = (REPO_ROOT / "README.md").read_text(encoding="utf-8")
-        self.assertIn("catalog currently contains six skills", text.lower())
+        self.assertIn("catalog currently contains seven skills", text.lower())
         self.assertIn(
             "| `unity-developer` |",
             text,
@@ -230,6 +230,7 @@ class UnityDeveloperEntryContractTests(unittest.TestCase):
         )
         self.assertIsNotNone(discovery_paragraph)
         self.assertIn("unity-developer", discovery_paragraph.group(1))  # type: ignore[union-attr]
+        self.assertIn("software-design-patterns", discovery_paragraph.group(1))  # type: ignore[union-attr]
 
     def test_ci_compiles_every_bundled_script_without_shell_globs(self) -> None:
         workflow = (REPO_ROOT / ".github" / "workflows" / "validate.yml").read_text(

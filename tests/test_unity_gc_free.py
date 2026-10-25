@@ -140,7 +140,7 @@ class UnityGcFreeEntryContractTests(unittest.TestCase):
 
     def test_readme_catalogs_installs_and_demonstrates_unity_gc_free(self) -> None:
         text = (REPO_ROOT / "README.md").read_text(encoding="utf-8")
-        self.assertIn("catalog currently contains six skills", text.lower())
+        self.assertIn("catalog currently contains seven skills", text.lower())
         self.assertIn("| `unity-gc-free` |", text)
         self.assertIn("[`SKILL.md`](skills/game-dev/unity-gc-free/SKILL.md)", text)
         self.assertIn("### Remote installation: `unity-gc-free`", text)
@@ -155,6 +155,7 @@ class UnityGcFreeEntryContractTests(unittest.TestCase):
         discovered = discovery_paragraph.group(1)  # type: ignore[union-attr]
         self.assertIn("unity-developer", discovered)
         self.assertIn("unity-gc-free", discovered)
+        self.assertIn("software-design-patterns", discovered)
 
     def test_ci_and_local_commands_compile_the_inspector_explicitly(self) -> None:
         workflow = (REPO_ROOT / ".github" / "workflows" / "validate.yml").read_text(

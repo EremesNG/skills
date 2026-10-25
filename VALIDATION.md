@@ -1,5 +1,123 @@
 # Validation report
 
+## Software Design Patterns skill — 2026-10-25
+
+Added `skills/code-quality/software-design-patterns/` **1.0.0**: a **112-line
+`SKILL.md` entry point including frontmatter**, 15 on-demand references,
+`agents/openai.yaml`, and **six evals**. Five references are platform idiom maps
+verified against official documentation on **2026-10-25**. Added
+`tests/test_software_design_patterns.py`; README catalog, layout, discovery,
+version, installation and usage sections and the two Unity tests now expect
+**seven skills**.
+
+After two evaluation iterations, the package was compacted from **3,829 to 1,123
+lines** (about 13.2k words) to keep only guidance that changes a no-skill answer.
+An independent value audit found that the measurable gain was decision discipline,
+not textbook pattern prose. That discipline means contrasting real alternatives,
+stating lifecycle and interruption contracts, conditional durability, platform traps
+and proportionality. `SKILL.md` gained Lifecycle and Interruption, Remote and Async
+Work and Proportionality sections. It also gained lazy reference-loading rules and
+an output menu. Pattern references became short decision cards with five fields:
+*choose when*, *simpler first and upgrade trigger*, *contract*, *traps* and *not*.
+Every H2/H3 heading and anchor is preserved. Attribution is consolidated in
+`sources.md`, and all source URLs are kept. Engine-specific ECS facts moved to the
+platform maps: Unity Entities, Unreal MassEntity, no built-in ECS in Godot or
+Roblox, and Roblox community libraries. `ecs-data-oriented.md` now links to those
+maps.
+
+Reference line counts measured from the current files (including headings and
+blank lines), **1,011 lines total**:
+
+| Reference under `references/` | Lines |
+| --- | ---: |
+| `application-architecture.md` | 109 |
+| `behavioral.md` | 80 |
+| `creational.md` | 38 |
+| `distributed-systems.md` | 151 |
+| `ecs-data-oriented.md` | 65 |
+| `game-ai.md` | 81 |
+| `game-programming.md` | 141 |
+| `platforms/general-stacks.md` | 40 |
+| `platforms/godot.md` | 27 |
+| `platforms/roblox.md` | 29 |
+| `platforms/unity.md` | 29 |
+| `platforms/unreal.md` | 27 |
+| `principles.md` | 52 |
+| `sources.md` | 90 |
+| `structural.md` | 52 |
+
+Sources and reuse: the references are independent paraphrases citing
+Refactoring.Guru, the GoF book, and Robert Nystrom's *Game Programming Patterns*.
+Refactoring.Guru's content usage policy permits only non-substantial, attributed
+quotes; Nystrom's prose is licensed **CC BY-NC-ND 4.0**. No upstream prose or figures
+are reproduced. Two maintainer-provided study notes informed the work but are not
+redistributed. See the package's `references/sources.md` for attribution and the
+upstream terms; the package's MIT license covers its independently written material.
+
+The skill-creator evaluation workflow used executor `thoth-worker`
+(`openai-codex/gpt-6.1-sol-fast`, **xhigh**) and fresh, blind `thoth-oracle` graders.
+The workspace remained outside the repository, with one run per configuration.
+
+- **Iteration 1:** with-skill assertion pass rate **95%** versus **85%** without
+  the skill; blind holistic scores **9/9/9** versus **8/9/8**. Mean token usage was
+  approximately **197k** versus **40k**. User feedback rejected the Roblox built-in
+  behavior-tree disclaimer assertion as outside the skill's responsibility.
+- **Iteration 2:** replaced that assertion with stale-async handling and added
+  post-commit notification-failure and jump-impulse checks, yielding **seven
+  assertions per eval**. `SKILL.md` reference loading became lazy. Assertion pass
+  rates were **100%** with the skill versus **90.5%** without; blind holistic scores
+  remained **9/9/9** versus **8/9/8**. Mean with-skill token usage fell to
+  approximately **121k (-38%)**; mean time was **173 s** with the skill versus
+  **180 s** without. Baseline outputs from iteration 1 were reused and regraded,
+  not rerun.
+- **Iteration 3 (compaction):** added three discriminating evals: a Unity buff
+  system, reward-grant retries and a solo Godot roguelike. Each has six or seven
+  assertions. Three configurations ran on all six evals: the compact skill, a frozen
+  snapshot of the pre-compaction skill, and no skill. One calibrated blind grader
+  then scored all **18** outputs.
+  - Assertion pass rates were **100%** compact, **100%** previous and **97.2%**
+    without the skill. The baseline made a transactional outbox unconditional in
+    the retries eval.
+  - Mean holistic scores were **8.83** compact, **9.00** previous and **8.00**
+    without. The compact skill ranked first in three evals, including **10/10** on
+    retries, and second in two.
+  - It ranked last on the code-heavy Unity eval (**7/10**). That run had a float
+    tick-boundary bug and over-long scaffolding; with one run per configuration,
+    this may be variance.
+  - Mean tokens were about **101k** compact, **110k** previous and **40k** without.
+    Most of the gap to the baseline comes from multi-turn cache re-reads rather than
+    skill text.
+  - Answers became shorter in five of six evals. The retries run needed no
+    reference file at all.
+  - The retries-eval baseline also loaded two unrelated installed skills, as the
+    harness required. The maintainer accepted the compact version.
+
+Checks observed on the current package and integration:
+
+- **Root-run skill-creator quick validation: PASS** on 2026-10-25, after the
+  compaction (`Skill is valid!`). From
+  `C:\Users\EremesNG\.claude\plugins\marketplaces\claude-plugins-official\plugins\skill-creator\skills\skill-creator`,
+  root ran `uv run --python 3.13 --with pyyaml python -m scripts.quick_validate`
+  with the package's absolute path.
+- **TDD red:** the focused package suite initially passed **8/9**, failing only
+  because README lacked the new catalog entry. After registration, all **9/9**
+  package tests pass within the full suite.
+- `uv run --python 3.13 python -m unittest discover -s tests -v` —
+  **69/69 PASS**, zero failures, errors or skips, after the compaction.
+- `npx skills add . --list` — **7/7 skills discovered**, including
+  `software-design-patterns`; no skill installation or publication performed.
+- An earlier independent final review **failed one blocker**: engine-specific
+  implementation details in `ecs-data-oriented.md`. The compaction removed them
+  from that general reference; the platform maps carry them.
+- `git diff --check`: **PASS**. The checksum manifest lists all **18 package
+  files** and the new test, and refreshes the four changed, already-listed files.
+  Digests are computed over LF-normalized bytes, equivalent to committed Git blobs.
+  Nothing was staged or committed.
+
+Limits: one run per configuration without variance; several assertions no longer
+discriminate between configurations; platform maps are version-sensitive and
+require project-version rechecks.
+
 ## Grill Me evals with skill-creator — 2026-10-17
 
 Ran the skill-creator eval workflow on `grill-me` (executor `thoth-worker`,

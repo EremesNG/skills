@@ -1,0 +1,4 @@
+interface:
+  display_name: "Software Design Patterns"
+  short_description: "Choose, apply and review design patterns"
+  default_prompt: "Use $software-design-patterns to choose, apply or review the simplest design or architecture that addresses the codebase's demonstrated needs."

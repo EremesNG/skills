@@ -1,0 +1,93 @@
+{
+  "skill_name": "software-design-patterns",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Tengo un plataformas 2D en Godot 4.3. Mi `player.gd` (CharacterBody2D) ya tiene unas 600 líneas y todo está en `_physics_process` con un montón de `if/elif` y booleanos: `is_jumping`, `is_dashing`, `is_attacking`, `is_wall_sliding`, `is_hurt`, `can_dash`. Estados: idle, run, jump, fall, dash, wall-slide, attack, hurt. Cada vez que añado algo (ahora quiero un double jump) se rompe otra cosa; por ejemplo, si me golpean durante el dash me quedo atascado en dash. Te pego un trozo:\n\n```gdscript\nfunc _physics_process(delta):\n    if is_hurt:\n        hurt_timer -= delta\n        if hurt_timer <= 0: is_hurt = false\n        velocity.x = knockback.x\n    elif is_dashing:\n        dash_timer -= delta\n        velocity = dash_dir * DASH_SPEED\n        if dash_timer <= 0: is_dashing = false\n    elif is_attacking:\n        velocity.x = 0\n    else:\n        if Input.is_action_just_pressed(\"jump\") and (is_on_floor() or is_wall_sliding):\n            velocity.y = JUMP_VELOCITY\n            is_jumping = true\n        if Input.is_action_just_pressed(\"dash\") and can_dash:\n            is_dashing = true; can_dash = false; dash_timer = DASH_TIME\n        # ... 500 líneas más\n    move_and_slide()\n```\n\n¿Qué patrón de diseño debería usar para ordenar esto y cómo lo migro sin romper el juego? Dame la estructura concreta.",
+      "expected_output": "Diagnoses boolean-flag soup and illegal state combinations, recommends an explicit state machine (State pattern or enum + match, scaled to the problem) with entry/exit handling that fixes the stuck-dash bug, treats hurt as an interrupt transition, maps the design to Godot idioms, and gives an incremental, behavior-preserving migration without introducing heavier AI architectures.",
+      "files": [],
+      "assertions": [
+        "Recommends an explicit state machine (State pattern, enum-based FSM or state nodes) to replace the independent boolean flags",
+        "Explains that entry/exit or transition handling resets dash state and timers when hurt interrupts a dash, fixing the stuck-dash bug",
+        "Maps the design to Godot idioms (for example enum + match, Node or RefCounted state objects, signals, InputMap actions, _physics_process delegation)",
+        "Proposes an incremental migration that keeps the game working (one state or slice at a time, behavior preserved, playtested or tested per step)",
+        "Handles double jump as a counter or data inside an airborne state (or equivalent) rather than another independent boolean",
+        "Distinguishes applying a jump impulse from entering the airborne or ascending state, so a second jump while already rising works",
+        "Does not recommend heavier architectures such as behavior trees, GOAP, ECS or a global event bus for the player controller"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Can you review this PR before I merge it? It's for our Node/TypeScript order service. Today we only send emails through SendGrid; product says SMS is 'maybe next year'. `IOrderRepository` has a single `PostgresOrderRepository` implementation and is replaced by an in-memory fake in our unit tests.\n\n```ts\n// config.ts\nexport class Config {\n  private static instance: Config;\n  private constructor(public readonly values: Record<string, string>) {}\n  static getInstance(): Config {\n    if (!Config.instance) Config.instance = new Config({ ...process.env } as Record<string, string>);\n    return Config.instance;\n  }\n}\n\n// notifications/INotificationSender.ts\nexport interface INotificationSender {\n  send(to: string, subject: string, body: string): Promise<void>;\n}\n\n// notifications/AbstractNotificationSenderFactory.ts\nexport abstract class AbstractNotificationSenderFactory {\n  abstract createSender(): INotificationSender;\n}\nexport class EmailNotificationSenderFactory extends AbstractNotificationSenderFactory {\n  createSender(): INotificationSender {\n    return new SendGridEmailSender(Config.getInstance().values.SENDGRID_KEY);\n  }\n}\n\n// notifications/NotificationSenderFactoryProvider.ts\nexport class NotificationSenderFactoryProvider {\n  static getFactory(kind: 'email'): AbstractNotificationSenderFactory {\n    switch (kind) {\n      case 'email': return new EmailNotificationSenderFactory();\n    }\n  }\n}\n\n// events/EventBus.ts\ntype Handler = (payload: unknown) => void;\nexport const EventBus = {\n  handlers: new Map<string, Handler[]>(),\n  on(event: string, handler: Handler) { /* push into map */ },\n  emit(event: string, payload: unknown) { this.handlers.get(event)?.forEach(h => h(payload)); },\n};\n\n// orders/OrderService.ts\nexport class OrderService {\n  constructor(private repo: IOrderRepository) {}\n  async placeOrder(order: Order) {\n    await this.repo.save(order);\n    EventBus.emit('order.placed', order);\n  }\n}\n\n// orders/handlers.ts\nEventBus.on('order.placed', async (o: any) => {\n  const sender = NotificationSenderFactoryProvider.getFactory('email').createSender();\n  await sender.send(o.customerEmail, 'Order confirmed', `Order ${o.id}`);\n});\n```",
+      "expected_output": "A design review that flags speculative generality (factory hierarchy and provider for one product, an event bus hiding a single direct call, a global config singleton), keeps only abstractions with a real boundary (the repository test seam and a notification port around the external provider), points out the concrete defects introduced by the indirection (unawaited async handler errors, hidden dependencies, hard-to-test singleton), proposes a simpler wiring through constructor injection at a composition root, and does not add new patterns.",
+      "files": [],
+      "assertions": [
+        "Flags the factory hierarchy and provider (AbstractNotificationSenderFactory, EmailNotificationSenderFactory, NotificationSenderFactoryProvider) as speculative for a single product and recommends removing or collapsing it",
+        "Keeps the IOrderRepository seam and a notification sender interface around SendGrid as justified boundaries instead of removing every abstraction",
+        "Identifies that EventBus.emit calls the async handler without awaiting it, so email failures become unhandled or silently lost",
+        "Identifies the Config singleton as hidden global state that hurts testability and recommends passing configuration or dependencies explicitly (constructor injection or a composition root)",
+        "Recommends replacing the event bus hop with a direct, explicit call or injected dependency for the single listener",
+        "Distinguishes a committed order from a failed notification: does not make placeOrder report failure or encourage retrying the whole order after the save succeeded",
+        "Does not require introducing additional patterns or infrastructure (new abstraction layers, plugin systems, message brokers) as the fix; reliability ideas such as an outbox are at most conditional"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Estoy haciendo un juego de sigilo en Roblox. Tendré unos 20-30 guardias NPC por servidor. Tienen que: patrullar entre waypoints, perseguir al jugador cuando lo ven, buscarlo en la última posición conocida si lo pierden, avisar a guardias cercanos para que acudan y huir a curarse cuando tienen poca vida. Más adelante queremos añadir guardias con linterna, perros y un jefe con fases. ¿Qué arquitectura de IA me recomiendas y cómo la organizo en scripts? Quiero que sea fácil añadir comportamientos nuevos sin que todo se vuelva un spaghetti.",
+      "expected_output": "Compares candidate AI architectures against the stated scale and growth, recommends a fitting one with clear reasons (not a planner by default), separates perception/knowledge from decisions, models guard variants as data, and adapts the design to Roblox: server-side AI in ModuleScripts, a shared time-sliced update instead of one loop per NPC, tag-based discovery, connection cleanup, and no assumption of a built-in behavior tree.",
+      "files": [],
+      "assertions": [
+        "Compares at least two AI architectures (for example FSM/HFSM, behavior tree, utility AI) against the stated needs before recommending one",
+        "Does not recommend GOAP or HTN planning as the primary architecture for this scope",
+        "Separates perception or shared knowledge (blackboard, memory or alert data) from decision logic",
+        "Runs AI on the server in ModuleScripts and uses a shared, time-sliced or budgeted update rather than one loop or thread per NPC",
+        "Handles stale asynchronous work, such as discarding outdated pathfinding results or expired alerts, so guards do not act on obsolete information",
+        "Addresses cleanup of connections or resources when an NPC is removed (Disconnect, Destroying, Maid, Trove or Janitor)",
+        "Models guard variants (flashlight guards, dogs, boss) through data, configuration or composition rather than a deep class hierarchy"
+      ]
+    },
+    {
+      "id": 4,
+      "prompt": "En Unity 6 quiero un sistema de buffs y debuffs para enemigos (veneno, ralentización, escudo, furia). Los stats base de cada tipo de enemigo están en ScriptableObjects (`EnemyStats`: vida, velocidad, daño, armadura) que comparten todos los enemigos de ese tipo. Los efectos se apilan: algunos suman un valor fijo, otros un porcentaje y otros multiplican, y tienen duración. La barra de vida y los iconos de estado de cada enemigo deben actualizarse cuando cambian sus stats. Habrá hasta ~80 enemigos a la vez. Diséñame la arquitectura y dame el código base en C#.",
+      "expected_output": "A proportional design that keeps shared ScriptableObject data read-only and computes per-instance runtime stats, applies modifiers in an explicit stage order with source tracking and expiry, recomputes lazily when modifiers change, wires per-enemy UI through owned subscriptions that are removed on disable or destroy, and avoids global managers, event buses or ECS for this scale.",
+      "files": [],
+      "assertions": [
+        "Never mutates the shared EnemyStats ScriptableObject at runtime; keeps per-instance runtime stats or modifier state separate from the shared asset and says why",
+        "Defines an explicit, deterministic modifier order (for example flat, then additive percent, then multiplicative) instead of applying effects in arrival order",
+        "Tracks modifier source or identity so a specific buff can be removed or refreshed, and handles duration expiry",
+        "Recomputes or caches final stats only when modifiers change (dirty flag or event-driven recompute) rather than rebuilding every frame for every enemy",
+        "Per-enemy UI subscribes to that enemy's change notification and unsubscribes in OnDisable or OnDestroy (or equivalent owned lifetime)",
+        "Does not introduce a global event bus, singleton manager or ECS/DOTS for ~80 enemies"
+      ]
+    },
+    {
+      "id": 5,
+      "prompt": "Our match service (Node.js) calls the inventory service over HTTP (`POST /grants`) to give players their rewards when a match ends. Sometimes the call times out and players complain they did not get their rewards, so I want to add retries. A teammate suggested wrapping the call with `axios-retry` (3 retries, exponential backoff). Is that enough? How should we do this properly?",
+      "expected_output": "Explains that a timeout does not mean the grant failed, so naive retries can double-grant; requires an idempotency key per match/player reward that the inventory service enforces; keeps bounded backoff with jitter at a single layer with a deadline; optionally makes the grant durable (outbox or queue) if rewards must survive crashes; avoids adding heavy infrastructure without need.",
+      "files": [],
+      "assertions": [
+        "Explains that a timeout does not prove the grant failed, so blind retries can grant rewards twice",
+        "Requires an idempotency key derived from the match and player (or reward id) that the inventory service stores and enforces",
+        "Keeps retries bounded with exponential backoff plus jitter and an overall deadline, and retries only transient failures",
+        "Warns against stacking retries at several layers (client library, service code, gateway) that multiply attempts",
+        "Mentions making the grant durable (outbox, queue or persisted pending grant with reconciliation) only as needed if rewards must survive crashes, not as a mandatory first step",
+        "Does not recommend unrelated heavy infrastructure such as a saga orchestrator, event sourcing or a service mesh for this fix"
+      ]
+    },
+    {
+      "id": 6,
+      "prompt": "Estoy empezando un roguelike pequeño en Godot 4.3, lo hago yo solo y quiero terminarlo en unos 3 meses. Necesito inventario, guardar y cargar partida, y que la UI reaccione cuando cambia la vida o el oro del jugador. Quiero hacerlo bien desde el principio para no tener que rehacerlo después. ¿Qué arquitectura y patrones me recomiendas?",
+      "expected_output": "A deliberately lightweight structure sized to a solo three-month project: plain data or Resources for items, signals for UI reactions, a small number of autoloads with clear ownership, an explicit versioned save format rather than serializing nodes, the shared-Resource mutation caveat, and explicit triggers for adding more structure later.",
+      "files": [],
+      "assertions": [
+        "Explicitly scales the architecture to a solo, three-month project and pushes back on building for hypothetical future needs",
+        "Uses Godot signals (or equivalent native mechanism) for UI reactions to health or gold changes instead of polling or a custom global event bus framework",
+        "Warns that shared Resources are shared across instances (mutating one affects all users) and recommends duplicate() or resource_local_to_scene or separate runtime state for mutable data",
+        "Recommends an explicit save format (dictionary or DTO with a version field) rather than serializing nodes or the whole scene tree",
+        "Limits autoloads or global singletons to a few with clear ownership and warns against autoload god objects",
+        "Names at least one concrete trigger for when to add more structure later (revisit trigger)",
+        "Does not recommend layering several heavy patterns at once (DI container, service locator, repository, ECS, plugin architecture) for this scope"
+      ]
+    }
+  ]
+}
