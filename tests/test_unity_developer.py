@@ -236,7 +236,7 @@ class UnityDeveloperEntryContractTests(unittest.TestCase):
         workflow = (REPO_ROOT / ".github" / "workflows" / "validate.yml").read_text(
             encoding="utf-8"
         )
-        self.assertIn('python-version: ["3.9", "3.13"]', workflow)
+        self.assertIn('python-version: ["3.11", "3.15"]', workflow)
         self.assertNotIn("*.py", workflow)
         for script in (
             "skills/agent-tooling/progressive-context-router/scripts/context_budget.py",

@@ -161,7 +161,7 @@ class UnityGcFreeEntryContractTests(unittest.TestCase):
         workflow = (REPO_ROOT / ".github" / "workflows" / "validate.yml").read_text(
             encoding="utf-8"
         )
-        self.assertIn('python-version: ["3.9", "3.13"]', workflow)
+        self.assertIn('python-version: ["3.11", "3.15"]', workflow)
         self.assertNotIn("*.py", workflow)
         self.assertIn("skills/game-dev/unity-gc-free/scripts/inspect_unity_gc.py", workflow)
         self.assertIn("skills/game-dev/unity-developer/scripts/inspect_unity_project.py", workflow)

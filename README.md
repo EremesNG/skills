@@ -284,7 +284,7 @@ npx skills add . --list
 
 The [validation report](VALIDATION.md) records the current results. The
 [GitHub Actions workflow](.github/workflows/validate.yml) compiles the bundled
-scripts and runs the unit tests with Python 3.9 and 3.13.
+scripts and runs the unit tests with Python 3.11 and 3.15.
 
 ## Contributing a skill
 
